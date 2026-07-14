@@ -1,8 +1,8 @@
 import { useDateRange } from "@/app/contexts/DateRangeContext";
-import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup } from "react-simple-maps";
+import { FanLocationsMap } from "@/app/components/v2/FanLocationsMap";
 import { calculateKPIData, calculateMerchandiseData, BASE_MERCHANDISE, ROI_REDIRECT_RATE, ROI_CONVERSION_RATE, ROI_AVG_ORDER_VALUE } from "@/app/utils/dataCalculations";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip } from "recharts";
-import { TrendingUp, TrendingDown, Users, DollarSign, ShoppingBag, X, HelpCircle, ThumbsUp, AlertCircle, MapPin, QrCode, BarChart2, Percent, ArrowUpRight } from "lucide-react";
+import { TrendingUp, TrendingDown, Users, DollarSign, ShoppingBag, X, HelpCircle, ThumbsUp, AlertCircle, QrCode, BarChart2, Percent, ArrowUpRight } from "lucide-react";
 import { getTeamLogo } from "@/app/utils/teamLogos";
 import { useState } from "react";
 import { format, subDays } from "date-fns";
@@ -19,13 +19,6 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
   const isTodayView = isCurrentDay();
   const calculatedData = calculateKPIData(daysInRange, isTodayView);
   const [showModal, setShowModal] = useState(false);
-  const [mapZoom, setMapZoom] = useState(1);
-  const [mapCenter, setMapCenter] = useState<[number, number]>([10, 10]);
-
-  const handleMapWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    setMapZoom(z => Math.min(8, Math.max(1, z - e.deltaY * 0.005)));
-  };
 
   // ROI derived values
   const totalRedirects = Math.round(calculatedData.totalSurveys * ROI_REDIRECT_RATE);
@@ -234,30 +227,6 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
     revenue: `$${Math.round((item.revenue / baseTotal) * actualMissingItems * 50).toLocaleString()}`, // Assume ~$50 avg per item
   }));
 
-  // Customer locations data - dynamically calculated based on date range
-  const BASE_LOCATIONS = [
-    { country: "United States", city: "New York", baseCount: 892, basePercentage: 66.2, coordinates: { x: 30, y: 42 } },
-    { country: "United States", city: "New Jersey", baseCount: 187, basePercentage: 13.9, coordinates: { x: 30.5, y: 42.5 } },
-    { country: "Canada", city: "Toronto", baseCount: 94, basePercentage: 7.0, coordinates: { x: 28, y: 38 } },
-    { country: "United Kingdom", city: "London", baseCount: 52, basePercentage: 3.9, coordinates: { x: 50, y: 33 } },
-    { country: "Japan", city: "Tokyo", baseCount: 38, basePercentage: 2.8, coordinates: { x: 88, y: 40 } },
-    { country: "Mexico", city: "Mexico City", baseCount: 29, basePercentage: 2.2, coordinates: { x: 22, y: 50 } },
-    { country: "Australia", city: "Sydney", baseCount: 21, basePercentage: 1.6, coordinates: { x: 87, y: 75 } },
-    { country: "Germany", city: "Berlin", baseCount: 18, basePercentage: 1.3, coordinates: { x: 53, y: 32 } },
-    { country: "France", city: "Paris", baseCount: 15, basePercentage: 1.1, coordinates: { x: 51, y: 35 } },
-  ];
-
-  // Scale location counts based on the total surveys for the date range
-  const baseTotalVisitors = BASE_LOCATIONS.reduce((sum, loc) => sum + loc.baseCount, 0);
-  const customerLocations = BASE_LOCATIONS.map(location => {
-    const scaledCount = Math.round((location.baseCount / baseTotalVisitors) * actualTotalSurveys);
-    return {
-      ...location,
-      count: scaledCount,
-      percentage: location.basePercentage, // Keep percentages relatively stable
-    };
-  });
-
   return (
     <>
       <div className="backdrop-blur-md bg-white/60 border border-white/40 rounded-2xl overflow-hidden shadow-2xl">
@@ -269,6 +238,9 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
               </h2>
               {viewMode === 'roi' && (
                 <p className="text-xs text-slate-500 mt-0.5">Online Sales Conversions from Survey Redirects</p>
+              )}
+              {viewMode === 'location' && (
+                <p className="text-xs text-slate-500 mt-0.5">Survey response origins</p>
               )}
               <p className="text-sm text-slate-600 mt-1">
                 {format(dateRange.from, 'MMM d, yyyy')} - {format(dateRange.to, 'MMM d, yyyy')}
@@ -391,126 +363,7 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
               </div>
             </div>
           ) : viewMode === 'location' ? (
-            // World Map View
-            <div>
-              <style>{`
-                @keyframes pin-pulse {
-                  0%, 100% { opacity: 1; transform: scale(1); }
-                  50% { opacity: 0.7; transform: scale(1.15); }
-                }
-              `}</style>
-              <div
-                style={{ borderRadius: '12px', overflow: 'hidden', background: '#e8f0f7', border: '1px solid #d0dce8', cursor: 'grab', userSelect: 'none' }}
-                onWheel={handleMapWheel}
-              >
-                <ComposableMap
-                  projection="geoNaturalEarth1"
-                  projectionConfig={{ scale: 195, center: [10, 10] }}
-                  style={{ width: '100%', height: '340px', display: 'block' }}
-                  viewBox="0 0 800 400"
-                >
-                  <ZoomableGroup
-                    zoom={mapZoom}
-                    center={mapCenter}
-                    onMoveEnd={({ coordinates, zoom }) => {
-                      setMapCenter(coordinates as [number, number]);
-                      setMapZoom(zoom);
-                    }}
-                    minZoom={1}
-                    maxZoom={8}
-                  >
-                  <Geographies geography="https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json">
-                    {({ geographies }) =>
-                      geographies.map((geo) => (
-                        <Geography
-                          key={geo.rsmKey}
-                          geography={geo}
-                          fill="#c8d8e8"
-                          stroke="#b0c4d8"
-                          strokeWidth={0.5}
-                          style={{
-                            default: { outline: 'none' },
-                            hover: { fill: '#b8ccd8', outline: 'none' },
-                            pressed: { outline: 'none' },
-                          }}
-                        />
-                      ))
-                    }
-                  </Geographies>
-
-                  {/* Map pins */}
-                  {([
-                    { name: "New York", coords: [-74.006, 40.712] as [number,number], count: customerLocations[0]?.count ?? 892, primary: true },
-                    { name: "New Jersey", coords: [-74.5, 40.5] as [number,number], count: customerLocations[1]?.count ?? 187, primary: true },
-                    { name: "Toronto", coords: [-79.383, 43.653] as [number,number], count: customerLocations[2]?.count ?? 94, primary: false },
-                    { name: "London", coords: [-0.127, 51.507] as [number,number], count: customerLocations[3]?.count ?? 52, primary: false },
-                    { name: "Tokyo", coords: [139.691, 35.689] as [number,number], count: customerLocations[4]?.count ?? 38, primary: false },
-                    { name: "Mexico City", coords: [-99.133, 19.432] as [number,number], count: customerLocations[5]?.count ?? 29, primary: false },
-                    { name: "Sydney", coords: [151.209, -33.868] as [number,number], count: customerLocations[6]?.count ?? 21, primary: false },
-                    { name: "Berlin", coords: [13.404, 52.52] as [number,number], count: customerLocations[7]?.count ?? 18, primary: false },
-                  ]).map((loc) => (
-                    <Marker key={loc.name} coordinates={loc.coords as [number, number]}>
-                      {/* Pin body */}
-                      <circle
-                        r={loc.primary ? 7 : 5}
-                        fill={loc.primary ? "#111827" : "#6B7280"}
-                        stroke="#ffffff"
-                        strokeWidth={2}
-                        style={{ animation: `pin-pulse ${loc.primary ? 2 : 3}s ease-in-out infinite`, cursor: 'default' }}
-                      />
-                      {/* Pulse ring */}
-                      <circle
-                        r={loc.primary ? 13 : 9}
-                        fill="none"
-                        stroke={loc.primary ? "#111827" : "#6B7280"}
-                        strokeWidth={1}
-                        opacity={0.25}
-                      />
-                      {/* Label */}
-                      <text
-                        textAnchor="middle"
-                        y={loc.primary ? -14 : -11}
-                        style={{ fontSize: loc.primary ? 9 : 8, fontWeight: 700, fill: '#1e293b', fontFamily: 'sans-serif', pointerEvents: 'none' }}
-                      >
-                        {loc.name}
-                      </text>
-                      <text
-                        textAnchor="middle"
-                        y={loc.primary ? -5 : -3}
-                        style={{ fontSize: 7, fill: '#64748b', fontFamily: 'sans-serif', pointerEvents: 'none' }}
-                      >
-                        {loc.count.toLocaleString()}
-                      </text>
-                    </Marker>
-                  ))}
-                  </ZoomableGroup>
-                </ComposableMap>
-              </div>
-
-              {/* Location list */}
-              <div className="grid grid-cols-3 gap-2 mt-3">
-                {customerLocations.slice(0, 6).map((location, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-white/70 backdrop-blur-sm border border-white/60 rounded-lg px-3 py-2"
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-1.5 min-w-0 flex-1">
-                        <MapPin size={12} className="text-[#9CA3AF] flex-shrink-0" />
-                        <div className="min-w-0 flex-1">
-                          <div className="text-xs font-bold text-[#111827] truncate">{location.city}</div>
-                          <div className="text-[10px] text-slate-600 truncate">{location.country}</div>
-                        </div>
-                      </div>
-                      <div className="text-right flex-shrink-0">
-                        <div className="text-xs font-black text-[#9CA3AF]">{location.count}</div>
-                        <div className="text-[9px] text-slate-500">{location.percentage}%</div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <FanLocationsMap totalSurveys={actualTotalSurveys} />
           ) : (
             // Bar Chart View
             <ResponsiveContainer width="100%" height={280}>
