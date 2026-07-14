@@ -1,7 +1,7 @@
 export function StoreSurveyPage() {
   return (
     <iframe
-      src="https://nhl-retail-survey.isaacsharrison.chatgpt.site/"
+      src="https://jiberetail.github.io/nhl-retail-survey/"
       style={{
         flex: 1,
         width: '100%',
