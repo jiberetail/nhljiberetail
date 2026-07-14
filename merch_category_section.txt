@@ -1,0 +1,15 @@
+    merchandiseCategory: {
+      title: "What {team} merch were you looking for?",
+      categories: {
+        jerseys: "Jerseys",
+        caps: "Caps",
+        hoodies: "Hoodies",
+        tshirts: "T-Shirts",
+        jackets: "Jackets",
+        accessories: "Accessories",
+        memorabilia: "Memorabilia",
+        gameUsed: "Game Used"
+      },
+      back: "Back",
+      continue: "Continue"
+    },
