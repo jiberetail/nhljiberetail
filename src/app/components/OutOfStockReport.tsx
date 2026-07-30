@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { exportReportPdf } from "@/app/utils/exportReportPdf";
 import { useRef } from "react";
 import nhlLogo from "../../imports/NHL-league-logo.png";
-import jibeRetailLogo from "figma:asset/c9ceb1471dccd073ec86737828ad56cc026ab66e.png";
+import jibeRetailLogo from "../../imports/jibe-retail-official-logo.png";
 
 type DateRange = {
   from: Date;
@@ -157,10 +157,10 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
         />
 
         <div className="px-6 py-6">
-          <div ref={reportRef} style={{
+          <div ref={reportRef} className="nhl-report-document" style={{
             backgroundColor: '#ffffff',
             padding: '40px',
-            fontFamily: 'system-ui, -apple-system, sans-serif',
+            fontFamily: "'Roboto Condensed', 'Arial Narrow', Arial, sans-serif",
             color: '#1f2937'
           }}>
             {/* Header */}
@@ -169,8 +169,8 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
                 <img src={nhlLogo} alt="NHL" style={{ height: '56px' }} />
                 <img src={jibeRetailLogo} alt="Jibe Retail" style={{ height: '80px' }} />
               </div>
-              <div style={{ borderBottom: '3px solid #041e42', paddingBottom: '12px' }}>
-                <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#041e42', margin: '0 0 8px 0' }}>
+              <div style={{ borderBottom: '3px solid #c7a447', paddingBottom: '12px' }}>
+                <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#07111b', margin: '0 0 8px 0' }}>
                   Missing Merchandise Report
                 </h1>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -181,7 +181,7 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
                     <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
                       Report Period
                     </p>
-                    <p style={{ fontSize: '16px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                    <p style={{ fontSize: '16px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                       {format(dateRange.from, "MMM d")} - {format(dateRange.to, "MMM d, yyyy")}
                     </p>
                     <p style={{ fontSize: '12px', color: '#9ca3af', margin: '4px 0 0 0' }}>
@@ -194,11 +194,11 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
 
             {/* Executive Summary */}
             <div style={{ marginBottom: '32px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
                 Executive Summary
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                <div style={{ background: 'linear-gradient(135deg, #BC0022 0%, #d4002a 100%)', padding: '24px', borderRadius: '8px' }}>
+                <div style={{ background: 'linear-gradient(135deg, #9a7120 0%, #c7a447 100%)', padding: '24px', borderRadius: '8px' }}>
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: 'rgba(255,255,255,0.9)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                     Total Revenue Loss
                   </p>
@@ -206,7 +206,7 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
                     ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </p>
                 </div>
-                <div style={{ background: 'linear-gradient(135deg, #041e42 0%, #0a2f5f 100%)', padding: '24px', borderRadius: '8px' }}>
+                <div style={{ background: 'linear-gradient(135deg, #07111b 0%, #0a4f7c 100%)', padding: '24px', borderRadius: '8px' }}>
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: 'rgba(255,255,255,0.9)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                     Total Items Requested
                   </p>
@@ -219,37 +219,37 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
 
             {/* Category Breakdown */}
             <div style={{ marginBottom: '32px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
                 Category Summary
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
-                <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(188,0,34,0.05) 0%, #ffffff 100%)' }}>
+                <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(154,113,32,0.05) 0%, #ffffff 100%)' }}>
                   <p style={{ fontSize: '14px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
                     Apparel
                   </p>
-                  <p style={{ fontSize: '28px', fontWeight: '900', color: '#BC0022', margin: '0 0 8px 0' }}>
+                  <p style={{ fontSize: '28px', fontWeight: '900', color: '#9a7120', margin: '0 0 8px 0' }}>
                     ${apparelTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </p>
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#4b5563', margin: 0 }}>
                     {apparelQty} items requested
                   </p>
                 </div>
-                <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(188,0,34,0.05) 0%, #ffffff 100%)' }}>
+                <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(154,113,32,0.05) 0%, #ffffff 100%)' }}>
                   <p style={{ fontSize: '14px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
                     Headwear
                   </p>
-                  <p style={{ fontSize: '28px', fontWeight: '900', color: '#BC0022', margin: '0 0 8px 0' }}>
+                  <p style={{ fontSize: '28px', fontWeight: '900', color: '#9a7120', margin: '0 0 8px 0' }}>
                     ${headwearTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </p>
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#4b5563', margin: 0 }}>
                     {headwearQty} items requested
                   </p>
                 </div>
-                <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(188,0,34,0.05) 0%, #ffffff 100%)' }}>
+                <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(154,113,32,0.05) 0%, #ffffff 100%)' }}>
                   <p style={{ fontSize: '14px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
                     Game Used
                   </p>
-                  <p style={{ fontSize: '28px', fontWeight: '900', color: '#BC0022', margin: '0 0 8px 0' }}>
+                  <p style={{ fontSize: '28px', fontWeight: '900', color: '#9a7120', margin: '0 0 8px 0' }}>
                     ${gameUsedTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </p>
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#4b5563', margin: 0 }}>
@@ -262,12 +262,12 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
             {/* Apparel Section */}
             <div style={{ marginBottom: '32px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', margin: 0, textTransform: 'uppercase' }}>
+                <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', margin: 0, textTransform: 'uppercase' }}>
                   Apparel - Detailed Breakdown
                 </h2>
                 <div style={{ textAlign: 'right' }}>
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 4px 0' }}>Category Total</p>
-                  <p style={{ fontSize: '18px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                  <p style={{ fontSize: '18px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                     ${apparelTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </p>
                 </div>
@@ -275,7 +275,7 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
               <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
-                    <tr style={{ background: 'linear-gradient(to right, #041e42, #0a2f5f)' }}>
+                    <tr style={{ background: 'linear-gradient(to right, #07111b, #0a4f7c)' }}>
                       <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Team</th>
                       <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Item</th>
                       <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Size</th>
@@ -292,12 +292,12 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.item}</td>
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.size}</td>
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.gender}</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>{item.quantity}</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>{item.quantity}</td>
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#1f2937', textAlign: 'right' }}>${item.unitPrice.toFixed(2)}</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>${item.revenueLoss.toFixed(2)}</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>${item.revenueLoss.toFixed(2)}</td>
                       </tr>
                     ))}
-                    <tr style={{ backgroundColor: '#041e42' }}>
+                    <tr style={{ backgroundColor: '#07111b' }}>
                       <td colSpan={4} style={{ padding: '16px', fontSize: '14px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>
                         Apparel Totals
                       </td>
@@ -319,12 +319,12 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
             {/* Headwear Section */}
             <div style={{ marginBottom: '32px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', margin: 0, textTransform: 'uppercase' }}>
+                <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', margin: 0, textTransform: 'uppercase' }}>
                   Headwear - Detailed Breakdown
                 </h2>
                 <div style={{ textAlign: 'right' }}>
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 4px 0' }}>Category Total</p>
-                  <p style={{ fontSize: '18px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                  <p style={{ fontSize: '18px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                     ${headwearTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </p>
                 </div>
@@ -332,7 +332,7 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
               <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
-                    <tr style={{ background: 'linear-gradient(to right, #041e42, #0a2f5f)' }}>
+                    <tr style={{ background: 'linear-gradient(to right, #07111b, #0a4f7c)' }}>
                       <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Team</th>
                       <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Item</th>
                       <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Size</th>
@@ -349,12 +349,12 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.item}</td>
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.size}</td>
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.gender}</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>{item.quantity}</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>{item.quantity}</td>
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#1f2937', textAlign: 'right' }}>${item.unitPrice.toFixed(2)}</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>${item.revenueLoss.toFixed(2)}</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>${item.revenueLoss.toFixed(2)}</td>
                       </tr>
                     ))}
-                    <tr style={{ backgroundColor: '#041e42' }}>
+                    <tr style={{ backgroundColor: '#07111b' }}>
                       <td colSpan={4} style={{ padding: '16px', fontSize: '14px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>
                         Headwear Totals
                       </td>
@@ -376,12 +376,12 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
             {/* Game Used Section */}
             <div style={{ marginBottom: '32px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', margin: 0, textTransform: 'uppercase' }}>
+                <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', margin: 0, textTransform: 'uppercase' }}>
                   Game Used Merchandise - Detailed Breakdown
                 </h2>
                 <div style={{ textAlign: 'right' }}>
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 4px 0' }}>Category Total</p>
-                  <p style={{ fontSize: '18px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                  <p style={{ fontSize: '18px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                     ${gameUsedTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </p>
                 </div>
@@ -389,7 +389,7 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
               <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
-                    <tr style={{ background: 'linear-gradient(to right, #041e42, #0a2f5f)' }}>
+                    <tr style={{ background: 'linear-gradient(to right, #07111b, #0a4f7c)' }}>
                       <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Team</th>
                       <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Item</th>
                       <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Size</th>
@@ -406,12 +406,12 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.item}</td>
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.size}</td>
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.gender}</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>{item.quantity}</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>{item.quantity}</td>
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#1f2937', textAlign: 'right' }}>${item.unitPrice.toFixed(2)}</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>${item.revenueLoss.toFixed(2)}</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>${item.revenueLoss.toFixed(2)}</td>
                       </tr>
                     ))}
-                    <tr style={{ backgroundColor: '#041e42' }}>
+                    <tr style={{ backgroundColor: '#07111b' }}>
                       <td colSpan={4} style={{ padding: '16px', fontSize: '14px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>
                         Game Used Totals
                       </td>
@@ -432,25 +432,25 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
 
             {/* Action Items */}
             <div style={{ marginBottom: '24px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
                 Recommended Actions
               </h2>
-              <div style={{ borderLeft: '4px solid #BC0022', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
+              <div style={{ borderLeft: '4px solid #9a7120', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
                 <ol style={{ fontSize: '14px', lineHeight: '1.8', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
                   <li style={{ marginBottom: '10px' }}>
-                    <span style={{ fontWeight: '900', color: '#041e42' }}>Priority Restocking:</span> Immediately reorder high-demand items with greatest revenue impact, particularly Rangers and Capitals apparel and headwear.
+                    <span style={{ fontWeight: '900', color: '#07111b' }}>Priority Restocking:</span> Immediately reorder high-demand items with greatest revenue impact, particularly Rangers and Capitals apparel and headwear.
                   </li>
                   <li style={{ marginBottom: '10px' }}>
-                    <span style={{ fontWeight: '900', color: '#041e42' }}>Size Analysis:</span> Review size distribution patterns to optimize inventory levels. Size L and XL show highest demand across multiple categories.
+                    <span style={{ fontWeight: '900', color: '#07111b' }}>Size Analysis:</span> Review size distribution patterns to optimize inventory levels. Size L and XL show highest demand across multiple categories.
                   </li>
                   <li style={{ marginBottom: '10px' }}>
-                    <span style={{ fontWeight: '900', color: '#041e42' }}>Game Used Program:</span> Establish vendor relationships to secure consistent supply of authenticated game-used memorabilia, particularly for Rangers, Islanders, and Capitals players.
+                    <span style={{ fontWeight: '900', color: '#07111b' }}>Game Used Program:</span> Establish vendor relationships to secure consistent supply of authenticated game-used memorabilia, particularly for Rangers, Islanders, and Capitals players.
                   </li>
                   <li style={{ marginBottom: '10px' }}>
-                    <span style={{ fontWeight: '900', color: '#041e42' }}>Pre-Order System:</span> Implement customer notification and pre-order capabilities for high-value game-used items to capture demand when out of stock.
+                    <span style={{ fontWeight: '900', color: '#07111b' }}>Pre-Order System:</span> Implement customer notification and pre-order capabilities for high-value game-used items to capture demand when out of stock.
                   </li>
                   <li>
-                    <span style={{ fontWeight: '900', color: '#041e42' }}>Inventory Alerts:</span> Set automated low-stock alerts for top 20 revenue-generating items to prevent future stockouts.
+                    <span style={{ fontWeight: '900', color: '#07111b' }}>Inventory Alerts:</span> Set automated low-stock alerts for top 20 revenue-generating items to prevent future stockouts.
                   </li>
                 </ol>
               </div>
@@ -499,8 +499,8 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
             gap: '8px',
             padding: '8px 16px',
             backgroundColor: '#ffffff',
-            color: '#041e42',
-            border: '2px solid #041e42',
+            color: '#07111b',
+            border: '2px solid #07111b',
             borderRadius: '4px',
             fontWeight: 'bold',
             fontSize: '14px',
@@ -519,7 +519,7 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
             alignItems: 'center',
             gap: '8px',
             padding: '8px 16px',
-            backgroundColor: '#041e42',
+            backgroundColor: '#07111b',
             color: '#ffffff',
             border: 'none',
             borderRadius: '4px',
@@ -559,10 +559,10 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
         borderRadius: '8px',
         boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
       }}>
-        <div ref={reportRef} style={{
+        <div ref={reportRef} className="nhl-report-document" style={{
           backgroundColor: '#ffffff',
           padding: '40px',
-          fontFamily: 'system-ui, -apple-system, sans-serif',
+          fontFamily: "'Roboto Condensed', 'Arial Narrow', Arial, sans-serif",
           color: '#1f2937'
         }}>
           {/* Header */}
@@ -571,8 +571,8 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
               <img src={nhlLogo} alt="NHL" style={{ height: '56px' }} />
               <img src={jibeRetailLogo} alt="Jibe Retail" style={{ height: '80px' }} />
             </div>
-            <div style={{ borderBottom: '3px solid #041e42', paddingBottom: '12px' }}>
-              <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#041e42', margin: '0 0 8px 0' }}>
+            <div style={{ borderBottom: '3px solid #c7a447', paddingBottom: '12px' }}>
+              <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#07111b', margin: '0 0 8px 0' }}>
                 Missing Merchandise Report
               </h1>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -583,7 +583,7 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
                     Report Period
                   </p>
-                  <p style={{ fontSize: '16px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                  <p style={{ fontSize: '16px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                     {format(dateRange.from, "MMM d")} - {format(dateRange.to, "MMM d, yyyy")}
                   </p>
                   <p style={{ fontSize: '12px', color: '#9ca3af', margin: '4px 0 0 0' }}>
@@ -596,11 +596,11 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
 
           {/* Executive Summary */}
           <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
               Executive Summary
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-              <div style={{ background: 'linear-gradient(135deg, #BC0022 0%, #d4002a 100%)', padding: '24px', borderRadius: '8px' }}>
+              <div style={{ background: 'linear-gradient(135deg, #9a7120 0%, #c7a447 100%)', padding: '24px', borderRadius: '8px' }}>
                 <p style={{ fontSize: '12px', fontWeight: 'bold', color: 'rgba(255,255,255,0.9)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                   Total Revenue Loss
                 </p>
@@ -608,7 +608,7 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
                   ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </p>
               </div>
-              <div style={{ background: 'linear-gradient(135deg, #041e42 0%, #0a2f5f 100%)', padding: '24px', borderRadius: '8px' }}>
+              <div style={{ background: 'linear-gradient(135deg, #07111b 0%, #0a4f7c 100%)', padding: '24px', borderRadius: '8px' }}>
                 <p style={{ fontSize: '12px', fontWeight: 'bold', color: 'rgba(255,255,255,0.9)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                   Total Items Requested
                 </p>
@@ -621,37 +621,37 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
 
           {/* Category Breakdown */}
           <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
               Category Summary
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
-              <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(188,0,34,0.05) 0%, #ffffff 100%)' }}>
+              <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(154,113,32,0.05) 0%, #ffffff 100%)' }}>
                 <p style={{ fontSize: '14px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
                   Apparel
                 </p>
-                <p style={{ fontSize: '28px', fontWeight: '900', color: '#BC0022', margin: '0 0 8px 0' }}>
+                <p style={{ fontSize: '28px', fontWeight: '900', color: '#9a7120', margin: '0 0 8px 0' }}>
                   ${apparelTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </p>
                 <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#4b5563', margin: 0 }}>
                   {apparelQty} items requested
                 </p>
               </div>
-              <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(188,0,34,0.05) 0%, #ffffff 100%)' }}>
+              <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(154,113,32,0.05) 0%, #ffffff 100%)' }}>
                 <p style={{ fontSize: '14px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
                   Headwear
                 </p>
-                <p style={{ fontSize: '28px', fontWeight: '900', color: '#BC0022', margin: '0 0 8px 0' }}>
+                <p style={{ fontSize: '28px', fontWeight: '900', color: '#9a7120', margin: '0 0 8px 0' }}>
                   ${headwearTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </p>
                 <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#4b5563', margin: 0 }}>
                   {headwearQty} items requested
                 </p>
               </div>
-              <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(188,0,34,0.05) 0%, #ffffff 100%)' }}>
+              <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(154,113,32,0.05) 0%, #ffffff 100%)' }}>
                 <p style={{ fontSize: '14px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
                   Game Used
                 </p>
-                <p style={{ fontSize: '28px', fontWeight: '900', color: '#BC0022', margin: '0 0 8px 0' }}>
+                <p style={{ fontSize: '28px', fontWeight: '900', color: '#9a7120', margin: '0 0 8px 0' }}>
                   ${gameUsedTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </p>
                 <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#4b5563', margin: 0 }}>
@@ -664,12 +664,12 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
           {/* Apparel Section */}
           <div style={{ marginBottom: '32px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', margin: 0, textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', margin: 0, textTransform: 'uppercase' }}>
                 Apparel - Detailed Breakdown
               </h2>
               <div style={{ textAlign: 'right' }}>
                 <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 4px 0' }}>Category Total</p>
-                <p style={{ fontSize: '18px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                <p style={{ fontSize: '18px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                   ${apparelTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </p>
               </div>
@@ -677,7 +677,7 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
             <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr style={{ background: 'linear-gradient(to right, #041e42, #0a2f5f)' }}>
+                  <tr style={{ background: 'linear-gradient(to right, #07111b, #0a4f7c)' }}>
                     <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Team</th>
                     <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Item</th>
                     <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Size</th>
@@ -694,12 +694,12 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
                       <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.item}</td>
                       <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.size}</td>
                       <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.gender}</td>
-                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>{item.quantity}</td>
+                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>{item.quantity}</td>
                       <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#1f2937', textAlign: 'right' }}>${item.unitPrice.toFixed(2)}</td>
-                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>${item.revenueLoss.toFixed(2)}</td>
+                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>${item.revenueLoss.toFixed(2)}</td>
                     </tr>
                   ))}
-                  <tr style={{ backgroundColor: '#041e42' }}>
+                  <tr style={{ backgroundColor: '#07111b' }}>
                     <td colSpan={4} style={{ padding: '16px', fontSize: '14px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>
                       Apparel Totals
                     </td>
@@ -721,12 +721,12 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
           {/* Headwear Section */}
           <div style={{ marginBottom: '32px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', margin: 0, textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', margin: 0, textTransform: 'uppercase' }}>
                 Headwear - Detailed Breakdown
               </h2>
               <div style={{ textAlign: 'right' }}>
                 <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 4px 0' }}>Category Total</p>
-                <p style={{ fontSize: '18px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                <p style={{ fontSize: '18px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                   ${headwearTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </p>
               </div>
@@ -734,7 +734,7 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
             <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr style={{ background: 'linear-gradient(to right, #041e42, #0a2f5f)' }}>
+                  <tr style={{ background: 'linear-gradient(to right, #07111b, #0a4f7c)' }}>
                     <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Team</th>
                     <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Item</th>
                     <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Size</th>
@@ -751,12 +751,12 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
                       <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.item}</td>
                       <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.size}</td>
                       <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.gender}</td>
-                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>{item.quantity}</td>
+                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>{item.quantity}</td>
                       <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#1f2937', textAlign: 'right' }}>${item.unitPrice.toFixed(2)}</td>
-                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>${item.revenueLoss.toFixed(2)}</td>
+                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>${item.revenueLoss.toFixed(2)}</td>
                     </tr>
                   ))}
-                  <tr style={{ backgroundColor: '#041e42' }}>
+                  <tr style={{ backgroundColor: '#07111b' }}>
                     <td colSpan={4} style={{ padding: '16px', fontSize: '14px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>
                       Headwear Totals
                     </td>
@@ -778,12 +778,12 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
           {/* Game Used Section */}
           <div style={{ marginBottom: '32px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', margin: 0, textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', margin: 0, textTransform: 'uppercase' }}>
                 Game Used Merchandise - Detailed Breakdown
               </h2>
               <div style={{ textAlign: 'right' }}>
                 <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 4px 0' }}>Category Total</p>
-                <p style={{ fontSize: '18px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                <p style={{ fontSize: '18px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                   ${gameUsedTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </p>
               </div>
@@ -791,7 +791,7 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
             <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr style={{ background: 'linear-gradient(to right, #041e42, #0a2f5f)' }}>
+                  <tr style={{ background: 'linear-gradient(to right, #07111b, #0a4f7c)' }}>
                     <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Team</th>
                     <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Item</th>
                     <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Size</th>
@@ -808,12 +808,12 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
                       <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.item}</td>
                       <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.size}</td>
                       <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.gender}</td>
-                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>{item.quantity}</td>
+                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>{item.quantity}</td>
                       <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#1f2937', textAlign: 'right' }}>${item.unitPrice.toFixed(2)}</td>
-                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>${item.revenueLoss.toFixed(2)}</td>
+                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>${item.revenueLoss.toFixed(2)}</td>
                     </tr>
                   ))}
-                  <tr style={{ backgroundColor: '#041e42' }}>
+                  <tr style={{ backgroundColor: '#07111b' }}>
                     <td colSpan={4} style={{ padding: '16px', fontSize: '14px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>
                       Game Used Totals
                     </td>
@@ -834,25 +834,25 @@ export function OutOfStockReport({ dateRange, onClose, isModal }: OutOfStockRepo
 
           {/* Action Items */}
           <div style={{ marginBottom: '24px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
               Recommended Actions
             </h2>
-            <div style={{ borderLeft: '4px solid #BC0022', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
+            <div style={{ borderLeft: '4px solid #9a7120', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
               <ol style={{ fontSize: '14px', lineHeight: '1.8', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
                 <li style={{ marginBottom: '10px' }}>
-                  <span style={{ fontWeight: '900', color: '#041e42' }}>Priority Restocking:</span> Immediately reorder high-demand items with greatest revenue impact, particularly Rangers and Capitals apparel and headwear.
+                  <span style={{ fontWeight: '900', color: '#07111b' }}>Priority Restocking:</span> Immediately reorder high-demand items with greatest revenue impact, particularly Rangers and Capitals apparel and headwear.
                 </li>
                 <li style={{ marginBottom: '10px' }}>
-                  <span style={{ fontWeight: '900', color: '#041e42' }}>Size Analysis:</span> Review size distribution patterns to optimize inventory levels. Size L and XL show highest demand across multiple categories.
+                  <span style={{ fontWeight: '900', color: '#07111b' }}>Size Analysis:</span> Review size distribution patterns to optimize inventory levels. Size L and XL show highest demand across multiple categories.
                 </li>
                 <li style={{ marginBottom: '10px' }}>
-                  <span style={{ fontWeight: '900', color: '#041e42' }}>Game Used Program:</span> Establish vendor relationships to secure consistent supply of authenticated game-used memorabilia, particularly for Rangers, Islanders, and Capitals players.
+                  <span style={{ fontWeight: '900', color: '#07111b' }}>Game Used Program:</span> Establish vendor relationships to secure consistent supply of authenticated game-used memorabilia, particularly for Rangers, Islanders, and Capitals players.
                 </li>
                 <li style={{ marginBottom: '10px' }}>
-                  <span style={{ fontWeight: '900', color: '#041e42' }}>Pre-Order System:</span> Implement customer notification and pre-order capabilities for high-value game-used items to capture demand when out of stock.
+                  <span style={{ fontWeight: '900', color: '#07111b' }}>Pre-Order System:</span> Implement customer notification and pre-order capabilities for high-value game-used items to capture demand when out of stock.
                 </li>
                 <li>
-                  <span style={{ fontWeight: '900', color: '#041e42' }}>Inventory Alerts:</span> Set automated low-stock alerts for top 20 revenue-generating items to prevent future stockouts.
+                  <span style={{ fontWeight: '900', color: '#07111b' }}>Inventory Alerts:</span> Set automated low-stock alerts for top 20 revenue-generating items to prevent future stockouts.
                 </li>
               </ol>
             </div>

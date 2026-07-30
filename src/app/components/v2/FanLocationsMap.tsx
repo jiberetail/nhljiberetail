@@ -77,7 +77,7 @@ function FanLocationMarker({
   const zoomContext = useZoomPanContext() as { k?: number };
   const inverseZoom = 1 / Math.max(MIN_ZOOM, zoomContext?.k ?? MIN_ZOOM);
   const radius = Math.min(11, 4.5 + Math.sqrt(location.percentage) * 0.72);
-  const markerColor = isSelected ? "#BC0022" : location.domestic ? "#041e42" : "#3887b9";
+  const markerColor = isSelected ? "#e2c36b" : location.domestic ? "#0a4f7c" : "#62a9d6";
 
   const handleKeyDown = (event: React.KeyboardEvent<SVGGElement>) => {
     if (event.key === "Enter" || event.key === " ") {
@@ -214,7 +214,7 @@ export function FanLocationsMap({ totalSurveys }: { totalSurveys: number }) {
         data-zoom={position.zoom.toFixed(2)}
         role="region"
         aria-label="Interactive fan origin map"
-        className={`relative h-[390px] overflow-hidden border border-slate-300 bg-[#eaf1f6] ${
+        className={`relative h-[390px] overflow-hidden border border-[#e2c36b]/75 bg-[#eaf1f6] ${
           isMoving ? "cursor-grabbing" : "cursor-grab"
         }`}
         style={{ borderRadius: "8px" }}
@@ -269,7 +269,7 @@ export function FanLocationsMap({ totalSurveys }: { totalSurveys: number }) {
           </ZoomableGroup>
         </ComposableMap>
 
-        <div className="pointer-events-none absolute left-3 top-3 flex items-center gap-2 bg-[#041e42] px-3 py-2 text-white shadow-lg" style={{ borderRadius: "6px" }}>
+        <div className="nhl-card pointer-events-none absolute left-3 top-3 flex items-center gap-2 px-3 py-2 text-white shadow-lg" style={{ borderRadius: "6px" }}>
           <Globe2 size={16} aria-hidden="true" />
           <div>
             <div className="text-xs font-black">{locations.length} origin markets</div>
@@ -277,18 +277,18 @@ export function FanLocationsMap({ totalSurveys }: { totalSurveys: number }) {
           </div>
         </div>
 
-        <div className="absolute right-3 top-3 flex flex-col overflow-hidden border border-slate-300 bg-white shadow-lg" style={{ borderRadius: "6px" }}>
+        <div className="nhl-card absolute right-3 top-3 flex flex-col overflow-hidden shadow-lg" style={{ borderRadius: "6px" }}>
           <button
             type="button"
             aria-label="Zoom in"
             title="Zoom in"
             onClick={() => changeZoom(1)}
             disabled={position.zoom >= MAX_ZOOM}
-            className="flex h-9 w-9 items-center justify-center text-[#041e42] transition-colors hover:bg-slate-100 disabled:cursor-not-allowed disabled:text-slate-300"
+            className="flex h-9 w-9 items-center justify-center text-[#e2c36b] transition-colors hover:bg-white/10 disabled:cursor-not-allowed disabled:text-slate-500"
           >
             <Plus size={17} strokeWidth={2.5} />
           </button>
-          <div className="flex h-7 items-center justify-center border-y border-slate-200 text-[10px] font-black text-slate-600" aria-live="polite">
+          <div className="flex h-7 items-center justify-center border-y border-[#e2c36b]/35 text-[10px] font-black text-white" aria-live="polite">
             {position.zoom.toFixed(1)}x
           </div>
           <button
@@ -297,7 +297,7 @@ export function FanLocationsMap({ totalSurveys }: { totalSurveys: number }) {
             title="Zoom out"
             onClick={() => changeZoom(-1)}
             disabled={position.zoom <= MIN_ZOOM}
-            className="flex h-9 w-9 items-center justify-center text-[#041e42] transition-colors hover:bg-slate-100 disabled:cursor-not-allowed disabled:text-slate-300"
+            className="flex h-9 w-9 items-center justify-center text-[#e2c36b] transition-colors hover:bg-white/10 disabled:cursor-not-allowed disabled:text-slate-500"
           >
             <Minus size={17} strokeWidth={2.5} />
           </button>
@@ -306,31 +306,31 @@ export function FanLocationsMap({ totalSurveys }: { totalSurveys: number }) {
             aria-label="Reset map"
             title="Reset map"
             onClick={resetMap}
-            className="flex h-9 w-9 items-center justify-center border-t border-slate-200 text-[#041e42] transition-colors hover:bg-slate-100"
+            className="flex h-9 w-9 items-center justify-center border-t border-[#e2c36b]/35 text-[#e2c36b] transition-colors hover:bg-white/10"
           >
             <RotateCcw size={15} strokeWidth={2.5} />
           </button>
         </div>
 
-        <div className="pointer-events-none absolute bottom-3 left-3 flex items-center gap-4 border border-slate-300 bg-white/95 px-3 py-2 shadow-sm" style={{ borderRadius: "6px" }}>
-          <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-700">
-            <span className="h-2.5 w-2.5 rounded-full bg-[#041e42]" />
+        <div className="nhl-card pointer-events-none absolute bottom-3 left-3 flex items-center gap-4 px-3 py-2 shadow-sm" style={{ borderRadius: "6px" }}>
+          <div className="flex items-center gap-1.5 text-[10px] font-bold text-white">
+            <span className="h-2.5 w-2.5 rounded-full bg-[#2385bd]" />
             U.S.
           </div>
-          <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-700">
-            <span className="h-2.5 w-2.5 rounded-full bg-[#3887b9]" />
+          <div className="flex items-center gap-1.5 text-[10px] font-bold text-white">
+            <span className="h-2.5 w-2.5 rounded-full bg-[#e2c36b]" />
             International
           </div>
-          <div className="border-l border-slate-300 pl-3 text-[10px] font-bold text-slate-600">
+          <div className="border-l border-[#e2c36b]/35 pl-3 text-[10px] font-bold text-sky-100/80">
             Dot size = response share
           </div>
         </div>
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1 border-b border-slate-200 pb-3 text-[11px] font-bold text-slate-600">
-        <span><strong className="text-[#111827]">{domesticPercentage.toFixed(1)}%</strong> U.S.</span>
-        <span><strong className="text-[#111827]">{(100 - domesticPercentage).toFixed(1)}%</strong> international</span>
-        <span><strong className="text-[#111827]">{locations[0].city}</strong> top origin</span>
+      <div className="nhl-panel-copy mt-3 flex flex-wrap items-center gap-x-5 gap-y-1 border-b border-[#e2c36b]/30 pb-3 text-[11px] font-bold">
+        <span><strong className="nhl-gold-value">{domesticPercentage.toFixed(1)}%</strong> U.S.</span>
+        <span><strong className="nhl-gold-value">{(100 - domesticPercentage).toFixed(1)}%</strong> international</span>
+        <span><strong className="nhl-gold-value">{locations[0].city}</strong> top origin</span>
       </div>
 
       <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-3">
@@ -344,27 +344,27 @@ export function FanLocationsMap({ totalSurveys }: { totalSurveys: number }) {
               aria-label={`Focus map on ${location.city}`}
               aria-pressed={isSelected}
               onClick={() => focusLocation(location)}
-              className={`flex h-[54px] w-full items-center justify-between gap-2 border px-3 text-left transition-colors ${
+              className={`nhl-light-card flex h-[54px] w-full items-center justify-between gap-2 border px-3 text-left transition-colors ${
                 isSelected
-                  ? "border-[#041e42] bg-slate-100"
-                  : "border-white/70 bg-white/70 hover:border-slate-300 hover:bg-white"
+                  ? "ring-2 ring-[#e2c36b]"
+                  : "hover:ring-1 hover:ring-[#7fc4ee]"
               }`}
               style={{ borderRadius: "6px" }}
             >
               <div className="flex min-w-0 items-center gap-2">
                 <span className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full ${
-                  isSelected ? "bg-[#041e42] text-white" : "bg-slate-200 text-slate-600"
+                  isSelected ? "bg-[#0a4f7c] text-white" : "bg-slate-200 text-slate-600"
                 }`}>
                   <MapPin size={12} strokeWidth={2.5} />
                 </span>
                 <span className="min-w-0">
-                  <span className="block truncate text-xs font-black text-[#111827]">{location.city}</span>
-                  <span className="block truncate text-[10px] font-medium text-slate-500">{location.country}</span>
+                  <span className="block truncate text-xs font-black text-white">{location.city}</span>
+                  <span className="block truncate text-[10px] font-medium text-[#b8c7d2]">{location.country}</span>
                 </span>
               </div>
               <span className="flex-shrink-0 text-right">
-                <span className="block text-xs font-black text-[#111827]">{location.count.toLocaleString()}</span>
-                <span className="block text-[9px] font-bold text-slate-500">{location.percentage.toFixed(1)}%</span>
+                <span className="nhl-gold-value block text-xs font-black">{location.count.toLocaleString()}</span>
+                <span className="block text-[9px] font-bold text-[#b8c7d2]">{location.percentage.toFixed(1)}%</span>
               </span>
             </button>
           );

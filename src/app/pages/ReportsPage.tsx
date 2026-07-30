@@ -7,6 +7,7 @@ import { AbandonedSurveyReport } from "@/app/components/AbandonedSurveyReport";
 import { PodiumActivityReport } from "@/app/components/PodiumActivityReport";
 import { StaffSatisfactionReport } from "@/app/components/StaffSatisfactionReport";
 import { ROIReport } from "@/app/components/ROIReport";
+import { NhlPageShell } from "@/app/components/NhlPageShell";
 import { Calendar, ChevronDown, Download, Eye, FileText, Package, UserX, Monitor, Star, TrendingUp } from "lucide-react";
 import { format, startOfDay, endOfDay, subDays } from "date-fns";
 
@@ -57,42 +58,36 @@ const reports = [
     title: "Executive Report",
     description: "Comprehensive overview of store performance, KPIs, and key insights",
     icon: FileText,
-    color: "from-[#041e42] to-[#0a2f5f]",
   },
   {
     id: "roi",
     title: "ROI Report",
     description: "Full survey QR code conversion analysis — by category, team, time, and customer segment",
     icon: TrendingUp,
-    color: "from-green-700 to-green-800",
   },
   {
     id: "outofstock",
     title: "Missing Merchandise Report",
     description: "Detailed analysis of missing merchandise and revenue impact",
     icon: Package,
-    color: "from-[#BC0022] to-[#d4002a]",
   },
   {
     id: "abandoned",
     title: "Abandoned Survey Report",
     description: "Track incomplete surveys and identify potential friction points",
     icon: UserX,
-    color: "from-orange-600 to-orange-700",
   },
   {
     id: "podium",
-    title: "Podium Activity Report",
-    description: "Customer interactions and engagement at each store podium",
+    title: "Kiosk Activity Report",
+    description: "Customer interactions and engagement at each store kiosk",
     icon: Monitor,
-    color: "from-purple-600 to-purple-700",
   },
   {
     id: "satisfaction",
     title: "Staff Satisfaction Report",
     description: "Customer ratings and feedback on staff performance",
     icon: Star,
-    color: "from-green-600 to-green-700",
   },
 ];
 
@@ -176,116 +171,115 @@ export function ReportsPage() {
   };
 
   return (
-    <main className="flex-1 p-6 overflow-y-auto">
-      <div className="max-w-[900px]">
+    <NhlPageShell>
+      <div className="max-w-[1600px] px-6 py-6">
         {/* Header */}
-        <div className="pt-2 pb-6 flex items-center justify-between">
+        <div className="nhl-panel nhl-primary-panel mb-5 flex items-center justify-between gap-6 px-5 py-4">
           <div>
-            <h1 className="text-3xl font-black text-[#333333]">Reports</h1>
-            <p className="text-sm text-[#333333] mt-1.5 font-medium">
+            <h1 className="nhl-panel-title text-2xl font-black">Reports</h1>
+            <p className="nhl-panel-copy mt-1 text-sm font-semibold">
               Generate and download detailed reports for the NHL Shop NYC store
             </p>
           </div>
 
-          {/* Date Range Picker */}
-          <div className="relative" ref={dropdownRef}>
-            <div className="bg-gradient-to-r from-[#111827]/30 to-[#6B7280]/30 rounded-lg p-[1px] shadow-sm">
+          <div className="flex items-center gap-4">
+            {/* Date Range Picker */}
+            <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 px-4 py-2.5 text-sm rounded-lg transition-colors bg-white hover:bg-gray-50"
+                className="flex items-center gap-2 px-4 py-2.5 text-sm rounded-lg border border-[#e2c36b]/70 bg-[#07111b]/90 hover:bg-[#102b40] transition-colors shadow-xl"
               >
-                <Calendar size={16} className="text-gray-600" />
-                <span className="text-gray-700 font-bold">{displayText}</span>
-                <ChevronDown size={16} className="text-gray-600" />
+                <Calendar size={16} className="text-[#e2c36b]" />
+                <span className="text-white font-bold">{displayText}</span>
+                <ChevronDown size={16} className="text-[#e2c36b]" />
               </button>
-            </div>
 
-            {isOpen && (
-              <div className="absolute right-0 mt-2 bg-white rounded-lg shadow-xl border-2 border-gray-200 z-50 min-w-[280px]">
-                <div className="p-2">
-                  {/* Preset Options */}
-                  <div className="space-y-1 mb-2">
-                    {presetOptions.map((option) => (
-                      <button
-                        key={option.label}
-                        onClick={() => handlePresetClick(option.label)}
-                        className={`w-full text-left px-3 py-2 text-sm rounded-md transition-colors font-semibold ${
-                          selectedPreset === option.label && !isCustomMode
-                            ? "bg-[#009EDB] text-white"
-                            : "hover:bg-gray-100 text-gray-700"
-                        }`}
-                      >
-                        {option.label}
-                      </button>
-                    ))}
-                  </div>
+              {isOpen && (
+                <div className="absolute right-0 mt-2 bg-white rounded-lg shadow-xl border-2 border-[#e2c36b] z-50 min-w-[280px]">
+                  <div className="p-2">
+                    {/* Preset Options */}
+                    <div className="space-y-1 mb-2">
+                      {presetOptions.map((option) => (
+                        <button
+                          key={option.label}
+                          onClick={() => handlePresetClick(option.label)}
+                          className={`w-full text-left px-3 py-2 text-sm rounded-md transition-colors font-semibold ${
+                            selectedPreset === option.label && !isCustomMode
+                              ? "bg-[#167cb4] text-white"
+                              : "hover:bg-sky-50 text-gray-700"
+                          }`}
+                        >
+                          {option.label}
+                        </button>
+                      ))}
+                    </div>
 
-                  {/* Custom Date Range Separator */}
-                  <div className="border-t border-gray-200 my-2"></div>
+                    {/* Custom Date Range Separator */}
+                    <div className="border-t border-gray-200 my-2"></div>
 
-                  {/* Custom Date Range Label */}
-                  <div className="px-3 py-2 text-xs font-black text-gray-500 uppercase tracking-wide">
-                    Custom Range
-                  </div>
+                    {/* Custom Date Range Label */}
+                    <div className="px-3 py-2 text-xs font-black text-gray-500 uppercase tracking-wide">
+                      Custom Range
+                    </div>
 
-                  {/* Calendar */}
-                  <div className="px-2">
-                    <CalendarComponent
-                      mode="range"
-                      selected={customRange}
-                      onSelect={handleCustomDateSelect}
-                      numberOfMonths={1}
-                    />
+                    {/* Calendar */}
+                    <div className="px-2">
+                      <CalendarComponent
+                        mode="range"
+                        selected={customRange}
+                        onSelect={handleCustomDateSelect}
+                        numberOfMonths={1}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
 
         {/* Reports Grid */}
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {reports.map((report) => {
             const Icon = report.icon;
             return (
               <div
                 key={report.id}
-                className="bg-gradient-to-r from-[#111827]/30 to-[#6B7280]/30 rounded-xl p-[1px] shadow-sm hover:shadow-lg transition-shadow group"
+                className="nhl-card nhl-secondary-panel relative overflow-hidden rounded-lg shadow-2xl transition-all duration-300 group hover:-translate-y-0.5"
               >
-                <div className="bg-white rounded-xl p-5">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4 flex-1">
+                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#738997] via-[#c7d2d9] to-[#42769a]" />
+                <div className="p-5 min-h-[184px] flex flex-col justify-between">
+                  <div className="flex items-start gap-4">
+                    <div className="flex items-center gap-4 flex-1 min-w-0">
                       {/* Icon */}
-                      <div className="group-hover:scale-110 transition-transform">
-                        <Icon size={24} className="text-[#333333]" strokeWidth={2.5} />
+                      <div className="flex items-center justify-center w-12 h-12 rounded-md border border-[#e2c36b]/70 bg-black/35 group-hover:bg-[#167cb4]/25 transition-colors flex-shrink-0">
+                        <Icon size={24} className="text-[#e2c36b]" strokeWidth={2.5} />
                       </div>
 
                       {/* Report Info */}
-                      <div className="flex-1">
-                        <h3 className="text-lg font-black text-[#333333] mb-1">{report.title}</h3>
-                        <p className="text-sm text-gray-600">{report.description}</p>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-lg font-black text-white mb-1">{report.title}</h3>
+                        <p className="nhl-panel-copy text-sm leading-relaxed">{report.description}</p>
                       </div>
                     </div>
+                  </div>
 
-                    {/* Action Buttons */}
-                    <div className="flex items-center gap-2">
-                      <div className="bg-gradient-to-r from-[#111827]/30 to-[#6B7280]/30 rounded-lg p-[1px] shadow-sm">
-                        <button
-                          onClick={() => handleViewReport(report.id)}
-                          className="flex items-center gap-2 px-4 py-2.5 bg-white text-[#333333] rounded-lg hover:bg-gray-50 transition-all font-bold text-sm"
-                        >
-                          <Eye size={16} strokeWidth={2.5} />
-                          <span>View</span>
-                        </button>
-                      </div>
-                      <button
+                  {/* Action Buttons */}
+                  <div className="flex items-center justify-end gap-2 mt-5">
+                    <button
+                      onClick={() => handleViewReport(report.id)}
+                      className="flex items-center gap-2 px-4 py-2.5 border border-[#e2c36b]/80 bg-black/30 text-[#f4dc91] rounded-lg hover:bg-[#e2c36b] hover:text-[#07111b] transition-all font-bold text-sm"
+                    >
+                      <Eye size={16} strokeWidth={2.5} />
+                      <span>View</span>
+                    </button>
+                    <button
                         onClick={() => handleDownload(report.id)}
-                        className="flex items-center gap-2 px-4 py-2.5 bg-[#333333] text-white rounded-lg hover:bg-[#1a1a1a] transition-all shadow-md hover:shadow-lg font-bold text-sm"
-                      >
-                        <Download size={16} strokeWidth={2.5} />
-                        <span>Download</span>
-                      </button>
-                    </div>
+                      className="nhl-action flex items-center gap-2 px-4 py-2.5 text-white rounded-lg transition-all shadow-md hover:shadow-lg font-bold text-sm"
+                    >
+                      <Download size={16} strokeWidth={2.5} />
+                      <span>Download</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -327,6 +321,6 @@ export function ReportsPage() {
           </div>
         )}
       </div>
-    </main>
+    </NhlPageShell>
   );
 }

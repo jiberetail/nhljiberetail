@@ -4,7 +4,7 @@ import { exportReportPdf } from "@/app/utils/exportReportPdf";
 import { format } from "date-fns";
 import { useRef } from "react";
 import nhlLogo from "../../imports/NHL-league-logo.png";
-import jibeRetailLogo from "figma:asset/c9ceb1471dccd073ec86737828ad56cc026ab66e.png";
+import jibeRetailLogo from "../../imports/jibe-retail-official-logo.png";
 import worldMap from "figma:asset/63ce3284c798e57a28c3e1a993ddad3ef10f97ba.png";
 
 type DateRange = {
@@ -182,10 +182,10 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
         <button onClick={handleEmail} data-report-email style={{ display: 'none' }} />
 
         <div className="px-6 py-6">
-          <div ref={reportRef} style={{
+          <div ref={reportRef} className="nhl-report-document" style={{
             backgroundColor: '#ffffff',
             padding: '48px',
-            fontFamily: 'system-ui, -apple-system, sans-serif',
+            fontFamily: "'Roboto Condensed', 'Arial Narrow', Arial, sans-serif",
             color: '#1f2937',
             maxWidth: '1200px',
             margin: '0 auto'
@@ -197,7 +197,7 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                 <img src={jibeRetailLogo} alt="Jibe Retail" style={{ height: '90px' }} />
               </div>
               <div style={{
-                borderLeft: '6px solid #111827',
+                borderLeft: '6px solid #c7a447',
                 paddingLeft: '24px',
                 marginBottom: '24px'
               }}>
@@ -245,7 +245,7 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
             {/* ── ROI SECTION ── */}
             <div style={{ marginBottom: '48px' }}>
               <div style={{
-                background: 'linear-gradient(135deg, #14532d 0%, #166534 50%, #15803d 100%)',
+                background: 'linear-gradient(135deg, #07111b 0%, #0a4f7c 50%, #0a4f7c 100%)',
                 padding: '20px 24px',
                 borderRadius: '12px 12px 0 0',
               }}>
@@ -256,12 +256,12 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                   Revenue generated when customers follow survey QR codes to purchase out-of-stock items online
                 </p>
               </div>
-              <div style={{ border: '2px solid #bbf7d0', borderTop: 'none', borderRadius: '0 0 12px 12px', padding: '32px', background: '#ffffff' }}>
+              <div style={{ border: '2px solid #bfdbfe', borderTop: 'none', borderRadius: '0 0 12px 12px', padding: '32px', background: '#ffffff' }}>
 
                 {/* Hero Stats */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px', marginBottom: '28px' }}>
                   {[
-                    { label: 'Total ROI', value: `$${data.roiData.totalROI.toLocaleString()}`, sub: 'Online revenue attributed', bg: 'linear-gradient(135deg, #14532d 0%, #166534 100%)', light: false },
+                    { label: 'Total ROI', value: `$${data.roiData.totalROI.toLocaleString()}`, sub: 'Online revenue attributed', bg: 'linear-gradient(135deg, #07111b 0%, #0a4f7c 100%)', light: false },
                     { label: 'QR Redirects', value: data.roiData.totalRedirects.toLocaleString(), sub: 'Customers sent online', bg: 'linear-gradient(135deg, #1e3a5f 0%, #1e40af 100%)', light: false },
                     { label: 'Conversion Rate', value: `${data.roiData.overallConversionRate}%`, sub: 'Redirects → purchases', bg: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)', light: true },
                     { label: 'Avg Order Value', value: `$${ROI_AVG_ORDER_VALUE}`, sub: 'Per converted sale', bg: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)', light: true },
@@ -275,13 +275,13 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                 </div>
 
                 {/* Conversion Funnel */}
-                <div style={{ marginBottom: '28px', background: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)', border: '2px solid #bbf7d0', borderRadius: '12px', padding: '20px' }}>
-                  <h3 style={{ fontSize: '13px', fontWeight: '800', color: '#14532d', margin: '0 0 14px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Conversion Funnel</h3>
+                <div style={{ marginBottom: '28px', background: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)', border: '2px solid #bfdbfe', borderRadius: '12px', padding: '20px' }}>
+                  <h3 style={{ fontSize: '13px', fontWeight: '800', color: '#07111b', margin: '0 0 14px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Conversion Funnel</h3>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                     {[
                       { label: 'Total Surveys', value: data.totalSurveys.toLocaleString(), pct: '100%', w: '100%', color: '#1e3a5f' },
                       { label: 'QR Redirects', value: data.roiData.totalRedirects.toLocaleString(), pct: `${Math.round((data.roiData.totalRedirects / data.totalSurveys) * 100)}%`, w: `${(data.roiData.totalRedirects / data.totalSurveys) * 100}%`, color: '#2563eb' },
-                      { label: 'Conversions', value: data.roiData.totalConversions.toLocaleString(), pct: `${Math.round((data.roiData.totalConversions / data.totalSurveys) * 100)}%`, w: `${(data.roiData.totalConversions / data.totalSurveys) * 100}%`, color: '#15803d' },
+                      { label: 'Conversions', value: data.roiData.totalConversions.toLocaleString(), pct: `${Math.round((data.roiData.totalConversions / data.totalSurveys) * 100)}%`, w: `${(data.roiData.totalConversions / data.totalSurveys) * 100}%`, color: '#0a4f7c' },
                     ].map((step, i) => (
                       <div key={i} style={{ flex: 1, textAlign: 'center' }}>
                         <div style={{ position: 'relative', height: '40px', background: '#e2e8f0', borderRadius: i === 0 ? '6px 0 0 6px' : i === 2 ? '0 6px 6px 0' : '0', overflow: 'hidden' }}>
@@ -314,7 +314,7 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                         <col style={{ width: '18%' }} />
                       </colgroup>
                       <thead>
-                        <tr style={{ background: 'linear-gradient(to right, #14532d, #166534)' }}>
+                        <tr style={{ background: 'linear-gradient(to right, #07111b, #0a4f7c)' }}>
                           {['Category', 'Redirects', 'Conversions', 'Conv. Rate', 'Avg Order', 'Revenue', '% of ROI'].map(h => (
                             <th key={h} style={{ padding: '10px 10px', textAlign: h === 'Category' ? 'left' : 'right', fontSize: '10px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.4px' }}>{h}</th>
                           ))}
@@ -329,16 +329,16 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                             <td style={{ padding: '10px', fontSize: '12px', fontWeight: '600', color: '#475569', textAlign: 'right' }}>{m.redirects}</td>
                             <td style={{ padding: '10px', fontSize: '12px', fontWeight: '700', color: '#1e293b', textAlign: 'right' }}>{m.conversions}</td>
                             <td style={{ padding: '10px', textAlign: 'right' }}>
-                              <span style={{ background: '#dcfce7', color: '#15803d', padding: '2px 7px', borderRadius: '20px', fontSize: '11px', fontWeight: '800' }}>
+                              <span style={{ background: '#dbeafe', color: '#0a4f7c', padding: '2px 7px', borderRadius: '20px', fontSize: '11px', fontWeight: '800' }}>
                                 {Math.round(m.convRate * 100)}%
                               </span>
                             </td>
                             <td style={{ padding: '10px', fontSize: '12px', fontWeight: '600', color: '#475569', textAlign: 'right' }}>${m.aov}</td>
-                            <td style={{ padding: '10px', fontSize: '13px', fontWeight: '900', color: '#15803d', textAlign: 'right' }}>${m.revenue.toLocaleString()}</td>
+                            <td style={{ padding: '10px', fontSize: '13px', fontWeight: '900', color: '#0a4f7c', textAlign: 'right' }}>${m.revenue.toLocaleString()}</td>
                             <td style={{ padding: '10px', textAlign: 'right' }}>
                               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '6px' }}>
                                 <div style={{ width: '40px', height: '6px', background: '#e2e8f0', borderRadius: '3px', overflow: 'hidden' }}>
-                                  <div style={{ height: '100%', width: `${m.pct}%`, background: 'linear-gradient(to right, #14532d, #16a34a)', borderRadius: '3px' }} />
+                                  <div style={{ height: '100%', width: `${m.pct}%`, background: 'linear-gradient(to right, #07111b, #167cb4)', borderRadius: '3px' }} />
                                 </div>
                                 <span style={{ fontSize: '11px', fontWeight: '800', color: '#374151' }}>{m.pct}%</span>
                               </div>
@@ -349,9 +349,9 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                           <td style={{ padding: '10px', fontSize: '12px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Total</td>
                           <td style={{ padding: '10px', fontSize: '12px', fontWeight: '900', color: '#ffffff', textAlign: 'right' }}>{data.roiData.totalRedirects}</td>
                           <td style={{ padding: '10px', fontSize: '12px', fontWeight: '900', color: '#ffffff', textAlign: 'right' }}>{data.roiData.totalConversions}</td>
-                          <td style={{ padding: '10px', fontSize: '12px', fontWeight: '900', color: '#4ade80', textAlign: 'right' }}>{data.roiData.overallConversionRate}%</td>
+                          <td style={{ padding: '10px', fontSize: '12px', fontWeight: '900', color: '#e2c36b', textAlign: 'right' }}>{data.roiData.overallConversionRate}%</td>
                           <td style={{ padding: '10px', fontSize: '12px', fontWeight: '900', color: '#ffffff', textAlign: 'right' }}>${ROI_AVG_ORDER_VALUE}</td>
-                          <td style={{ padding: '10px', fontSize: '13px', fontWeight: '900', color: '#4ade80', textAlign: 'right' }}>${data.roiData.totalROI.toLocaleString()}</td>
+                          <td style={{ padding: '10px', fontSize: '13px', fontWeight: '900', color: '#e2c36b', textAlign: 'right' }}>${data.roiData.totalROI.toLocaleString()}</td>
                           <td style={{ padding: '10px', fontSize: '12px', fontWeight: '900', color: '#ffffff', textAlign: 'right' }}>100%</td>
                         </tr>
                       </tbody>
@@ -376,7 +376,7 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                         <col style={{ width: '16%' }} />
                       </colgroup>
                       <thead>
-                        <tr style={{ background: 'linear-gradient(to right, #14532d, #166534)' }}>
+                        <tr style={{ background: 'linear-gradient(to right, #07111b, #0a4f7c)' }}>
                           {['#', 'Team', 'Top Item', 'Redirects', 'Conversions', 'Rate', 'Revenue'].map(h => (
                             <th key={h} style={{ padding: '10px 10px', textAlign: h === 'Team' || h === 'Top Item' || h === '#' ? 'left' : 'right', fontSize: '10px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.4px' }}>{h}</th>
                           ))}
@@ -385,17 +385,17 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                       <tbody>
                         {data.roiData.teamROI.sort((a, b) => b.revenue - a.revenue).map((t, idx) => (
                           <tr key={idx} style={{ backgroundColor: idx % 2 === 0 ? '#ffffff' : '#f8fafc', borderBottom: idx < data.roiData.teamROI.length - 1 ? '1px solid #e2e8f0' : 'none' }}>
-                            <td style={{ padding: '10px', fontSize: '12px', fontWeight: '900', color: idx < 3 ? '#15803d' : '#94a3b8' }}>#{idx + 1}</td>
+                            <td style={{ padding: '10px', fontSize: '12px', fontWeight: '900', color: idx < 3 ? '#0a4f7c' : '#94a3b8' }}>#{idx + 1}</td>
                             <td style={{ padding: '10px', fontSize: '12px', fontWeight: '800', color: '#1e293b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t.team}</td>
                             <td style={{ padding: '10px', fontSize: '11px', fontWeight: '600', color: '#475569', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t.item}</td>
                             <td style={{ padding: '10px', fontSize: '12px', fontWeight: '600', color: '#475569', textAlign: 'right' }}>{t.redirects}</td>
                             <td style={{ padding: '10px', fontSize: '12px', fontWeight: '700', color: '#1e293b', textAlign: 'right' }}>{t.conversions}</td>
                             <td style={{ padding: '10px', textAlign: 'right' }}>
-                              <span style={{ background: '#dcfce7', color: '#15803d', padding: '2px 7px', borderRadius: '20px', fontSize: '11px', fontWeight: '800' }}>
+                              <span style={{ background: '#dbeafe', color: '#0a4f7c', padding: '2px 7px', borderRadius: '20px', fontSize: '11px', fontWeight: '800' }}>
                                 {Math.round(t.convRate * 100)}%
                               </span>
                             </td>
-                            <td style={{ padding: '10px', fontSize: '13px', fontWeight: '900', color: '#15803d', textAlign: 'right' }}>${t.revenue.toLocaleString()}</td>
+                            <td style={{ padding: '10px', fontSize: '13px', fontWeight: '900', color: '#0a4f7c', textAlign: 'right' }}>${t.revenue.toLocaleString()}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -405,9 +405,9 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
 
                 {/* ROI Narrative */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                  <div style={{ background: 'linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%)', border: '2px solid #6ee7b7', borderRadius: '12px', padding: '24px' }}>
-                    <p style={{ fontSize: '13px', fontWeight: '800', color: '#065f46', margin: '0 0 10px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>💡 Key Insight</p>
-                    <p style={{ fontSize: '14px', lineHeight: '1.7', color: '#065f46', margin: 0 }}>
+                  <div style={{ background: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)', border: '2px solid #93c5fd', borderRadius: '12px', padding: '24px' }}>
+                    <p style={{ fontSize: '13px', fontWeight: '800', color: '#0a4f7c', margin: '0 0 10px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>💡 Key Insight</p>
+                    <p style={{ fontSize: '14px', lineHeight: '1.7', color: '#0a4f7c', margin: 0 }}>
                       Jerseys (Home + Away) account for the majority of redirected items and generate the highest per-conversion revenue.
                       Ensuring NHL.com deep-links remain accurate and fast-loading for jersey SKUs will directly protect conversion rates.
                     </p>
@@ -427,7 +427,7 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
             {/* Survey Findings */}
             <div style={{ marginBottom: '48px' }}>
               <div style={{
-                background: 'linear-gradient(135deg, #111827 0%, #0a2f5f 100%)',
+                background: 'linear-gradient(135deg, #111827 0%, #0a4f7c 100%)',
                 padding: '20px 24px',
                 borderRadius: '12px 12px 0 0',
                 marginBottom: '0'
@@ -526,12 +526,12 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                       alignItems: 'flex-start',
                       gap: '12px',
                       padding: '14px',
-                      background: '#f0fdf4',
+                      background: '#eff6ff',
                       borderRadius: '6px'
                     }}>
                       <span style={{ fontSize: '18px', flexShrink: 0, marginTop: '2px' }}>✓</span>
                       <p style={{ fontSize: '14px', lineHeight: '1.5', color: '#475569', margin: 0 }}>
-                        <strong style={{ color: '#15803d' }}>Inventory Priority:</strong> Immediately restock top 5 missing items (Rangers jerseys, Islanders jerseys, team caps)
+                        <strong style={{ color: '#0a4f7c' }}>Inventory Priority:</strong> Immediately restock top 5 missing items (Rangers jerseys, Islanders jerseys, team caps)
                       </p>
                     </div>
                     <div style={{
@@ -539,12 +539,12 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                       alignItems: 'flex-start',
                       gap: '12px',
                       padding: '14px',
-                      background: '#f0fdf4',
+                      background: '#eff6ff',
                       borderRadius: '6px'
                     }}>
                       <span style={{ fontSize: '18px', flexShrink: 0, marginTop: '2px' }}>✓</span>
                       <p style={{ fontSize: '14px', lineHeight: '1.5', color: '#475569', margin: 0 }}>
-                        <strong style={{ color: '#15803d' }}>Staffing Optimization:</strong> Increase floor coverage during peak hours to reduce wait times and improve assistance availability
+                        <strong style={{ color: '#0a4f7c' }}>Staffing Optimization:</strong> Increase floor coverage during peak hours to reduce wait times and improve assistance availability
                       </p>
                     </div>
                     <div style={{
@@ -552,12 +552,12 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                       alignItems: 'flex-start',
                       gap: '12px',
                       padding: '14px',
-                      background: '#f0fdf4',
+                      background: '#eff6ff',
                       borderRadius: '6px'
                     }}>
                       <span style={{ fontSize: '18px', flexShrink: 0, marginTop: '2px' }}>✓</span>
                       <p style={{ fontSize: '14px', lineHeight: '1.5', color: '#475569', margin: 0 }}>
-                        <strong style={{ color: '#15803d' }}>Process Improvement:</strong> Streamline checkout process to address the {data.customerFeedback.checkoutProcessDifficult} customer complaints
+                        <strong style={{ color: '#0a4f7c' }}>Process Improvement:</strong> Streamline checkout process to address the {data.customerFeedback.checkoutProcessDifficult} customer complaints
                       </p>
                     </div>
                   </div>
@@ -565,19 +565,19 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
 
                 {/* Revenue Recovery Potential */}
                 <div style={{
-                  background: 'linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%)',
-                  border: '2px solid #10b981',
+                  background: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
+                  border: '2px solid #2385bd',
                   borderRadius: '12px',
                   padding: '24px',
                   textAlign: 'center'
                 }}>
-                  <p style={{ fontSize: '13px', fontWeight: '800', color: '#059669', margin: '0 0 8px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  <p style={{ fontSize: '13px', fontWeight: '800', color: '#167cb4', margin: '0 0 8px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                     Estimated Revenue Recovery Potential
                   </p>
                   <p style={{ fontSize: '48px', fontWeight: '900', color: '#047857', margin: '0', lineHeight: '1' }}>
                     ${data.outOfStock.totalRevenueLoss.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </p>
-                  <p style={{ fontSize: '13px', color: '#059669', margin: '8px 0 0 0', fontWeight: '600' }}>
+                  <p style={{ fontSize: '13px', color: '#167cb4', margin: '8px 0 0 0', fontWeight: '600' }}>
                     Available through inventory optimization and restocking
                   </p>
                 </div>
@@ -587,7 +587,7 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
             {/* Survey Overview */}
             <div style={{ marginBottom: '48px' }}>
               <div style={{
-                background: 'linear-gradient(135deg, #111827 0%, #0a2f5f 100%)',
+                background: 'linear-gradient(135deg, #111827 0%, #0a4f7c 100%)',
                 padding: '20px 24px',
                 borderRadius: '12px 12px 0 0'
               }}>
@@ -624,7 +624,7 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                     </p>
                   </div>
                   <div style={{
-                    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                    background: 'linear-gradient(135deg, #2385bd 0%, #167cb4 100%)',
                     padding: '28px',
                     borderRadius: '12px',
                     textAlign: 'center',
@@ -664,7 +664,7 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
             {/* Associate Engagement */}
             <div style={{ marginBottom: '48px' }}>
               <div style={{
-                background: 'linear-gradient(135deg, #111827 0%, #0a2f5f 100%)',
+                background: 'linear-gradient(135deg, #111827 0%, #0a4f7c 100%)',
                 padding: '20px 24px',
                 borderRadius: '12px 12px 0 0'
               }}>
@@ -707,7 +707,7 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                       <div style={{
                         height: '100%',
                         width: `${associateEngagementRate}%`,
-                        background: 'linear-gradient(to right, #111827, #0a2f5f)',
+                        background: 'linear-gradient(to right, #111827, #0a4f7c)',
                         borderRadius: '6px'
                       }} />
                     </div>
@@ -717,13 +717,13 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                     border: '2px solid #e2e8f0',
                     borderRadius: '12px',
                     padding: '28px',
-                    background: 'linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%)'
+                    background: 'linear-gradient(135deg, #eff6ff 0%, #ffffff 100%)'
                   }}>
                     <p style={{ fontSize: '13px', fontWeight: '800', color: '#64748b', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                       Associate Satisfaction Rate
                     </p>
                     <div style={{ marginBottom: '16px' }}>
-                      <p style={{ fontSize: '52px', fontWeight: '900', color: '#10b981', margin: '0', lineHeight: '1' }}>
+                      <p style={{ fontSize: '52px', fontWeight: '900', color: '#2385bd', margin: '0', lineHeight: '1' }}>
                         {associateSatisfactionRate.toFixed(1)}%
                       </p>
                       <p style={{ fontSize: '14px', color: '#64748b', margin: '8px 0 0 0', fontWeight: '600' }}>
@@ -734,7 +734,7 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                       <div style={{
                         height: '100%',
                         width: `${associateSatisfactionRate}%`,
-                        background: 'linear-gradient(to right, #10b981, #059669)',
+                        background: 'linear-gradient(to right, #2385bd, #167cb4)',
                         borderRadius: '6px'
                       }} />
                     </div>
@@ -746,7 +746,7 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
             {/* Customer Feedback Breakdown */}
             <div style={{ marginBottom: '48px' }}>
               <div style={{
-                background: 'linear-gradient(135deg, #111827 0%, #0a2f5f 100%)',
+                background: 'linear-gradient(135deg, #111827 0%, #0a4f7c 100%)',
                 padding: '20px 24px',
                 borderRadius: '12px 12px 0 0'
               }}>
@@ -826,7 +826,7 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
             {/* Out of Stock */}
             <div style={{ marginBottom: '48px' }}>
               <div style={{
-                background: 'linear-gradient(135deg, #6B7280 0%, #d4002a 100%)',
+                background: 'linear-gradient(135deg, #6B7280 0%, #c7a447 100%)',
                 padding: '20px 24px',
                 borderRadius: '12px 12px 0 0'
               }}>
@@ -1085,7 +1085,7 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
             {/* How Customers Heard About Us */}
             <div style={{ marginBottom: '48px' }}>
               <div style={{
-                background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+                background: 'linear-gradient(135deg, #2385bd 0%, #0a4f7c 100%)',
                 padding: '20px 24px',
                 borderRadius: '12px 12px 0 0'
               }}>
@@ -1115,14 +1115,14 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                       padding: '20px 24px',
                       border: '2px solid #f1f5f9',
                       borderRadius: '10px',
-                      background: idx < 3 ? 'linear-gradient(135deg, #faf5ff 0%, #ffffff 100%)' : '#fafafa'
+                      background: idx < 3 ? 'linear-gradient(135deg, #f8fafc 0%, #ffffff 100%)' : '#fafafa'
                     }}>
                       <div style={{ flex: 1 }}>
                         <div style={{ marginBottom: '8px' }}>
                           <span style={{
                             display: 'inline-block',
                             padding: '4px 10px',
-                            background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+                            background: 'linear-gradient(135deg, #2385bd 0%, #0a4f7c 100%)',
                             color: '#ffffff',
                             borderRadius: '6px',
                             fontSize: '11px',
@@ -1142,7 +1142,7 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                               <div style={{
                                 height: '100%',
                                 width: `${source.percentage}%`,
-                                background: 'linear-gradient(to right, #8b5cf6, #7c3aed)',
+                                background: 'linear-gradient(to right, #2385bd, #0a4f7c)',
                                 borderRadius: '5px'
                               }} />
                             </div>
@@ -1157,7 +1157,7 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                         textAlign: 'right',
                         paddingLeft: '24px'
                       }}>
-                        <p style={{ fontSize: '32px', fontWeight: '900', color: '#8b5cf6', margin: '0', lineHeight: '1' }}>
+                        <p style={{ fontSize: '32px', fontWeight: '900', color: '#2385bd', margin: '0', lineHeight: '1' }}>
                           {source.count}
                         </p>
                         <p style={{ fontSize: '11px', fontWeight: '600', color: '#94a3b8', margin: '4px 0 0 0', textTransform: 'uppercase' }}>
@@ -1176,33 +1176,33 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
                   gap: '16px'
                 }}>
                   <div style={{
-                    background: 'linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%)',
-                    border: '2px solid #c4b5fd',
+                    background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
+                    border: '2px solid #bfdbfe',
                     borderRadius: '12px',
                     padding: '20px',
                     textAlign: 'center'
                   }}>
-                    <p style={{ fontSize: '13px', fontWeight: '800', color: '#6b21a8', margin: '0 0 8px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                    <p style={{ fontSize: '13px', fontWeight: '800', color: '#07111b', margin: '0 0 8px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                       Top Referral Source
                     </p>
-                    <p style={{ fontSize: '18px', fontWeight: '900', color: '#7c3aed', margin: 0 }}>
+                    <p style={{ fontSize: '18px', fontWeight: '900', color: '#0a4f7c', margin: 0 }}>
                       {data.referralSources[0].description}
                     </p>
-                    <p style={{ fontSize: '14px', fontWeight: '600', color: '#8b5cf6', margin: '4px 0 0 0' }}>
+                    <p style={{ fontSize: '14px', fontWeight: '600', color: '#2385bd', margin: '4px 0 0 0' }}>
                       {data.referralSources[0].count} customers ({data.referralSources[0].percentage}%)
                     </p>
                   </div>
                   <div style={{
-                    background: 'linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%)',
-                    border: '2px solid #c4b5fd',
+                    background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
+                    border: '2px solid #bfdbfe',
                     borderRadius: '12px',
                     padding: '20px',
                     textAlign: 'center'
                   }}>
-                    <p style={{ fontSize: '13px', fontWeight: '800', color: '#6b21a8', margin: '0 0 8px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                    <p style={{ fontSize: '13px', fontWeight: '800', color: '#07111b', margin: '0 0 8px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                       Total Sources Tracked
                     </p>
-                    <p style={{ fontSize: '32px', fontWeight: '900', color: '#7c3aed', margin: 0, lineHeight: '1' }}>
+                    <p style={{ fontSize: '32px', fontWeight: '900', color: '#0a4f7c', margin: 0, lineHeight: '1' }}>
                       {data.referralSources.length}
                     </p>
                   </div>
@@ -1306,10 +1306,10 @@ export function ExecutiveReport({ dateRange, onClose, isModal }: ExecutiveReport
           padding: '24px'
         }}>
           {/* Render the same content as page mode */}
-          <div ref={reportRef} style={{
+          <div ref={reportRef} className="nhl-report-document" style={{
             backgroundColor: '#ffffff',
             padding: '48px',
-            fontFamily: 'system-ui, -apple-system, sans-serif',
+            fontFamily: "'Roboto Condensed', 'Arial Narrow', Arial, sans-serif",
             color: '#1f2937',
             maxWidth: '1200px',
             margin: '0 auto'

@@ -6,6 +6,8 @@ import { AbandonedSurveyReport } from "@/app/components/AbandonedSurveyReport";
 import { PodiumActivityReport } from "@/app/components/PodiumActivityReport";
 import { StaffSatisfactionReport } from "@/app/components/StaffSatisfactionReport";
 import { ROIReport } from "@/app/components/ROIReport";
+import { NhlPageShell } from "@/app/components/NhlPageShell";
+import jibeRetailLogo from "../../imports/jibe-retail-official-logo.png";
 
 export function ReportViewPage() {
   const navigate = useNavigate();
@@ -54,30 +56,35 @@ export function ReportViewPage() {
   };
 
   return (
-    <main className="flex-1 overflow-y-auto">
+    <NhlPageShell>
       {/* Back to Reports Button */}
-      <div className="sticky top-0 z-10 bg-white border-b-2 border-gray-200 shadow-sm">
+      <div className="sticky top-0 z-10 bg-[#07111b]/95 backdrop-blur-xl border-b border-[#e2c36b]/60 shadow-2xl">
         <div className="px-6 py-4 flex items-center justify-between">
-          <button
-            onClick={() => navigate("/reports")}
-            className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#041e42] to-[#0a2f5f] text-white rounded-lg hover:from-[#BC0022] hover:to-[#d4002a] transition-all shadow-md hover:shadow-lg font-bold text-sm"
-          >
-            <ArrowLeft size={16} strokeWidth={2.5} />
-            <span>Back to Reports</span>
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => navigate("/reports")}
+              className="flex items-center gap-2 px-4 py-2.5 border border-[#e2c36b]/75 bg-black/30 text-[#f4dc91] rounded-lg hover:bg-[#e2c36b] hover:text-[#07111b] transition-all shadow-md hover:shadow-lg font-bold text-sm"
+            >
+              <ArrowLeft size={16} strokeWidth={2.5} />
+              <span>Back to Reports</span>
+            </button>
+            <div className="bg-white/95 border border-[#e2c36b]/60 rounded-lg px-2.5 py-1 shadow-lg">
+              <img src={jibeRetailLogo} alt="Jibe Retail" className="h-9 w-auto object-contain" />
+            </div>
+          </div>
 
           {/* Download and Email Buttons */}
           <div className="flex items-center gap-3">
             <button
               onClick={handleEmail}
-              className="flex items-center gap-2 px-4 py-2.5 bg-white text-[#041e42] border-2 border-[#041e42] rounded-lg hover:bg-gray-50 transition-all shadow-md hover:shadow-lg font-bold text-sm"
+              className="flex items-center gap-2 px-4 py-2.5 bg-[#d8dde2] text-[#07111b] border border-white/70 rounded-lg hover:bg-white transition-all shadow-md hover:shadow-lg font-bold text-sm"
             >
               <Mail size={16} strokeWidth={2.5} />
               <span>Email</span>
             </button>
             <button
               onClick={handleDownload}
-              className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#041e42] to-[#0a2f5f] text-white rounded-lg hover:from-[#BC0022] hover:to-[#d4002a] transition-all shadow-md hover:shadow-lg font-bold text-sm"
+              className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#0a4f7c] to-[#2385bd] text-white rounded-lg hover:from-[#167cb4] hover:to-[#36a1d5] transition-all shadow-md hover:shadow-lg font-bold text-sm"
             >
               <Download size={16} strokeWidth={2.5} />
               <span>Download PDF</span>
@@ -87,9 +94,9 @@ export function ReportViewPage() {
       </div>
 
       {/* Report Content */}
-      <div className="max-w-[900px] ml-6">
+      <div className="max-w-[1040px] px-6 pb-10">
         {renderReport()}
       </div>
-    </main>
+    </NhlPageShell>
   );
 }

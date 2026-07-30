@@ -15,11 +15,11 @@ export function KeyMetricsV2() {
   return (
     <div className="space-y-3">
       {/* Total ROI */}
-      <div className="relative backdrop-blur-md bg-white/60 rounded-2xl overflow-hidden shadow-2xl hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-300">
+      <section className="nhl-card nhl-secondary-panel relative overflow-hidden">
         <div className="px-5 py-4">
           <div className="flex items-center gap-2 mb-3">
-            <DollarSign size={16} className="text-[#0076CE]" />
-            <span className="text-sm font-medium text-[#1e293b]">Total ROI</span>
+            <DollarSign size={16} className="text-[#e2c36b]" />
+            <span className="nhl-panel-title text-sm font-medium">Total ROI</span>
             <div className="group relative">
               <HelpCircle size={14} className="text-slate-400 cursor-help" />
               <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 hidden group-hover:block w-48 p-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg z-10">
@@ -28,17 +28,17 @@ export function KeyMetricsV2() {
               </div>
             </div>
           </div>
-          <div className="text-base font-black text-[#16a34a] mb-1">${totalROI.toLocaleString()}</div>
-          <div className="text-xs text-[#0076CE]">Online conversions from survey redirects</div>
+          <div className="nhl-gold-value text-base font-black mb-1">${totalROI.toLocaleString()}</div>
+          <div className="nhl-blue-copy text-xs">Online conversions from survey redirects</div>
         </div>
-      </div>
+      </section>
 
       {/* Survey Details */}
-      <div className="relative backdrop-blur-md bg-white/60 rounded-2xl overflow-hidden shadow-2xl hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-300">
+      <section className="nhl-card nhl-secondary-panel relative overflow-hidden">
         <div className="px-5 py-4">
           <div className="flex items-center gap-2 mb-3">
-            <ClipboardList size={16} className="text-[#0076CE]" />
-            <span className="text-sm font-medium text-[#1e293b]">Survey Outcomes</span>
+            <ClipboardList size={16} className="text-[#e2c36b]" />
+            <span className="nhl-panel-title text-sm font-medium">Survey Outcomes</span>
             <div className="group relative">
               <HelpCircle size={14} className="text-slate-400 cursor-help" />
               <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 hidden group-hover:block w-48 p-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg z-10">
@@ -47,10 +47,10 @@ export function KeyMetricsV2() {
               </div>
             </div>
           </div>
-          <div className="text-base font-black text-[#1e293b] mb-1">58% Completion</div>
-          <div className="text-xs text-[#0076CE]">Avg time 2m 14s · 3 drop-off screens</div>
+          <div className="nhl-gold-value text-base font-black mb-1">58% Completion</div>
+          <div className="nhl-blue-copy text-xs">Avg time 2m 14s · 3 drop-off screens</div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

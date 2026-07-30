@@ -13,6 +13,15 @@ interface SurveyOverviewV2Props {
   setViewMode: (mode: 'roi' | 'survey' | 'satisfaction' | 'location') => void;
 }
 
+const DAILY_CONVERSION_RATES = [
+  82, 86, 88, 84, 89, 83, 85, 87, 81, 90,
+  79, 86, 88, 84, 87, 82, 89, 85, 80, 88,
+  86, 83, 90, 84, 87, 81, 89, 85, 82, 88,
+];
+
+const getDailyConversionRate = (index: number) =>
+  DAILY_CONVERSION_RATES[index % DAILY_CONVERSION_RATES.length];
+
 export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Props) {
   const { getDayCount, isCurrentDay, dateRange } = useDateRange();
   const daysInRange = getDayCount();
@@ -38,21 +47,31 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
         const currentHourIndex = isTodayView ? 9 : hours.length - 1;
         const hourlyPatterns = [5, 6, 7, 12, 14, 13, 10, 8, 11, 9, 6, 4];
         return hours.map((hour, i) => {
-          if (isTodayView && i > currentHourIndex) return { id: `roi-h-${i}`, label: hour, surveys: 0, conversions: 0 };
+          if (isTodayView && i > currentHourIndex) {
+            return { id: `roi-h-${i}`, label: hour, surveys: 0, conversions: 0, conversionRate: null };
+          }
           const surveys = hourlyPatterns[i];
-          const redirects = Math.round(surveys * ROI_REDIRECT_RATE);
-          const conversions = Math.round(redirects * ROI_CONVERSION_RATE);
-          return { id: `roi-h-${i}`, label: hour, surveys, conversions };
+          const dailyConversionRate = getDailyConversionRate(i);
+          const conversions = Math.round(surveys * (dailyConversionRate / 100));
+          return { id: `roi-h-${i}`, label: hour, surveys, conversions, conversionRate: dailyConversionRate };
         });
       } else {
         const days = [];
         const dailyAverage = Math.round(calculatedData.totalSurveys / daysInRange);
         for (let i = daysInRange - 1; i >= 0; i--) {
           const date = subDays(dateRange.to, i);
+          const dayIndex = daysInRange - 1 - i;
           const variation = 0.7 + Math.random() * 0.6;
           const surveys = Math.round(dailyAverage * variation);
-          const conversions = Math.round(surveys * ROI_REDIRECT_RATE * ROI_CONVERSION_RATE);
-          days.push({ id: `roi-d-${i}`, label: format(date, 'M/d'), surveys, conversions });
+          const dailyConversionRate = getDailyConversionRate(dayIndex);
+          const conversions = Math.round(surveys * (dailyConversionRate / 100));
+          days.push({
+            id: `roi-d-${i}`,
+            label: format(date, 'M/d'),
+            surveys,
+            conversions,
+            conversionRate: dailyConversionRate,
+          });
         }
         return days;
       }
@@ -229,32 +248,32 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
 
   return (
     <>
-      <div className="backdrop-blur-md bg-white/60 border border-white/40 rounded-2xl overflow-hidden shadow-2xl">
-        <div className="px-6 py-3 border-b border-white/30">
+      <div className="nhl-panel nhl-primary-panel backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl">
+        <div className="px-6 py-3 border-b border-[#e2c36b]/35">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-bold text-[#1e293b]">
+              <h2 className="nhl-panel-title text-lg font-bold">
                 {viewMode === 'roi' ? 'Total Survey ROI' : viewMode === 'survey' ? 'Survey Response Overview' : viewMode === 'satisfaction' ? 'Associate Performance Overview' : 'Fan Locations'}
               </h2>
               {viewMode === 'roi' && (
-                <p className="text-xs text-slate-500 mt-0.5">Online Sales Conversions from Survey Redirects</p>
+                <p className="nhl-panel-copy text-xs mt-0.5">Online Sales Conversions from Survey Redirects</p>
               )}
               {viewMode === 'location' && (
-                <p className="text-xs text-slate-500 mt-0.5">Survey response origins</p>
+                <p className="nhl-panel-copy text-xs mt-0.5">Survey response origins</p>
               )}
-              <p className="text-sm text-slate-600 mt-1">
+              <p className="nhl-blue-copy text-sm mt-1">
                 {format(dateRange.from, 'MMM d, yyyy')} - {format(dateRange.to, 'MMM d, yyyy')}
               </p>
             </div>
             <div className="flex items-center gap-3">
               {/* Toggle Button */}
-              <div className="bg-white/40 backdrop-blur-sm border border-white/60 rounded-lg p-1 shadow-sm">
+              <div className="nhl-mode-control backdrop-blur-sm rounded-lg p-1 shadow-sm">
                 <div className="flex items-center rounded-lg p-0.5">
                   <button
                     onClick={() => setViewMode('roi')}
                     className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${
                       viewMode === 'roi'
-                        ? 'bg-[#16a34a] text-white shadow-md'
+                        ? 'nhl-mode-active shadow-md'
                         : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
@@ -264,7 +283,7 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
                     onClick={() => setViewMode('survey')}
                     className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${
                       viewMode === 'survey'
-                        ? 'bg-[#111827] text-white shadow-md'
+                        ? 'nhl-mode-active shadow-md'
                         : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
@@ -274,7 +293,7 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
                     onClick={() => setViewMode('satisfaction')}
                     className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${
                       viewMode === 'satisfaction'
-                        ? 'bg-[#111827] text-white shadow-md'
+                        ? 'nhl-mode-active shadow-md'
                         : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
@@ -284,7 +303,7 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
                     onClick={() => setViewMode('location')}
                     className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${
                       viewMode === 'location'
-                        ? 'bg-[#111827] text-white shadow-md'
+                        ? 'nhl-mode-active shadow-md'
                         : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
@@ -294,11 +313,11 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
               </div>
 
               {/* Survey Count */}
-              <Users size={20} className="text-[#0076CE]" />
-              <span className="text-2xl font-black text-[#333333]">
+              <Users size={20} className="text-[#e2c36b]" />
+              <span className="nhl-gold-value text-2xl font-black">
                 {actualTotalSurveys.toLocaleString()}
               </span>
-              <span className="text-sm text-gray-600">Surveys</span>
+              <span className="nhl-panel-copy text-sm">Engagements</span>
             </div>
           </div>
         </div>
@@ -308,56 +327,68 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
             <div>
               {/* ROI Stat Cards */}
               <div className="grid grid-cols-4 gap-3 mb-5">
-                <div className="bg-white/70 backdrop-blur-sm border border-white/60 rounded-xl p-4">
+                <div className="nhl-light-card backdrop-blur-sm rounded-xl p-4">
                   <div className="flex items-center gap-1.5 mb-2">
-                    <DollarSign size={14} className="text-[#16a34a]" />
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Converted Sales</span>
+                    <DollarSign size={14} className="text-[#e2c36b]" />
+                    <span className="text-xs font-bold text-slate-300 uppercase tracking-wide">Converted Sales</span>
                   </div>
-                  <div className="text-2xl font-black text-[#16a34a]">${totalROI.toLocaleString()}</div>
-                  <div className="text-xs text-slate-500 mt-1 flex items-center gap-1"><ArrowUpRight size={11} className="text-[#16a34a]" />Online revenue attributed</div>
+                  <div className="text-2xl font-black text-[#e2c36b]">${totalROI.toLocaleString()}</div>
+                  <div className="text-xs text-slate-400 mt-1 flex items-center gap-1"><ArrowUpRight size={11} className="text-[#e2c36b]" />Online revenue attributed</div>
                 </div>
-                <div className="bg-white/70 backdrop-blur-sm border border-white/60 rounded-xl p-4">
+                <div className="nhl-light-card backdrop-blur-sm rounded-xl p-4">
                   <div className="flex items-center gap-1.5 mb-2">
-                    <QrCode size={14} className="text-[#111827]" />
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Redirects</span>
+                    <QrCode size={14} className="text-slate-300" />
+                    <span className="text-xs font-bold text-slate-300 uppercase tracking-wide">Redirects</span>
                   </div>
-                  <div className="text-2xl font-black text-[#111827]">{totalRedirects.toLocaleString()}</div>
-                  <div className="text-xs text-slate-500 mt-1">QR scans from survey</div>
+                  <div className="text-2xl font-black text-white">{totalRedirects.toLocaleString()}</div>
+                  <div className="text-xs text-slate-400 mt-1">QR scans from Kiosks</div>
                 </div>
-                <div className="bg-white/70 backdrop-blur-sm border border-white/60 rounded-xl p-4">
+                <div className="nhl-light-card backdrop-blur-sm rounded-xl p-4">
                   <div className="flex items-center gap-1.5 mb-2">
-                    <Percent size={14} className="text-[#1e3a5f]" />
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Avg Conversion</span>
+                    <Percent size={14} className="text-[#e2c36b]" />
+                    <span className="text-xs font-bold text-slate-300 uppercase tracking-wide">Avg Conversion</span>
                   </div>
-                  <div className="text-2xl font-black text-[#1e3a5f]">{conversionRate}%</div>
-                  <div className="text-xs text-slate-500 mt-1">Redirects → purchases</div>
+                  <div className="text-2xl font-black text-white">{conversionRate}%</div>
+                  <div className="text-xs text-slate-400 mt-1">
+                    {totalConversions.toLocaleString()} purchases
+                  </div>
                 </div>
-                <div className="bg-white/70 backdrop-blur-sm border border-white/60 rounded-xl p-4">
+                <div className="nhl-light-card backdrop-blur-sm rounded-xl p-4">
                   <div className="flex items-center gap-1.5 mb-2">
-                    <BarChart2 size={14} className="text-[#9CA3AF]" />
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Avg Order Value</span>
+                    <BarChart2 size={14} className="text-slate-300" />
+                    <span className="text-xs font-bold text-slate-300 uppercase tracking-wide">Avg Order Value</span>
                   </div>
-                  <div className="text-2xl font-black text-[#333333]">${avgOrderValue}</div>
-                  <div className="text-xs text-slate-500 mt-1">Per converted sale</div>
+                  <div className="text-2xl font-black text-white">${avgOrderValue}</div>
+                  <div className="text-xs text-slate-400 mt-1">Per converted sale</div>
                 </div>
               </div>
 
               {/* ROI Performance Chart */}
               <div className="mb-1">
                 <div className="flex items-center gap-4 mb-2">
-                  <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-sm bg-[#111111]" /><span className="text-xs text-slate-600">Surveys</span></div>
-                  <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-sm bg-[#16a34a]" /><span className="text-xs text-slate-600">Conversions</span></div>
+                  <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-sm bg-[#2385bd]" /><span className="nhl-panel-copy text-xs">Engagements</span></div>
+                  <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-sm bg-[#e2c36b]" /><span className="nhl-panel-copy text-xs">Conversions</span></div>
                 </div>
                 <ResponsiveContainer width="100%" height={175}>
                   <BarChart data={chartData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
-                    <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#666' }} axisLine={{ stroke: '#e0e0e0' }} />
-                    <YAxis tick={{ fontSize: 11, fill: '#666' }} axisLine={{ stroke: '#e0e0e0' }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.14)" vertical={false} />
+                    <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#c7d2d9' }} axisLine={{ stroke: '#637582' }} />
+                    <YAxis tick={{ fontSize: 11, fill: '#c7d2d9' }} axisLine={{ stroke: '#637582' }} />
                     <Tooltip
                       contentStyle={{ background: '#fff', border: '1px solid #e0e0e0', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
                     />
-                    <Bar dataKey="surveys" fill="#111111" radius={[4, 4, 0, 0]} name="Total Surveys" />
-                    <Bar dataKey="conversions" fill="#16a34a" radius={[4, 4, 0, 0]} name="Conversions" />
+                    <Bar
+                      dataKey="surveys"
+                      fill="#2385bd"
+                      radius={[4, 4, 0, 0]}
+                      name="Engagements"
+                    />
+                    <Bar
+                      dataKey="conversions"
+                      fill="#e2c36b"
+                      radius={[4, 4, 0, 0]}
+                      name="Conversions"
+                    />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -368,15 +399,15 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
             // Bar Chart View
             <ResponsiveContainer width="100%" height={280}>
               <BarChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.14)" vertical={false} />
                 <XAxis
                   dataKey="label"
-                  tick={{ fontSize: 12, fill: '#666' }}
-                  axisLine={{ stroke: '#e0e0e0' }}
+                  tick={{ fontSize: 12, fill: '#c7d2d9' }}
+                  axisLine={{ stroke: '#637582' }}
                 />
                 <YAxis
-                  tick={{ fontSize: 12, fill: '#666' }}
-                  axisLine={{ stroke: '#e0e0e0' }}
+                  tick={{ fontSize: 12, fill: '#c7d2d9' }}
+                  axisLine={{ stroke: '#637582' }}
                   domain={viewMode === 'satisfaction' ? [0, 100] : undefined}
                 />
                 <Tooltip
@@ -395,13 +426,13 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
                 />
                 {viewMode === 'survey' ? (
                   <>
-                    <Bar dataKey="surveys" fill="#111111" radius={[4, 4, 0, 0]} name="Total Surveys" />
-                    <Bar dataKey="missingItems" fill="#A8A9AD" radius={[4, 4, 0, 0]} name="Missing Items" />
+                    <Bar dataKey="surveys" fill="#2385bd" radius={[4, 4, 0, 0]} name="Engagements" />
+                    <Bar dataKey="missingItems" fill="#e2c36b" radius={[4, 4, 0, 0]} name="Missing Items" />
                   </>
                 ) : (
                   <>
-                    <Bar dataKey="engagement" fill="#111111" radius={[4, 4, 0, 0]} name="Associate Engagement" />
-                    <Bar dataKey="satisfaction" fill="#1e3a5f" radius={[4, 4, 0, 0]} name="Associate Satisfaction" />
+                    <Bar dataKey="engagement" fill="#2385bd" radius={[4, 4, 0, 0]} name="Associate Engagement" />
+                    <Bar dataKey="satisfaction" fill="#e2c36b" radius={[4, 4, 0, 0]} name="Associate Satisfaction" />
                   </>
                 )}
               </BarChart>
@@ -411,11 +442,11 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
           <div className={`grid grid-cols-2 gap-4 ${viewMode === 'roi' ? 'hidden' : 'mt-6'}`}>
             {viewMode === 'survey' ? (
               <>
-                <div className="bg-white/50 backdrop-blur-sm rounded-xl shadow-sm">
+                <div className="nhl-light-card backdrop-blur-sm rounded-xl shadow-sm">
                   <div className="px-5 py-4">
                     <div className="flex items-center gap-2 mb-3">
-                      <DollarSign size={16} className="text-[#0076CE]" />
-                      <span className="text-sm font-medium text-[#333333]">Revenue Loss</span>
+                      <DollarSign size={16} className="text-[#55a9dc]" />
+                      <span className="text-sm font-medium text-slate-200">Revenue Loss</span>
                       <div className="group relative">
                         <HelpCircle size={14} className="text-slate-400 cursor-help" />
                         <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 hidden group-hover:block w-48 p-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg z-10">
@@ -424,18 +455,18 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
                         </div>
                       </div>
                     </div>
-                    <div className="text-2xl font-black text-[#9CA3AF] mb-1">
+                    <div className="text-2xl font-black text-white mb-1">
                       ${calculatedData.potentialRevenueLoss.toLocaleString()}
                     </div>
-                    <div className="text-xs text-[#0076CE]">Missing merchandise</div>
+                    <div className="text-xs text-[#8fc8e8]">Missing merchandise</div>
                   </div>
                 </div>
 
-                <div className="bg-white/50 backdrop-blur-sm rounded-xl shadow-sm cursor-pointer hover:bg-white/70 transition-colors" onClick={() => setShowModal(true)}>
+                <div className="nhl-light-card backdrop-blur-sm rounded-xl shadow-sm cursor-pointer transition-colors" onClick={() => setShowModal(true)}>
                   <div className="px-5 py-4">
                     <div className="flex items-center gap-2 mb-3">
-                      <ShoppingBag size={16} className="text-[#0076CE]" />
-                      <span className="text-sm font-medium text-[#333333]">Items Missing</span>
+                      <ShoppingBag size={16} className="text-[#55a9dc]" />
+                      <span className="text-sm font-medium text-slate-200">Items Missing</span>
                       <div className="group relative" onClick={(e) => e.stopPropagation()}>
                         <HelpCircle size={14} className="text-slate-400 cursor-help" />
                         <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 hidden group-hover:block w-48 p-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg z-10">
@@ -444,20 +475,20 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
                         </div>
                       </div>
                     </div>
-                    <div className="text-2xl font-black text-[#9CA3AF] mb-1">
+                    <div className="text-2xl font-black text-white mb-1">
                       {actualMissingItems.toLocaleString()}
                     </div>
-                    <div className="text-xs text-[#0076CE]">Unfulfilled requests</div>
+                    <div className="text-xs text-[#8fc8e8]">Unfulfilled requests</div>
                   </div>
                 </div>
               </>
             ) : viewMode === 'satisfaction' ? (
               <>
-                <div className="bg-white/50 backdrop-blur-sm rounded-xl shadow-sm">
+                <div className="nhl-light-card backdrop-blur-sm rounded-xl shadow-sm">
                   <div className="px-5 py-4">
                     <div className="flex items-center gap-2 mb-3">
-                      <ThumbsUp size={16} className="text-[#0076CE]" />
-                      <span className="text-sm font-medium text-[#333333]">Associate Satisfaction</span>
+                      <ThumbsUp size={16} className="text-[#55a9dc]" />
+                      <span className="text-sm font-medium text-slate-200">Associate Satisfaction</span>
                       <div className="group relative">
                         <HelpCircle size={14} className="text-slate-400 cursor-help" />
                         <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 hidden group-hover:block w-48 p-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg z-10">
@@ -469,15 +500,15 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
                     <div className="text-2xl font-black text-[#22c55e] mb-1">
                       {calculatedData.staffSatisfaction}%
                     </div>
-                    <div className="text-xs text-[#0076CE]">+2% vs yesterday</div>
+                    <div className="text-xs text-[#8fc8e8]">+2% vs yesterday</div>
                   </div>
                 </div>
 
-                <div className="bg-white/50 backdrop-blur-sm rounded-xl shadow-sm">
+                <div className="nhl-light-card backdrop-blur-sm rounded-xl shadow-sm">
                   <div className="px-5 py-4">
                     <div className="flex items-center gap-2 mb-3">
-                      <Users size={16} className="text-[#0076CE]" />
-                      <span className="text-sm font-medium text-[#333333]">Associate Engagement</span>
+                      <Users size={16} className="text-[#55a9dc]" />
+                      <span className="text-sm font-medium text-slate-200">Associate Engagement</span>
                       <div className="group relative">
                         <HelpCircle size={14} className="text-slate-400 cursor-help" />
                         <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 hidden group-hover:block w-48 p-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg z-10">
@@ -489,7 +520,7 @@ export function SurveyOverviewV2({ viewMode, setViewMode }: SurveyOverviewV2Prop
                     <div className="text-2xl font-black text-[#22c55e] mb-1">
                       {calculatedData.staffContact}%
                     </div>
-                    <div className="text-xs text-[#0076CE]">+5% vs yesterday</div>
+                    <div className="text-xs text-[#8fc8e8]">+5% vs yesterday</div>
                   </div>
                 </div>
               </>

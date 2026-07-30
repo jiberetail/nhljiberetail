@@ -1,6 +1,6 @@
 // ROI constants — shared across all components that compute survey ROI
 export const ROI_REDIRECT_RATE = 0.56;   // 56% of surveys → QR redirect
-export const ROI_CONVERSION_RATE = 0.65; // 65% of redirects → purchase
+export const ROI_CONVERSION_RATE = 0.85; // 85% of redirects → purchase
 export const ROI_AVG_ORDER_VALUE = 247;  // avg online order value in dollars
 
 // Base data for 30 days (used as reference)
@@ -126,7 +126,7 @@ export function calculateQuickInsights(days: number, isToday: boolean = false) {
       subtitle: "Due to out-of-stock items",
     },
     mostActivePodium: {
-      value: "Rangers Corner",
+      value: "O-Zone Kiosk",
       subtitle: "Most customer interactions",
     },
     estimatedDailyRevenueLoss: {

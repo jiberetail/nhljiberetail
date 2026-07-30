@@ -225,7 +225,7 @@ export function DateRangePicker() {
   return (
     <div className="relative" ref={dropdownRef}>
       {/* Trigger */}
-      <div className="bg-gradient-to-r from-[#111827]/30 to-[#6B7280]/30 rounded-lg p-[1px]">
+      <div className="nhl-date-trigger bg-gradient-to-r from-[#111827]/30 to-[#6B7280]/30 rounded-lg p-[1px]">
         <button
           onClick={handleOpen}
           className="flex items-center gap-2 px-4 py-2 text-sm bg-white rounded-lg hover:bg-gray-50 transition-colors"

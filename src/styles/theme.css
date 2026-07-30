@@ -184,3 +184,261 @@
     line-height: 1.5;
   }
 }
+
+/* NHL dashboard surface system */
+.nhl-dashboard-theme {
+  --nhl-dashboard-black: #03070b;
+  --nhl-dashboard-blue: #0a4f7c;
+  --nhl-dashboard-blue-deep: #071b2e;
+  --nhl-dashboard-blue-light: #7fc4ee;
+  --nhl-dashboard-gold: #e2c36b;
+  --nhl-dashboard-gold-dark: #9a7120;
+}
+
+.nhl-dashboard-theme .nhl-panel {
+  background: linear-gradient(
+    145deg,
+    rgba(3, 7, 11, 0.94) 0%,
+    rgba(7, 27, 46, 0.92) 58%,
+    rgba(8, 48, 76, 0.88) 100%
+  ) !important;
+  border: 1px solid rgba(226, 195, 107, 0.76) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    inset 0 -3px 0 rgba(10, 79, 124, 0.42),
+    0 18px 44px rgba(0, 0, 0, 0.34) !important;
+}
+
+.nhl-dashboard-theme .nhl-card {
+  background: linear-gradient(
+    145deg,
+    rgba(3, 8, 13, 0.96) 0%,
+    rgba(7, 28, 47, 0.94) 62%,
+    rgba(9, 56, 88, 0.9) 100%
+  ) !important;
+  border: 1px solid rgba(226, 195, 107, 0.66) !important;
+  box-shadow:
+    inset 0 2px 0 rgba(87, 160, 207, 0.3),
+    0 14px 34px rgba(0, 0, 0, 0.28) !important;
+}
+
+.nhl-dashboard-theme .nhl-light-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.97) 0%,
+    rgba(222, 230, 237, 0.96) 100%
+  ) !important;
+  border: 1px solid rgba(226, 195, 107, 0.82) !important;
+  box-shadow:
+    inset 4px 0 0 rgba(10, 79, 124, 0.94),
+    inset 0 2px 0 rgba(255, 255, 255, 0.84),
+    0 9px 24px rgba(0, 0, 0, 0.2) !important;
+}
+
+.nhl-dashboard-theme .nhl-panel-title {
+  color: #ffffff !important;
+}
+
+.nhl-dashboard-theme .nhl-panel-copy {
+  color: #b8d2e5 !important;
+}
+
+.nhl-dashboard-theme .nhl-gold-value {
+  color: var(--nhl-dashboard-gold) !important;
+}
+
+.nhl-dashboard-theme .nhl-blue-copy {
+  color: var(--nhl-dashboard-blue-light) !important;
+}
+
+.nhl-dashboard-theme .nhl-mode-control {
+  background: rgba(2, 8, 13, 0.9) !important;
+  border: 1px solid rgba(226, 195, 107, 0.72) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.nhl-dashboard-theme .nhl-mode-control button {
+  color: #c7dbea !important;
+}
+
+.nhl-dashboard-theme .nhl-mode-control .nhl-mode-active {
+  color: #07111b !important;
+  background: linear-gradient(135deg, var(--nhl-dashboard-gold-dark), #f4dc91) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.32);
+}
+
+.nhl-dashboard-theme .nhl-action {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--nhl-dashboard-blue), var(--nhl-dashboard-black)) !important;
+  border: 1px solid rgba(226, 195, 107, 0.88) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.nhl-dashboard-theme .nhl-action:hover {
+  background: linear-gradient(135deg, #126da8, #07111b) !important;
+}
+
+.nhl-dashboard-theme .nhl-date-trigger {
+  padding: 1px;
+  border: 1px solid rgba(226, 195, 107, 0.9);
+  background: linear-gradient(135deg, var(--nhl-dashboard-gold-dark), var(--nhl-dashboard-blue));
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+.nhl-dashboard-theme .nhl-date-trigger > button {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, rgba(3, 8, 13, 0.98), rgba(8, 48, 76, 0.96)) !important;
+}
+
+.nhl-dashboard-theme .nhl-date-trigger > button:hover {
+  background: linear-gradient(135deg, rgba(8, 27, 44, 0.98), rgba(12, 72, 111, 0.96)) !important;
+}
+
+.nhl-dashboard-theme .nhl-date-trigger svg {
+  color: var(--nhl-dashboard-gold) !important;
+}
+
+.nhl-dashboard-theme .nhl-date-trigger span {
+  color: #ffffff !important;
+}
+
+/* Home dashboard premium arena workspace */
+.nhl-home-dashboard {
+  background: linear-gradient(180deg, #eef1f3 0%, #dfe4e7 42%, #d3dade 100%);
+}
+
+.nhl-home-masthead {
+  border-bottom: 1px solid rgba(226, 195, 107, 0.76);
+  box-shadow:
+    inset 0 -1px 0 rgba(203, 214, 221, 0.22),
+    0 12px 30px rgba(15, 23, 31, 0.22);
+}
+
+.nhl-home-main {
+  position: relative;
+}
+
+.nhl-home-dashboard .nhl-panel,
+.nhl-home-dashboard .nhl-card {
+  background:
+    linear-gradient(
+      118deg,
+      rgba(255, 255, 255, 0.09) 0%,
+      transparent 17%,
+      transparent 72%,
+      rgba(151, 169, 181, 0.05) 100%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(11, 17, 22, 0.98) 0%,
+      rgba(29, 38, 45, 0.97) 55%,
+      rgba(15, 21, 27, 0.98) 100%
+    ) !important;
+  backdrop-filter: none;
+  border: 1px solid rgba(226, 195, 107, 0.7) !important;
+  border-radius: 8px !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(190, 204, 213, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    0 12px 28px rgba(15, 23, 31, 0.24) !important;
+}
+
+.nhl-home-dashboard .nhl-card {
+  background:
+    linear-gradient(
+      118deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 18%,
+      transparent 100%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(34, 44, 52, 0.98) 0%,
+      rgba(23, 31, 38, 0.98) 56%,
+      rgba(14, 20, 25, 0.99) 100%
+    ) !important;
+  backdrop-filter: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(190, 204, 213, 0.2),
+    inset 3px 0 0 rgba(226, 195, 107, 0.74),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 10px 22px rgba(15, 23, 31, 0.2) !important;
+}
+
+.nhl-home-dashboard .nhl-secondary-panel {
+  border-color: rgba(170, 184, 194, 0.62) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(210, 221, 228, 0.15),
+    inset 3px 0 0 rgba(177, 191, 200, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.11),
+    0 10px 22px rgba(15, 23, 31, 0.18) !important;
+}
+
+.nhl-home-dashboard .nhl-primary-panel {
+  border: 2px solid rgba(226, 195, 107, 0.9) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 241, 187, 0.12),
+    inset 4px 0 0 rgba(226, 195, 107, 0.74),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 14px 30px rgba(15, 23, 31, 0.26) !important;
+}
+
+.nhl-home-dashboard .nhl-light-card {
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 20%,
+      transparent 100%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(42, 53, 62, 0.99) 0%,
+      rgba(29, 38, 45, 0.99) 58%,
+      rgba(20, 27, 33, 0.99) 100%
+    ) !important;
+  backdrop-filter: none;
+  border: 1px solid rgba(170, 184, 194, 0.48) !important;
+  border-radius: 6px !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(218, 229, 235, 0.14),
+    inset 3px 0 0 rgba(226, 195, 107, 0.72),
+    inset 0 1px 0 rgba(255, 255, 255, 0.11),
+    0 6px 16px rgba(15, 23, 31, 0.18) !important;
+}
+
+.nhl-home-dashboard .nhl-panel-title {
+  color: #f8fafc !important;
+}
+
+.nhl-home-dashboard .nhl-panel-copy {
+  color: #b8c4cc !important;
+}
+
+.nhl-home-dashboard .nhl-gold-value {
+  color: #f0d67f !important;
+}
+
+.nhl-home-dashboard .nhl-blue-copy {
+  color: #a9beca !important;
+}
+
+.nhl-home-dashboard .tracking-wide {
+  letter-spacing: 0 !important;
+}
+
+.nhl-report-document {
+  overflow: hidden;
+  border: 2px solid #c7a447;
+  border-top: 8px solid #07111b;
+  box-shadow:
+    0 0 0 1px rgba(10, 79, 124, 0.58),
+    0 20px 55px rgba(0, 0, 0, 0.32);
+}
+
+.nhl-report-document h1,
+.nhl-report-document h2,
+.nhl-report-document h3,
+.nhl-report-document th {
+  letter-spacing: 0 !important;
+}

@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { exportReportPdf } from "@/app/utils/exportReportPdf";
 import { useRef } from "react";
 import nhlLogo from "../../imports/NHL-league-logo.png";
-import jibeRetailLogo from "figma:asset/c9ceb1471dccd073ec86737828ad56cc026ab66e.png";
+import jibeRetailLogo from "../../imports/jibe-retail-official-logo.png";
 
 type DateRange = {
   from: Date;
@@ -219,10 +219,10 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
         />
 
         <div className="px-6 py-6">
-          <div ref={reportRef} style={{
+          <div ref={reportRef} className="nhl-report-document" style={{
             backgroundColor: '#ffffff',
             padding: '40px',
-            fontFamily: 'system-ui, -apple-system, sans-serif',
+            fontFamily: "'Roboto Condensed', 'Arial Narrow', Arial, sans-serif",
             color: '#1f2937'
           }}>
             {/* Header */}
@@ -231,8 +231,8 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                 <img src={nhlLogo} alt="NHL" style={{ height: '56px' }} />
                 <img src={jibeRetailLogo} alt="Jibe Retail" style={{ height: '80px' }} />
               </div>
-              <div style={{ borderBottom: '3px solid #041e42', paddingBottom: '12px' }}>
-                <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#041e42', margin: '0 0 8px 0' }}>
+              <div style={{ borderBottom: '3px solid #c7a447', paddingBottom: '12px' }}>
+                <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#07111b', margin: '0 0 8px 0' }}>
                   Abandoned Survey Report
                 </h1>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -243,7 +243,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                     <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
                       Report Period
                     </p>
-                    <p style={{ fontSize: '16px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                    <p style={{ fontSize: '16px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                       {format(dateRange.from, "MMM d")} - {format(dateRange.to, "MMM d, yyyy")}
                     </p>
                     <p style={{ fontSize: '12px', color: '#9ca3af', margin: '4px 0 0 0' }}>
@@ -256,11 +256,11 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
 
             {/* Executive Summary */}
             <div style={{ marginBottom: '32px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
                 Executive Summary
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px' }}>
-                <div style={{ background: 'linear-gradient(135deg, #041e42 0%, #0a2f5f 100%)', padding: '20px', borderRadius: '8px' }}>
+                <div style={{ background: 'linear-gradient(135deg, #07111b 0%, #0a4f7c 100%)', padding: '20px', borderRadius: '8px' }}>
                   <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                     Surveys Started
                   </p>
@@ -268,7 +268,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                     {totalStarted}
                   </p>
                 </div>
-                <div style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', padding: '20px', borderRadius: '8px' }}>
+                <div style={{ background: 'linear-gradient(135deg, #2385bd 0%, #167cb4 100%)', padding: '20px', borderRadius: '8px' }}>
                   <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                     Completed
                   </p>
@@ -276,7 +276,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                     {totalCompleted}
                   </p>
                 </div>
-                <div style={{ background: 'linear-gradient(135deg, #BC0022 0%, #d4002a 100%)', padding: '20px', borderRadius: '8px' }}>
+                <div style={{ background: 'linear-gradient(135deg, #9a7120 0%, #c7a447 100%)', padding: '20px', borderRadius: '8px' }}>
                   <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                     Abandoned
                   </p>
@@ -297,14 +297,14 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
 
             {/* Critical Abandonment Points */}
             <div style={{ marginBottom: '32px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
                 Critical Abandonment Points
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
                 {topAbandonmentScreens.map((screen, idx) => (
-                  <div key={idx} style={{ border: '2px solid #BC0022', borderRadius: '8px', padding: '16px', background: 'linear-gradient(135deg, rgba(188,0,34,0.05) 0%, #ffffff 100%)' }}>
+                  <div key={idx} style={{ border: '2px solid #9a7120', borderRadius: '8px', padding: '16px', background: 'linear-gradient(135deg, rgba(154,113,32,0.05) 0%, #ffffff 100%)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                      <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#BC0022', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', fontWeight: '900', fontSize: '14px' }}>
+                      <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#9a7120', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', fontWeight: '900', fontSize: '14px' }}>
                         {idx + 1}
                       </div>
                       <div>
@@ -312,7 +312,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                         <p style={{ fontSize: '12px', fontWeight: '900', color: '#1f2937', margin: 0 }}>{screen.screenName}</p>
                       </div>
                     </div>
-                    <p style={{ fontSize: '28px', fontWeight: '900', color: '#BC0022', margin: '8px 0 4px 0' }}>
+                    <p style={{ fontSize: '28px', fontWeight: '900', color: '#9a7120', margin: '8px 0 4px 0' }}>
                       {screen.abandonmentRate}%
                     </p>
                     <p style={{ fontSize: '11px', fontWeight: 'bold', color: '#6b7280', margin: 0 }}>
@@ -325,7 +325,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
 
             {/* Survey Flow Visualization */}
             <div style={{ marginBottom: '32px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
                 Survey Flow & Abandonment Funnel
               </h2>
               <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '24px', background: '#f9fafb' }}>
@@ -344,7 +344,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                             width: '36px',
                             height: '36px',
                             borderRadius: '50%',
-                            background: isHighAbandonment ? '#BC0022' : '#041e42',
+                            background: isHighAbandonment ? '#9a7120' : '#07111b',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
@@ -358,7 +358,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                             <p style={{ fontSize: '14px', fontWeight: '900', color: '#1f2937', margin: 0 }}>
                               {screen.screenName}
                               {isHighAbandonment && (
-                                <span style={{ marginLeft: '8px', fontSize: '11px', fontWeight: 'bold', color: '#BC0022', textTransform: 'uppercase' }}>
+                                <span style={{ marginLeft: '8px', fontSize: '11px', fontWeight: 'bold', color: '#9a7120', textTransform: 'uppercase' }}>
                                   ⚠ High Abandonment
                                 </span>
                               )}
@@ -369,7 +369,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                           </div>
                         </div>
                         <div style={{ textAlign: 'right' }}>
-                          <p style={{ fontSize: '18px', fontWeight: '900', color: isHighAbandonment ? '#BC0022' : '#041e42', margin: 0 }}>
+                          <p style={{ fontSize: '18px', fontWeight: '900', color: isHighAbandonment ? '#9a7120' : '#07111b', margin: 0 }}>
                             {screen.abandonmentRate.toFixed(1)}%
                           </p>
                           <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: 0, textTransform: 'uppercase' }}>
@@ -383,7 +383,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                         <div style={{
                           width: `${completedWidth}%`,
                           height: '100%',
-                          background: 'linear-gradient(to right, #10b981, #059669)',
+                          background: 'linear-gradient(to right, #2385bd, #167cb4)',
                           position: 'absolute',
                           left: 0,
                           top: 0
@@ -391,7 +391,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                         <div style={{
                           width: `${abandonedWidth}%`,
                           height: '100%',
-                          background: 'linear-gradient(to right, #BC0022, #d4002a)',
+                          background: 'linear-gradient(to right, #9a7120, #c7a447)',
                           position: 'absolute',
                           left: `${completedWidth}%`,
                           top: 0
@@ -402,23 +402,23 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr', gap: '8px' }}>
                         <div style={{ background: '#ffffff', padding: '8px', borderRadius: '4px', border: '1px solid #e5e7eb' }}>
                           <p style={{ fontSize: '9px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Started</p>
-                          <p style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: 0 }}>{screen.started}</p>
+                          <p style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: 0 }}>{screen.started}</p>
                         </div>
                         <div style={{ background: '#ffffff', padding: '8px', borderRadius: '4px', border: '1px solid #e5e7eb' }}>
                           <p style={{ fontSize: '9px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Completed</p>
-                          <p style={{ fontSize: '16px', fontWeight: '900', color: '#10b981', margin: 0 }}>{screen.completed}</p>
+                          <p style={{ fontSize: '16px', fontWeight: '900', color: '#2385bd', margin: 0 }}>{screen.completed}</p>
                         </div>
                         <div style={{ background: '#ffffff', padding: '8px', borderRadius: '4px', border: '1px solid #e5e7eb' }}>
                           <p style={{ fontSize: '9px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Abandoned</p>
-                          <p style={{ fontSize: '16px', fontWeight: '900', color: '#BC0022', margin: 0 }}>{screen.abandoned}</p>
+                          <p style={{ fontSize: '16px', fontWeight: '900', color: '#9a7120', margin: 0 }}>{screen.abandoned}</p>
                         </div>
                         <div style={{ background: '#ffffff', padding: '8px', borderRadius: '4px', border: '1px solid #e5e7eb' }}>
                           <p style={{ fontSize: '9px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Avg Time</p>
-                          <p style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: 0 }}>{formatTime(screen.avgTimeOnScreen)}</p>
+                          <p style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: 0 }}>{formatTime(screen.avgTimeOnScreen)}</p>
                         </div>
                         <div style={{ background: '#ffffff', padding: '8px', borderRadius: '4px', border: '1px solid #e5e7eb' }}>
                           <p style={{ fontSize: '9px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Time @ Abandon</p>
-                          <p style={{ fontSize: '16px', fontWeight: '900', color: '#BC0022', margin: 0 }}>{formatTime(screen.avgTimeBeforeAbandon)}</p>
+                          <p style={{ fontSize: '16px', fontWeight: '900', color: '#9a7120', margin: 0 }}>{formatTime(screen.avgTimeBeforeAbandon)}</p>
                         </div>
                         <div style={{ background: '#ffffff', padding: '8px', borderRadius: '4px', border: '1px solid #e5e7eb' }}>
                           <p style={{ fontSize: '9px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Drop-off</p>
@@ -440,20 +440,20 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
 
             {/* Time Analysis */}
             <div style={{ marginBottom: '32px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
                 Time Analysis
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                <div style={{ border: '2px solid #041e42', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(4,30,66,0.05) 0%, #ffffff 100%)' }}>
+                <div style={{ border: '2px solid #07111b', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(7,17,27,0.05) 0%, #ffffff 100%)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                    <div style={{ padding: '10px', background: '#041e42', borderRadius: '8px' }}>
+                    <div style={{ padding: '10px', background: '#07111b', borderRadius: '8px' }}>
                       <Clock size={24} color="#ffffff" />
                     </div>
                     <div>
                       <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>
                         Avg Time to Complete
                       </p>
-                      <p style={{ fontSize: '32px', fontWeight: '900', color: '#041e42', margin: 0 }}>
+                      <p style={{ fontSize: '32px', fontWeight: '900', color: '#07111b', margin: 0 }}>
                         {formatTime(avgCompletionTime)}
                       </p>
                     </div>
@@ -462,16 +462,16 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                     Average time spent by users who successfully completed the entire survey
                   </p>
                 </div>
-                <div style={{ border: '2px solid #BC0022', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(188,0,34,0.05) 0%, #ffffff 100%)' }}>
+                <div style={{ border: '2px solid #9a7120', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(154,113,32,0.05) 0%, #ffffff 100%)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                    <div style={{ padding: '10px', background: '#BC0022', borderRadius: '8px' }}>
+                    <div style={{ padding: '10px', background: '#9a7120', borderRadius: '8px' }}>
                       <TrendingDown size={24} color="#ffffff" />
                     </div>
                     <div>
                       <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>
                         Avg Time Before Abandon
                       </p>
-                      <p style={{ fontSize: '32px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                      <p style={{ fontSize: '32px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                         {formatTime(Math.round(avgAbandonTime))}
                       </p>
                     </div>
@@ -485,7 +485,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
 
             {/* Key Insights & Recommendations */}
             <div style={{ marginBottom: '24px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
                 Key Insights & Recommendations
               </h2>
               <div style={{ borderLeft: '4px solid #f59e0b', padding: '20px', backgroundColor: '#fffbeb', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
@@ -497,7 +497,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                   This screen requires detailed input (Team, Item, Size, Gender) and takes an average of 95 seconds, but users are abandoning
                   after only 48 seconds - suggesting form complexity or length is a barrier.
                 </p>
-                <p style={{ fontSize: '13px', fontWeight: 'bold', color: '#041e42', margin: '0 0 8px 0' }}>RECOMMENDED ACTIONS:</p>
+                <p style={{ fontSize: '13px', fontWeight: 'bold', color: '#07111b', margin: '0 0 8px 0' }}>RECOMMENDED ACTIONS:</p>
                 <ul style={{ fontSize: '13px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
                   <li>Simplify form with auto-complete/dropdown menus instead of free text</li>
                   <li>Break into smaller steps with progress indicator</li>
@@ -506,8 +506,8 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                 </ul>
               </div>
 
-              <div style={{ borderLeft: '4px solid #10b981', padding: '20px', backgroundColor: '#f0fdf4', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
-                <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#10b981', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+              <div style={{ borderLeft: '4px solid #2385bd', padding: '20px', backgroundColor: '#eff6ff', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#2385bd', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                   ✅ Excellent Performance: Overall Survey Flow
                 </h3>
                 <p style={{ fontSize: '14px', lineHeight: '1.6', color: '#4b5563', margin: '0 0 12px 0' }}>
@@ -515,7 +515,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                   demonstrates strong user engagement and efficient design. Core experience screens (rating questions, staff interactions) are
                   performing exceptionally well.
                 </p>
-                <p style={{ fontSize: '13px', fontWeight: 'bold', color: '#041e42', margin: '0 0 8px 0' }}>BEST PRACTICES TO MAINTAIN:</p>
+                <p style={{ fontSize: '13px', fontWeight: 'bold', color: '#07111b', margin: '0 0 8px 0' }}>BEST PRACTICES TO MAINTAIN:</p>
                 <ul style={{ fontSize: '13px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
                   <li>Keep single-question screens with clear rating scales (1-5 stars)</li>
                   <li>Use visual elements (stars, buttons, multi-select) over text input</li>
@@ -524,15 +524,15 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                 </ul>
               </div>
 
-              <div style={{ borderLeft: '4px solid #041e42', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
-                <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+              <div style={{ borderLeft: '4px solid #07111b', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                   📊 Opportunity: Optimize Optional Fields (Steps 9-10)
                 </h3>
                 <p style={{ fontSize: '14px', lineHeight: '1.6', color: '#4b5563', margin: '0 0 12px 0' }}>
                   Additional Comments and Contact Information screens show minimal abandonment (<strong>1-1.5%</strong>) but could capture even more
                   data with strategic incentives and clearer value propositions for users.
                 </p>
-                <p style={{ fontSize: '13px', fontWeight: 'bold', color: '#041e42', margin: '0 0 8px 0' }}>OPTIMIZATION OPPORTUNITIES:</p>
+                <p style={{ fontSize: '13px', fontWeight: 'bold', color: '#07111b', margin: '0 0 8px 0' }}>OPTIMIZATION OPPORTUNITIES:</p>
                 <ul style={{ fontSize: '13px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
                   <li>Add incentive messaging (e.g., "Enter email for exclusive offers and 10% off")</li>
                   <li>Test moving contact information earlier in survey for higher completion</li>
@@ -544,13 +544,13 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
 
             {/* Summary Table */}
             <div style={{ marginBottom: '32px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
                 Complete Survey Metrics Summary
               </h2>
               <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
-                    <tr style={{ background: 'linear-gradient(to right, #041e42, #0a2f5f)' }}>
+                    <tr style={{ background: 'linear-gradient(to right, #07111b, #0a4f7c)' }}>
                       <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Step</th>
                       <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Screen Name</th>
                       <th style={{ padding: '14px 16px', textAlign: 'right', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Started</th>
@@ -564,16 +564,16 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                     {data.slice(0, -1).map((screen, idx) => {
                       const isHighAbandonment = screen.abandonmentRate >= 10;
                       return (
-                        <tr key={idx} style={{ backgroundColor: isHighAbandonment ? 'rgba(188,0,34,0.05)' : (idx % 2 === 0 ? '#ffffff' : '#f9fafb') }}>
-                          <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42' }}>{screen.step}</td>
+                        <tr key={idx} style={{ backgroundColor: isHighAbandonment ? 'rgba(154,113,32,0.05)' : (idx % 2 === 0 ? '#ffffff' : '#f9fafb') }}>
+                          <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b' }}>{screen.step}</td>
                           <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#1f2937' }}>{screen.screenName}</td>
-                          <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42', textAlign: 'right' }}>{screen.started}</td>
-                          <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#10b981', textAlign: 'right' }}>{screen.completed}</td>
-                          <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>{screen.abandoned}</td>
-                          <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: isHighAbandonment ? '#BC0022' : '#6b7280', textAlign: 'right' }}>
+                          <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b', textAlign: 'right' }}>{screen.started}</td>
+                          <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#2385bd', textAlign: 'right' }}>{screen.completed}</td>
+                          <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>{screen.abandoned}</td>
+                          <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: isHighAbandonment ? '#9a7120' : '#6b7280', textAlign: 'right' }}>
                             {screen.abandonmentRate.toFixed(1)}%
                           </td>
-                          <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42', textAlign: 'right' }}>{formatTime(screen.avgTimeOnScreen)}</td>
+                          <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b', textAlign: 'right' }}>{formatTime(screen.avgTimeOnScreen)}</td>
                         </tr>
                       );
                     })}
@@ -625,8 +625,8 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
             gap: '8px',
             padding: '8px 16px',
             backgroundColor: '#ffffff',
-            color: '#041e42',
-            border: '2px solid #041e42',
+            color: '#07111b',
+            border: '2px solid #07111b',
             borderRadius: '4px',
             fontWeight: 'bold',
             fontSize: '14px',
@@ -645,7 +645,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
             alignItems: 'center',
             gap: '8px',
             padding: '8px 16px',
-            backgroundColor: '#041e42',
+            backgroundColor: '#07111b',
             color: '#ffffff',
             border: 'none',
             borderRadius: '4px',
@@ -685,10 +685,10 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
         borderRadius: '8px',
         boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
       }}>
-        <div ref={reportRef} style={{
+        <div ref={reportRef} className="nhl-report-document" style={{
           backgroundColor: '#ffffff',
           padding: '40px',
-          fontFamily: 'system-ui, -apple-system, sans-serif',
+          fontFamily: "'Roboto Condensed', 'Arial Narrow', Arial, sans-serif",
           color: '#1f2937'
         }}>
           {/* Header */}
@@ -697,8 +697,8 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
               <img src={nhlLogo} alt="NHL" style={{ height: '56px' }} />
               <img src={jibeRetailLogo} alt="Jibe Retail" style={{ height: '80px' }} />
             </div>
-            <div style={{ borderBottom: '3px solid #041e42', paddingBottom: '12px' }}>
-              <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#041e42', margin: '0 0 8px 0' }}>
+            <div style={{ borderBottom: '3px solid #c7a447', paddingBottom: '12px' }}>
+              <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#07111b', margin: '0 0 8px 0' }}>
                 Abandoned Survey Report
               </h1>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -709,7 +709,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
                     Report Period
                   </p>
-                  <p style={{ fontSize: '16px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                  <p style={{ fontSize: '16px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                     {format(dateRange.from, "MMM d")} - {format(dateRange.to, "MMM d, yyyy")}
                   </p>
                   <p style={{ fontSize: '12px', color: '#9ca3af', margin: '4px 0 0 0' }}>
@@ -722,11 +722,11 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
 
           {/* Executive Summary */}
           <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
               Executive Summary
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px' }}>
-              <div style={{ background: 'linear-gradient(135deg, #041e42 0%, #0a2f5f 100%)', padding: '20px', borderRadius: '8px' }}>
+              <div style={{ background: 'linear-gradient(135deg, #07111b 0%, #0a4f7c 100%)', padding: '20px', borderRadius: '8px' }}>
                 <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                   Surveys Started
                 </p>
@@ -734,7 +734,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                   {totalStarted}
                 </p>
               </div>
-              <div style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', padding: '20px', borderRadius: '8px' }}>
+              <div style={{ background: 'linear-gradient(135deg, #2385bd 0%, #167cb4 100%)', padding: '20px', borderRadius: '8px' }}>
                 <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                   Completed
                 </p>
@@ -742,7 +742,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                   {totalCompleted}
                 </p>
               </div>
-              <div style={{ background: 'linear-gradient(135deg, #BC0022 0%, #d4002a 100%)', padding: '20px', borderRadius: '8px' }}>
+              <div style={{ background: 'linear-gradient(135deg, #9a7120 0%, #c7a447 100%)', padding: '20px', borderRadius: '8px' }}>
                 <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                   Abandoned
                 </p>
@@ -763,14 +763,14 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
 
           {/* Critical Abandonment Points */}
           <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
               Critical Abandonment Points
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
               {topAbandonmentScreens.map((screen, idx) => (
-                <div key={idx} style={{ border: '2px solid #BC0022', borderRadius: '8px', padding: '16px', background: 'linear-gradient(135deg, rgba(188,0,34,0.05) 0%, #ffffff 100%)' }}>
+                <div key={idx} style={{ border: '2px solid #9a7120', borderRadius: '8px', padding: '16px', background: 'linear-gradient(135deg, rgba(154,113,32,0.05) 0%, #ffffff 100%)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#BC0022', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', fontWeight: '900', fontSize: '14px' }}>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#9a7120', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', fontWeight: '900', fontSize: '14px' }}>
                       {idx + 1}
                     </div>
                     <div>
@@ -778,7 +778,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                       <p style={{ fontSize: '12px', fontWeight: '900', color: '#1f2937', margin: 0 }}>{screen.screenName}</p>
                     </div>
                   </div>
-                  <p style={{ fontSize: '28px', fontWeight: '900', color: '#BC0022', margin: '8px 0 4px 0' }}>
+                  <p style={{ fontSize: '28px', fontWeight: '900', color: '#9a7120', margin: '8px 0 4px 0' }}>
                     {screen.abandonmentRate}%
                   </p>
                   <p style={{ fontSize: '11px', fontWeight: 'bold', color: '#6b7280', margin: 0 }}>
@@ -791,7 +791,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
 
           {/* Survey Flow Visualization */}
           <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
               Survey Flow & Abandonment Funnel
             </h2>
             <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '24px', background: '#f9fafb' }}>
@@ -810,7 +810,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                           width: '36px',
                           height: '36px',
                           borderRadius: '50%',
-                          background: isHighAbandonment ? '#BC0022' : '#041e42',
+                          background: isHighAbandonment ? '#9a7120' : '#07111b',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -824,7 +824,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                           <p style={{ fontSize: '14px', fontWeight: '900', color: '#1f2937', margin: 0 }}>
                             {screen.screenName}
                             {isHighAbandonment && (
-                              <span style={{ marginLeft: '8px', fontSize: '11px', fontWeight: 'bold', color: '#BC0022', textTransform: 'uppercase' }}>
+                              <span style={{ marginLeft: '8px', fontSize: '11px', fontWeight: 'bold', color: '#9a7120', textTransform: 'uppercase' }}>
                                 ⚠ High Abandonment
                               </span>
                             )}
@@ -835,7 +835,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                         </div>
                       </div>
                       <div style={{ textAlign: 'right' }}>
-                        <p style={{ fontSize: '18px', fontWeight: '900', color: isHighAbandonment ? '#BC0022' : '#041e42', margin: 0 }}>
+                        <p style={{ fontSize: '18px', fontWeight: '900', color: isHighAbandonment ? '#9a7120' : '#07111b', margin: 0 }}>
                           {screen.abandonmentRate.toFixed(1)}%
                         </p>
                         <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: 0, textTransform: 'uppercase' }}>
@@ -849,7 +849,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                       <div style={{
                         width: `${completedWidth}%`,
                         height: '100%',
-                        background: 'linear-gradient(to right, #10b981, #059669)',
+                        background: 'linear-gradient(to right, #2385bd, #167cb4)',
                         position: 'absolute',
                         left: 0,
                         top: 0
@@ -857,7 +857,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                       <div style={{
                         width: `${abandonedWidth}%`,
                         height: '100%',
-                        background: 'linear-gradient(to right, #BC0022, #d4002a)',
+                        background: 'linear-gradient(to right, #9a7120, #c7a447)',
                         position: 'absolute',
                         left: `${completedWidth}%`,
                         top: 0
@@ -868,23 +868,23 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr', gap: '8px' }}>
                       <div style={{ background: '#ffffff', padding: '8px', borderRadius: '4px', border: '1px solid #e5e7eb' }}>
                         <p style={{ fontSize: '9px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Started</p>
-                        <p style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: 0 }}>{screen.started}</p>
+                        <p style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: 0 }}>{screen.started}</p>
                       </div>
                       <div style={{ background: '#ffffff', padding: '8px', borderRadius: '4px', border: '1px solid #e5e7eb' }}>
                         <p style={{ fontSize: '9px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Completed</p>
-                        <p style={{ fontSize: '16px', fontWeight: '900', color: '#10b981', margin: 0 }}>{screen.completed}</p>
+                        <p style={{ fontSize: '16px', fontWeight: '900', color: '#2385bd', margin: 0 }}>{screen.completed}</p>
                       </div>
                       <div style={{ background: '#ffffff', padding: '8px', borderRadius: '4px', border: '1px solid #e5e7eb' }}>
                         <p style={{ fontSize: '9px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Abandoned</p>
-                        <p style={{ fontSize: '16px', fontWeight: '900', color: '#BC0022', margin: 0 }}>{screen.abandoned}</p>
+                        <p style={{ fontSize: '16px', fontWeight: '900', color: '#9a7120', margin: 0 }}>{screen.abandoned}</p>
                       </div>
                       <div style={{ background: '#ffffff', padding: '8px', borderRadius: '4px', border: '1px solid #e5e7eb' }}>
                         <p style={{ fontSize: '9px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Avg Time</p>
-                        <p style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: 0 }}>{formatTime(screen.avgTimeOnScreen)}</p>
+                        <p style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: 0 }}>{formatTime(screen.avgTimeOnScreen)}</p>
                       </div>
                       <div style={{ background: '#ffffff', padding: '8px', borderRadius: '4px', border: '1px solid #e5e7eb' }}>
                         <p style={{ fontSize: '9px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Time @ Abandon</p>
-                        <p style={{ fontSize: '16px', fontWeight: '900', color: '#BC0022', margin: 0 }}>{formatTime(screen.avgTimeBeforeAbandon)}</p>
+                        <p style={{ fontSize: '16px', fontWeight: '900', color: '#9a7120', margin: 0 }}>{formatTime(screen.avgTimeBeforeAbandon)}</p>
                       </div>
                       <div style={{ background: '#ffffff', padding: '8px', borderRadius: '4px', border: '1px solid #e5e7eb' }}>
                         <p style={{ fontSize: '9px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Drop-off</p>
@@ -906,20 +906,20 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
 
           {/* Time Analysis */}
           <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
               Time Analysis
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-              <div style={{ border: '2px solid #041e42', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(4,30,66,0.05) 0%, #ffffff 100%)' }}>
+              <div style={{ border: '2px solid #07111b', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(7,17,27,0.05) 0%, #ffffff 100%)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                  <div style={{ padding: '10px', background: '#041e42', borderRadius: '8px' }}>
+                  <div style={{ padding: '10px', background: '#07111b', borderRadius: '8px' }}>
                     <Clock size={24} color="#ffffff" />
                   </div>
                   <div>
                     <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>
                       Avg Time to Complete
                     </p>
-                    <p style={{ fontSize: '32px', fontWeight: '900', color: '#041e42', margin: 0 }}>
+                    <p style={{ fontSize: '32px', fontWeight: '900', color: '#07111b', margin: 0 }}>
                       {formatTime(avgCompletionTime)}
                     </p>
                   </div>
@@ -928,16 +928,16 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                   Average time spent by users who successfully completed the entire survey
                 </p>
               </div>
-              <div style={{ border: '2px solid #BC0022', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(188,0,34,0.05) 0%, #ffffff 100%)' }}>
+              <div style={{ border: '2px solid #9a7120', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(154,113,32,0.05) 0%, #ffffff 100%)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                  <div style={{ padding: '10px', background: '#BC0022', borderRadius: '8px' }}>
+                  <div style={{ padding: '10px', background: '#9a7120', borderRadius: '8px' }}>
                     <TrendingDown size={24} color="#ffffff" />
                   </div>
                   <div>
                     <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>
                       Avg Time Before Abandon
                     </p>
-                    <p style={{ fontSize: '32px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                    <p style={{ fontSize: '32px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                       {formatTime(Math.round(avgAbandonTime))}
                     </p>
                   </div>
@@ -951,7 +951,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
 
           {/* Key Insights & Recommendations */}
           <div style={{ marginBottom: '24px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
               Key Insights & Recommendations
             </h2>
             <div style={{ borderLeft: '4px solid #f59e0b', padding: '20px', backgroundColor: '#fffbeb', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
@@ -963,7 +963,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                 This screen requires detailed input (Team, Item, Size, Gender) and takes an average of 95 seconds, but users are abandoning
                 after only 48 seconds - suggesting form complexity or length is a barrier.
               </p>
-              <p style={{ fontSize: '13px', fontWeight: 'bold', color: '#041e42', margin: '0 0 8px 0' }}>RECOMMENDED ACTIONS:</p>
+              <p style={{ fontSize: '13px', fontWeight: 'bold', color: '#07111b', margin: '0 0 8px 0' }}>RECOMMENDED ACTIONS:</p>
               <ul style={{ fontSize: '13px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
                 <li>Simplify form with auto-complete/dropdown menus instead of free text</li>
                 <li>Break into smaller steps with progress indicator</li>
@@ -972,8 +972,8 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
               </ul>
             </div>
 
-            <div style={{ borderLeft: '4px solid #10b981', padding: '20px', backgroundColor: '#f0fdf4', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#10b981', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+            <div style={{ borderLeft: '4px solid #2385bd', padding: '20px', backgroundColor: '#eff6ff', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#2385bd', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                 ✅ Excellent Performance: Overall Survey Flow
               </h3>
               <p style={{ fontSize: '14px', lineHeight: '1.6', color: '#4b5563', margin: '0 0 12px 0' }}>
@@ -981,7 +981,7 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                 demonstrates strong user engagement and efficient design. Core experience screens (rating questions, staff interactions) are
                 performing exceptionally well.
               </p>
-              <p style={{ fontSize: '13px', fontWeight: 'bold', color: '#041e42', margin: '0 0 8px 0' }}>BEST PRACTICES TO MAINTAIN:</p>
+              <p style={{ fontSize: '13px', fontWeight: 'bold', color: '#07111b', margin: '0 0 8px 0' }}>BEST PRACTICES TO MAINTAIN:</p>
               <ul style={{ fontSize: '13px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
                 <li>Keep single-question screens with clear rating scales (1-5 stars)</li>
                 <li>Use visual elements (stars, buttons, multi-select) over text input</li>
@@ -990,15 +990,15 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
               </ul>
             </div>
 
-            <div style={{ borderLeft: '4px solid #041e42', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+            <div style={{ borderLeft: '4px solid #07111b', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                 📊 Opportunity: Optimize Optional Fields (Steps 9-10)
               </h3>
               <p style={{ fontSize: '14px', lineHeight: '1.6', color: '#4b5563', margin: '0 0 12px 0' }}>
                 Additional Comments and Contact Information screens show minimal abandonment (<strong>1-1.5%</strong>) but could capture even more
                 data with strategic incentives and clearer value propositions for users.
               </p>
-              <p style={{ fontSize: '13px', fontWeight: 'bold', color: '#041e42', margin: '0 0 8px 0' }}>OPTIMIZATION OPPORTUNITIES:</p>
+              <p style={{ fontSize: '13px', fontWeight: 'bold', color: '#07111b', margin: '0 0 8px 0' }}>OPTIMIZATION OPPORTUNITIES:</p>
               <ul style={{ fontSize: '13px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
                 <li>Add incentive messaging (e.g., "Enter email for exclusive offers and 10% off")</li>
                 <li>Test moving contact information earlier in survey for higher completion</li>
@@ -1010,13 +1010,13 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
 
           {/* Summary Table */}
           <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
               Complete Survey Metrics Summary
             </h2>
             <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr style={{ background: 'linear-gradient(to right, #041e42, #0a2f5f)' }}>
+                  <tr style={{ background: 'linear-gradient(to right, #07111b, #0a4f7c)' }}>
                     <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Step</th>
                     <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Screen Name</th>
                     <th style={{ padding: '14px 16px', textAlign: 'right', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Started</th>
@@ -1030,16 +1030,16 @@ export function AbandonedSurveyReport({ dateRange, onClose, isModal }: Abandoned
                   {data.slice(0, -1).map((screen, idx) => {
                     const isHighAbandonment = screen.abandonmentRate >= 10;
                     return (
-                      <tr key={idx} style={{ backgroundColor: isHighAbandonment ? 'rgba(188,0,34,0.05)' : (idx % 2 === 0 ? '#ffffff' : '#f9fafb') }}>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42' }}>{screen.step}</td>
+                      <tr key={idx} style={{ backgroundColor: isHighAbandonment ? 'rgba(154,113,32,0.05)' : (idx % 2 === 0 ? '#ffffff' : '#f9fafb') }}>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b' }}>{screen.step}</td>
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#1f2937' }}>{screen.screenName}</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42', textAlign: 'right' }}>{screen.started}</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#10b981', textAlign: 'right' }}>{screen.completed}</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>{screen.abandoned}</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: isHighAbandonment ? '#BC0022' : '#6b7280', textAlign: 'right' }}>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b', textAlign: 'right' }}>{screen.started}</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#2385bd', textAlign: 'right' }}>{screen.completed}</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>{screen.abandoned}</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: isHighAbandonment ? '#9a7120' : '#6b7280', textAlign: 'right' }}>
                           {screen.abandonmentRate.toFixed(1)}%
                         </td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42', textAlign: 'right' }}>{formatTime(screen.avgTimeOnScreen)}</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b', textAlign: 'right' }}>{formatTime(screen.avgTimeOnScreen)}</td>
                       </tr>
                     );
                   })}

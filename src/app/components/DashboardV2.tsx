@@ -7,6 +7,8 @@ import { useDateRange } from "@/app/contexts/DateRangeContext";
 import { calculateMerchandiseData } from "@/app/utils/dataCalculations";
 import { getTeamLogo } from "@/app/utils/teamLogos";
 import { useState } from "react";
+import dashboardBackground from "../../imports/nhl-shop-hudson-yards-dashboard.png";
+import nhlShopLogo from "../../imports/nhl-shop-fanatics-dashboard-logo.png";
 
 export function DashboardV2() {
   const { getDayCount, isCurrentDay } = useDateRange();
@@ -30,15 +32,31 @@ export function DashboardV2() {
   const animationDuration = getAnimationDuration();
 
   return (
-    <div className="flex-1 overflow-auto">
-      {/* Header */}
-      <div>
-        <div className="max-w-[1400px] px-6 py-4">
-          <div className="grid grid-cols-12 gap-6">
+    <div className="nhl-dashboard-theme nhl-home-dashboard flex-1 overflow-auto min-h-screen">
+      {/* Branded Masthead */}
+      <header
+        className="nhl-home-masthead"
+        style={{
+          backgroundImage: `
+            linear-gradient(90deg, rgba(3, 7, 11, 0.76), rgba(3, 7, 11, 0.38) 56%, rgba(3, 7, 11, 0.56)),
+            url(${dashboardBackground})
+          `,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 38%',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        <div className="max-w-[1600px] min-h-[164px] px-6 py-5 flex items-center">
+          <div className="grid grid-cols-12 gap-6 w-full">
             <div className="col-span-12 md:col-span-8 flex items-center gap-3">
               <div>
-                <h1 className="font-bold text-[#111827] text-3xl">NHL Shop NYC Dashboard</h1>
-                <p className="text-xs text-slate-600">Customer Survey Analytics</p>
+                <h1 className="sr-only">NHL Shop Customer Survey Dashboard</h1>
+                <img
+                  src={nhlShopLogo}
+                  alt="NHL Shop - A Fanatics Experience"
+                  className="w-full max-w-[430px] h-auto"
+                  style={{ filter: 'drop-shadow(0 5px 14px rgba(0, 0, 0, 0.62))' }}
+                />
               </div>
             </div>
             <div className="col-span-12 md:col-span-4 flex items-center md:justify-end">
@@ -46,17 +64,17 @@ export function DashboardV2() {
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
       {/* Main Content */}
-      <div className="max-w-[1400px] px-6 py-6">
+      <div className="nhl-home-main max-w-[1600px] px-6 py-6">
         <div className="grid grid-cols-12 gap-6">
           {/* Left Column */}
-          <div className="col-span-12 xl:col-span-8 space-y-3">
+          <div className="col-span-12 xl:col-span-8 space-y-4">
             <SurveyOverviewV2 viewMode={viewMode} setViewMode={setViewMode} />
 
             {/* Out of Stock Ticker - Glassmorphism */}
-            <div className="backdrop-blur-md bg-white/60 border border-white/40 rounded-2xl overflow-hidden shadow-2xl">
+            <div className="nhl-panel nhl-secondary-panel backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl">
               <div className="overflow-hidden">
                 <div className="ticker-wrapper">
                   <div className="ticker-content flex items-center gap-4 py-3">
@@ -72,20 +90,20 @@ export function DashboardV2() {
                         )}
 
                         {/* Item Details */}
-                        <span className="text-sm font-black text-[#111827]">
+                        <span className="text-sm font-black text-white">
                           {item.team}
                         </span>
-                        <span className="text-sm text-gray-700 font-bold">
+                        <span className="text-sm text-[#b8c4cc] font-bold">
                           {item.item} - {item.gender} ({item.size})
                         </span>
 
                         {/* Count Badge */}
-                        <span className="inline-flex items-center justify-center min-w-[28px] h-[28px] px-2 bg-gradient-to-r from-[#374151] to-[#6B7280] text-white rounded-full font-black text-xs shadow-lg">
+                        <span className="inline-flex items-center justify-center min-w-[28px] h-[28px] px-2 bg-gradient-to-r from-[#9a7120] to-[#f4dc91] text-[#07111b] rounded-full font-black text-xs shadow-lg">
                           {item.count}
                         </span>
 
                         {/* Separator Dot */}
-                        <span className="w-2 h-2 bg-[#9CA3AF] rounded-full flex-shrink-0 ml-1 shadow-sm"></span>
+                        <span className="w-2 h-2 bg-[#e2c36b] rounded-full flex-shrink-0 ml-1 shadow-sm"></span>
                       </div>
                     ))}
                   </div>

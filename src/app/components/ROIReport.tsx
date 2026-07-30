@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { ROI_REDIRECT_RATE, ROI_CONVERSION_RATE, ROI_AVG_ORDER_VALUE, calculateKPIData } from "@/app/utils/dataCalculations";
 import { exportReportPdf } from "@/app/utils/exportReportPdf";
 import nhlLogo from "../../imports/NHL-league-logo.png";
-import jibeRetailLogo from "figma:asset/c9ceb1471dccd073ec86737828ad56cc026ab66e.png";
+import jibeRetailLogo from "../../imports/jibe-retail-official-logo.png";
 
 type DateRange = { from: Date; to: Date };
 type ROIReportProps = { dateRange: DateRange; onClose: () => void; isModal?: boolean };
@@ -148,7 +148,7 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
   };
 
   const content = (
-    <div ref={reportRef} style={{ backgroundColor: '#ffffff', padding: '48px', fontFamily: 'system-ui, -apple-system, sans-serif', color: '#1f2937', maxWidth: '1200px', margin: '0 auto' }}>
+    <div ref={reportRef} className="nhl-report-document" style={{ backgroundColor: '#ffffff', padding: '48px', fontFamily: "'Roboto Condensed', 'Arial Narrow', Arial, sans-serif", color: '#1f2937', maxWidth: '1200px', margin: '0 auto' }}>
 
       {/* ── HEADER ── */}
       <div style={{ marginBottom: '40px' }}>
@@ -156,25 +156,25 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
           <img src={nhlLogo} alt="NHL" style={{ height: '64px' }} />
           <img src={jibeRetailLogo} alt="Jibe Retail" style={{ height: '90px' }} />
         </div>
-        <div style={{ borderLeft: '6px solid #15803d', paddingLeft: '24px', marginBottom: '24px' }}>
-          <h1 style={{ fontSize: '42px', fontWeight: 900, color: '#14532d', margin: '0 0 8px 0', letterSpacing: '-0.5px' }}>
+        <div style={{ borderLeft: '6px solid #c7a447', paddingLeft: '24px', marginBottom: '24px' }}>
+          <h1 style={{ fontSize: '42px', fontWeight: 900, color: '#07111b', margin: '0 0 8px 0', letterSpacing: '-0.5px' }}>
             ROI Report
           </h1>
           <p style={{ fontSize: '18px', fontWeight: 600, color: '#6b7280', margin: 0 }}>
             NHL Shop NYC Flagship — Survey QR Code Online Conversion Analysis
           </p>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 24px', background: 'linear-gradient(135deg, #f0fdf4, #dcfce7)', borderRadius: '12px', border: '1px solid #bbf7d0' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 24px', background: 'linear-gradient(135deg, #eff6ff, #dbeafe)', borderRadius: '12px', border: '1px solid #bfdbfe' }}>
           <div>
-            <p style={{ fontSize: '12px', fontWeight: 700, color: '#15803d', margin: '0 0 4px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Report Period</p>
-            <p style={{ fontSize: '20px', fontWeight: 900, color: '#14532d', margin: 0 }}>{format(dateRange.from, "MMM d")} – {format(dateRange.to, "MMM d, yyyy")}</p>
+            <p style={{ fontSize: '12px', fontWeight: 700, color: '#0a4f7c', margin: '0 0 4px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Report Period</p>
+            <p style={{ fontSize: '20px', fontWeight: 900, color: '#07111b', margin: 0 }}>{format(dateRange.from, "MMM d")} – {format(dateRange.to, "MMM d, yyyy")}</p>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <p style={{ fontSize: '12px', fontWeight: 700, color: '#15803d', margin: '0 0 4px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Days Covered</p>
-            <p style={{ fontSize: '20px', fontWeight: 900, color: '#14532d', margin: 0 }}>{d.days}</p>
+            <p style={{ fontSize: '12px', fontWeight: 700, color: '#0a4f7c', margin: '0 0 4px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Days Covered</p>
+            <p style={{ fontSize: '20px', fontWeight: 900, color: '#07111b', margin: 0 }}>{d.days}</p>
           </div>
           <div style={{ textAlign: 'right' }}>
-            <p style={{ fontSize: '12px', fontWeight: 700, color: '#15803d', margin: '0 0 4px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Generated</p>
+            <p style={{ fontSize: '12px', fontWeight: 700, color: '#0a4f7c', margin: '0 0 4px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Generated</p>
             <p style={{ fontSize: '14px', fontWeight: 600, color: '#475569', margin: 0 }}>{format(new Date(), "MMM d, yyyy 'at' h:mm a")}</p>
           </div>
         </div>
@@ -183,8 +183,8 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
       {/* ── HERO KPI CARDS ── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '14px', marginBottom: '40px' }}>
         {[
-          { label: 'Total ROI',         value: `$${d.totalROI.toLocaleString()}`,       sub: 'Online revenue',          bg: 'linear-gradient(135deg,#14532d,#166534)', light: false },
-          { label: 'Daily Avg ROI',     value: `$${d.dailyROI.toLocaleString()}`,        sub: 'Per day',                 bg: 'linear-gradient(135deg,#166534,#15803d)', light: false },
+          { label: 'Total ROI',         value: `$${d.totalROI.toLocaleString()}`,       sub: 'Online revenue',          bg: 'linear-gradient(135deg,#07111b,#0a4f7c)', light: false },
+          { label: 'Daily Avg ROI',     value: `$${d.dailyROI.toLocaleString()}`,        sub: 'Per day',                 bg: 'linear-gradient(135deg,#0a4f7c,#0a4f7c)', light: false },
           { label: 'QR Redirects',      value: d.totalRedirects.toLocaleString(),        sub: 'Sent online',             bg: 'linear-gradient(135deg,#1e3a5f,#1e40af)', light: false },
           { label: 'Conversions',       value: d.totalConversions.toLocaleString(),      sub: 'Completed purchases',     bg: 'linear-gradient(135deg,#f8fafc,#f1f5f9)',  light: true  },
           { label: 'Conversion Rate',   value: `${d.overallConvRate}%`,                  sub: 'Redirects → purchases',  bg: 'linear-gradient(135deg,#f8fafc,#f1f5f9)',  light: true  },
@@ -198,15 +198,15 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
       </div>
 
       {/* ── CONVERSION FUNNEL ── */}
-      <div style={{ marginBottom: '40px', background: 'linear-gradient(135deg,#f0fdf4,#dcfce7)', border: '2px solid #bbf7d0', borderRadius: '14px', padding: '28px' }}>
-        <h2 style={{ fontSize: '16px', fontWeight: 900, color: '#14532d', margin: '0 0 20px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+      <div style={{ marginBottom: '40px', background: 'linear-gradient(135deg,#eff6ff,#dbeafe)', border: '2px solid #bfdbfe', borderRadius: '14px', padding: '28px' }}>
+        <h2 style={{ fontSize: '16px', fontWeight: 900, color: '#07111b', margin: '0 0 20px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
           📊 Conversion Funnel
         </h2>
         <div style={{ display: 'flex', alignItems: 'stretch', gap: '6px' }}>
           {[
             { label: 'Total Surveys',  value: d.totalSurveys,     pct: '100%',  color: '#1e3a5f',  bg: '#dbeafe' },
             { label: 'QR Redirects',   value: d.totalRedirects,   pct: `${Math.round((d.totalRedirects / d.totalSurveys) * 100)}%`,   color: '#1d4ed8', bg: '#bfdbfe' },
-            { label: 'Conversions',    value: d.totalConversions, pct: `${Math.round((d.totalConversions / d.totalSurveys) * 100)}%`, color: '#15803d', bg: '#bbf7d0' },
+            { label: 'Conversions',    value: d.totalConversions, pct: `${Math.round((d.totalConversions / d.totalSurveys) * 100)}%`, color: '#0a4f7c', bg: '#bfdbfe' },
           ].map((step, i) => (
             <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <div style={{ background: '#e2e8f0', borderRadius: '8px', overflow: 'hidden', height: '56px', position: 'relative' }}>
@@ -220,7 +220,7 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
             </div>
           ))}
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px', padding: '12px 0 0 0', borderTop: '1px solid #86efac' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px', padding: '12px 0 0 0', borderTop: '1px solid #93c5fd' }}>
           {[
             { label: 'Redirect Rate',   value: `${Math.round(ROI_REDIRECT_RATE * 100)}%`,  sub: 'Surveys → QR scan' },
             { label: 'Conversion Rate', value: `${d.overallConvRate}%`,                      sub: 'Redirects → purchase' },
@@ -228,7 +228,7 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
             { label: 'Avg Order Value', value: `$${ROI_AVG_ORDER_VALUE}`,                   sub: 'Per converted sale' },
           ].map((m, i) => (
             <div key={i} style={{ textAlign: 'center' }}>
-              <p style={{ fontSize: '20px', fontWeight: 900, color: '#14532d', margin: '0 0 4px 0' }}>{m.value}</p>
+              <p style={{ fontSize: '20px', fontWeight: 900, color: '#07111b', margin: '0 0 4px 0' }}>{m.value}</p>
               <p style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', margin: 0 }}>{m.label}</p>
               <p style={{ fontSize: '10px', color: '#94a3b8', margin: '2px 0 0 0' }}>{m.sub}</p>
             </div>
@@ -238,7 +238,7 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
 
       {/* ── ROI BY MERCH CATEGORY ── */}
       <div style={{ marginBottom: '40px' }}>
-        <h2 style={{ fontSize: '16px', fontWeight: 900, color: '#14532d', margin: '0 0 14px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+        <h2 style={{ fontSize: '16px', fontWeight: 900, color: '#07111b', margin: '0 0 14px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
           🏒 ROI by Merchandise Category
         </h2>
         <div style={{ border: '2px solid #e2e8f0', borderRadius: '12px', overflow: 'hidden' }}>
@@ -253,7 +253,7 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
               <col style={{ width: '19%' }} />
             </colgroup>
             <thead>
-              <tr style={{ background: 'linear-gradient(to right,#14532d,#166534)' }}>
+              <tr style={{ background: 'linear-gradient(to right,#07111b,#0a4f7c)' }}>
                 {['Category','Redirects','Conversions','Conv. Rate','Avg Order','Revenue','% of Total ROI'].map(h => (
                   <th key={h} style={headCell({ textAlign: h === 'Category' ? 'left' : 'right' })}>{h}</th>
                 ))}
@@ -266,14 +266,14 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
                   <td style={cell({ textAlign: 'right' })}>{m.redirects.toLocaleString()}</td>
                   <td style={cell({ textAlign: 'right', fontWeight: 700, color: '#1e293b' })}>{m.conversions.toLocaleString()}</td>
                   <td style={{ ...cell({ textAlign: 'right' }) }}>
-                    <span style={{ background: '#dcfce7', color: '#15803d', padding: '2px 8px', borderRadius: '20px', fontSize: '11px', fontWeight: 800 }}>{Math.round(m.convRate * 100)}%</span>
+                    <span style={{ background: '#dbeafe', color: '#0a4f7c', padding: '2px 8px', borderRadius: '20px', fontSize: '11px', fontWeight: 800 }}>{Math.round(m.convRate * 100)}%</span>
                   </td>
                   <td style={cell({ textAlign: 'right' })}>${m.aov}</td>
-                  <td style={cell({ textAlign: 'right', fontWeight: 900, color: '#15803d', fontSize: '13px' })}>${m.revenue.toLocaleString()}</td>
+                  <td style={cell({ textAlign: 'right', fontWeight: 900, color: '#0a4f7c', fontSize: '13px' })}>${m.revenue.toLocaleString()}</td>
                   <td style={cell({ textAlign: 'right' })}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '6px' }}>
                       <div style={{ width: '48px', height: '6px', background: '#e2e8f0', borderRadius: '3px', overflow: 'hidden' }}>
-                        <div style={{ height: '100%', width: `${m.pct}%`, background: 'linear-gradient(to right,#14532d,#16a34a)', borderRadius: '3px' }} />
+                        <div style={{ height: '100%', width: `${m.pct}%`, background: 'linear-gradient(to right,#07111b,#167cb4)', borderRadius: '3px' }} />
                       </div>
                       <span style={{ fontSize: '11px', fontWeight: 800, color: '#374151' }}>{m.pct}%</span>
                     </div>
@@ -284,9 +284,9 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
                 <td style={cell({ fontWeight: 900, color: '#ffffff', textTransform: 'uppercase' })}>TOTAL</td>
                 <td style={cell({ textAlign: 'right', fontWeight: 900, color: '#ffffff' })}>{d.totalRedirects.toLocaleString()}</td>
                 <td style={cell({ textAlign: 'right', fontWeight: 900, color: '#ffffff' })}>{d.totalConversions.toLocaleString()}</td>
-                <td style={cell({ textAlign: 'right', fontWeight: 900, color: '#4ade80' })}>{d.overallConvRate}%</td>
+                <td style={cell({ textAlign: 'right', fontWeight: 900, color: '#e2c36b' })}>{d.overallConvRate}%</td>
                 <td style={cell({ textAlign: 'right', fontWeight: 900, color: '#ffffff' })}>${ROI_AVG_ORDER_VALUE}</td>
-                <td style={cell({ textAlign: 'right', fontWeight: 900, color: '#4ade80', fontSize: '13px' })}>${d.totalROI.toLocaleString()}</td>
+                <td style={cell({ textAlign: 'right', fontWeight: 900, color: '#e2c36b', fontSize: '13px' })}>${d.totalROI.toLocaleString()}</td>
                 <td style={cell({ textAlign: 'right', fontWeight: 900, color: '#ffffff' })}>100%</td>
               </tr>
             </tbody>
@@ -296,7 +296,7 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
 
       {/* ── ROI BY TEAM ── */}
       <div style={{ marginBottom: '40px' }}>
-        <h2 style={{ fontSize: '16px', fontWeight: 900, color: '#14532d', margin: '0 0 14px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+        <h2 style={{ fontSize: '16px', fontWeight: 900, color: '#07111b', margin: '0 0 14px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
           🏆 Top Teams by Conversion Revenue
         </h2>
         <div style={{ border: '2px solid #e2e8f0', borderRadius: '12px', overflow: 'hidden' }}>
@@ -311,7 +311,7 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
               <col style={{ width: '16%' }} />
             </colgroup>
             <thead>
-              <tr style={{ background: 'linear-gradient(to right,#14532d,#166534)' }}>
+              <tr style={{ background: 'linear-gradient(to right,#07111b,#0a4f7c)' }}>
                 {['#','Team','Top Item','Redirects','Conversions','Rate','Revenue'].map(h => (
                   <th key={h} style={headCell({ textAlign: ['#','Team','Top Item'].includes(h) ? 'left' : 'right' })}>{h}</th>
                 ))}
@@ -320,7 +320,7 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
             <tbody>
               {d.teams.map((t, idx) => (
                 <tr key={idx} style={{ backgroundColor: idx % 2 === 0 ? '#ffffff' : '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
-                  <td style={cell({ fontWeight: 900, color: idx < 3 ? '#15803d' : '#94a3b8' })}>#{idx + 1}</td>
+                  <td style={cell({ fontWeight: 900, color: idx < 3 ? '#0a4f7c' : '#94a3b8' })}>#{idx + 1}</td>
                   <td style={cell({ fontWeight: 800, color: '#1e293b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' })}>
                     <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: t.color, marginRight: '6px', verticalAlign: 'middle' }} />
                     {t.team}
@@ -329,9 +329,9 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
                   <td style={cell({ textAlign: 'right' })}>{t.redirects.toLocaleString()}</td>
                   <td style={cell({ textAlign: 'right', fontWeight: 700, color: '#1e293b' })}>{t.conversions.toLocaleString()}</td>
                   <td style={cell({ textAlign: 'right' })}>
-                    <span style={{ background: '#dcfce7', color: '#15803d', padding: '2px 8px', borderRadius: '20px', fontSize: '11px', fontWeight: 800 }}>{Math.round(t.convRate * 100)}%</span>
+                    <span style={{ background: '#dbeafe', color: '#0a4f7c', padding: '2px 8px', borderRadius: '20px', fontSize: '11px', fontWeight: 800 }}>{Math.round(t.convRate * 100)}%</span>
                   </td>
-                  <td style={cell({ textAlign: 'right', fontWeight: 900, color: '#15803d', fontSize: '13px' })}>${t.revenue.toLocaleString()}</td>
+                  <td style={cell({ textAlign: 'right', fontWeight: 900, color: '#0a4f7c', fontSize: '13px' })}>${t.revenue.toLocaleString()}</td>
                 </tr>
               ))}
             </tbody>
@@ -355,12 +355,12 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
               const isWeekend = dow.day === 'Sat' || dow.day === 'Sun';
               return (
                 <div key={dow.day} style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                  <span style={{ fontSize: '11px', fontWeight: 800, color: isWeekend ? '#14532d' : '#64748b', width: '28px' }}>{dow.day}</span>
+                  <span style={{ fontSize: '11px', fontWeight: 800, color: isWeekend ? '#07111b' : '#64748b', width: '28px' }}>{dow.day}</span>
                   <div style={{ flex: 1, background: '#f1f5f9', borderRadius: '4px', height: '20px', overflow: 'hidden' }}>
-                    <div style={{ width: `${barW}%`, height: '100%', background: isWeekend ? 'linear-gradient(to right,#14532d,#16a34a)' : 'linear-gradient(to right,#1e3a5f,#3b82f6)', borderRadius: '4px' }} />
+                    <div style={{ width: `${barW}%`, height: '100%', background: isWeekend ? 'linear-gradient(to right,#07111b,#167cb4)' : 'linear-gradient(to right,#1e3a5f,#3b82f6)', borderRadius: '4px' }} />
                   </div>
                   <span style={{ fontSize: '11px', fontWeight: 700, color: '#374151', width: '28px', textAlign: 'right' }}>{convs}</span>
-                  <span style={{ fontSize: '10px', color: isWeekend ? '#15803d' : '#94a3b8', width: '38px', textAlign: 'right', fontWeight: isWeekend ? 800 : 600 }}>×{dow.factor}</span>
+                  <span style={{ fontSize: '10px', color: isWeekend ? '#0a4f7c' : '#94a3b8', width: '38px', textAlign: 'right', fontWeight: isWeekend ? 800 : 600 }}>×{dow.factor}</span>
                 </div>
               );
             })}
@@ -380,12 +380,12 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
               const isPeak = tod.factor >= 1.25;
               return (
                 <div key={tod.hour} style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                  <span style={{ fontSize: '10px', fontWeight: 700, color: isPeak ? '#14532d' : '#64748b', width: '42px' }}>{tod.hour}</span>
+                  <span style={{ fontSize: '10px', fontWeight: 700, color: isPeak ? '#07111b' : '#64748b', width: '42px' }}>{tod.hour}</span>
                   <div style={{ flex: 1, background: '#f1f5f9', borderRadius: '4px', height: '20px', overflow: 'hidden' }}>
-                    <div style={{ width: `${barW}%`, height: '100%', background: isPeak ? 'linear-gradient(to right,#14532d,#16a34a)' : 'linear-gradient(to right,#6b7280,#9ca3af)', borderRadius: '4px' }} />
+                    <div style={{ width: `${barW}%`, height: '100%', background: isPeak ? 'linear-gradient(to right,#07111b,#167cb4)' : 'linear-gradient(to right,#6b7280,#9ca3af)', borderRadius: '4px' }} />
                   </div>
                   <span style={{ fontSize: '11px', fontWeight: 700, color: '#374151', width: '22px', textAlign: 'right' }}>{convs}</span>
-                  {isPeak && <span style={{ fontSize: '9px', fontWeight: 800, color: '#15803d', background: '#dcfce7', padding: '1px 5px', borderRadius: '10px' }}>PEAK</span>}
+                  {isPeak && <span style={{ fontSize: '9px', fontWeight: 800, color: '#0a4f7c', background: '#dbeafe', padding: '1px 5px', borderRadius: '10px' }}>PEAK</span>}
                 </div>
               );
             })}
@@ -395,7 +395,7 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
 
       {/* ── CUSTOMER SEGMENT ROI ── */}
       <div style={{ marginBottom: '40px' }}>
-        <h2 style={{ fontSize: '16px', fontWeight: 900, color: '#14532d', margin: '0 0 14px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+        <h2 style={{ fontSize: '16px', fontWeight: 900, color: '#07111b', margin: '0 0 14px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
           👤 ROI by Customer Segment
         </h2>
         <div style={{ border: '2px solid #e2e8f0', borderRadius: '12px', overflow: 'hidden' }}>
@@ -410,7 +410,7 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
               <col style={{ width: '18%' }} />
             </colgroup>
             <thead>
-              <tr style={{ background: 'linear-gradient(to right,#14532d,#166534)' }}>
+              <tr style={{ background: 'linear-gradient(to right,#07111b,#0a4f7c)' }}>
                 {['Segment','Share','Redirects','Conversions','Conv. Rate','Avg Order','Revenue'].map(h => (
                   <th key={h} style={headCell({ textAlign: h === 'Segment' ? 'left' : 'right' })}>{h}</th>
                 ))}
@@ -424,10 +424,10 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
                   <td style={cell({ textAlign: 'right' })}>{s.redirects.toLocaleString()}</td>
                   <td style={cell({ textAlign: 'right', fontWeight: 700, color: '#1e293b' })}>{s.conversions.toLocaleString()}</td>
                   <td style={cell({ textAlign: 'right' })}>
-                    <span style={{ background: '#dcfce7', color: '#15803d', padding: '2px 8px', borderRadius: '20px', fontSize: '11px', fontWeight: 800 }}>{Math.round(s.convRate * 100)}%</span>
+                    <span style={{ background: '#dbeafe', color: '#0a4f7c', padding: '2px 8px', borderRadius: '20px', fontSize: '11px', fontWeight: 800 }}>{Math.round(s.convRate * 100)}%</span>
                   </td>
                   <td style={cell({ textAlign: 'right' })}>${s.aov}</td>
-                  <td style={cell({ textAlign: 'right', fontWeight: 900, color: '#15803d', fontSize: '13px' })}>${s.revenue.toLocaleString()}</td>
+                  <td style={cell({ textAlign: 'right', fontWeight: 900, color: '#0a4f7c', fontSize: '13px' })}>${s.revenue.toLocaleString()}</td>
                 </tr>
               ))}
             </tbody>
@@ -441,7 +441,7 @@ export function ROIReport({ dateRange, onClose, isModal }: ROIReportProps) {
           {
             title: '💡 Top Opportunity',
             body: 'Fitted & Snapback Caps drive high redirect volume but only a $48 average order. Bundling with a jersey or hoodie suggestion at QR landing could lift per-scan revenue significantly.',
-            bg: 'linear-gradient(135deg,#f0fdf4,#dcfce7)', border: '#6ee7b7', titleColor: '#065f46',
+            bg: 'linear-gradient(135deg,#eff6ff,#dbeafe)', border: '#93c5fd', titleColor: '#0a4f7c',
           },
           {
             title: '📈 Biggest Win',

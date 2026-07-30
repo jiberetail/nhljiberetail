@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { exportReportPdf } from "@/app/utils/exportReportPdf";
 import { useRef } from "react";
 import nhlLogo from "../../imports/NHL-league-logo.png";
-import jibeRetailLogo from "figma:asset/c9ceb1471dccd073ec86737828ad56cc026ab66e.png";
+import jibeRetailLogo from "../../imports/jibe-retail-official-logo.png";
 
 type DateRange = {
   from: Date;
@@ -44,8 +44,8 @@ const generatePodiumData = (dateRange: DateRange): PodiumData[] => {
   return [
     {
       id: '1',
-      name: 'Main Entrance Podium',
-      location: 'Floor 1 - Main Entrance',
+      name: 'O-Zone',
+      location: 'Level 1 - Main Entrance',
       totalSurveys: 285,
       completedSurveys: 224,
       abandonedSurveys: 61,
@@ -69,8 +69,8 @@ const generatePodiumData = (dateRange: DateRange): PodiumData[] => {
     },
     {
       id: '2',
-      name: 'Rangers Corner',
-      location: 'Floor 1 - East Side',
+      name: 'Left Wing',
+      location: 'Level 1 - West',
       totalSurveys: 312,
       completedSurveys: 241,
       abandonedSurveys: 71,
@@ -94,8 +94,8 @@ const generatePodiumData = (dateRange: DateRange): PodiumData[] => {
     },
     {
       id: '3',
-      name: 'Islanders Display',
-      location: 'Floor 1 - West Side',
+      name: 'Right Wing',
+      location: 'Level 1 - East',
       totalSurveys: 198,
       completedSurveys: 152,
       abandonedSurveys: 46,
@@ -119,8 +119,8 @@ const generatePodiumData = (dateRange: DateRange): PodiumData[] => {
     },
     {
       id: '4',
-      name: 'Hat Central',
-      location: 'Floor 2 - Center',
+      name: 'Center Lane',
+      location: 'Level 2 - Top of Stairs',
       totalSurveys: 267,
       completedSurveys: 208,
       abandonedSurveys: 59,
@@ -144,8 +144,8 @@ const generatePodiumData = (dateRange: DateRange): PodiumData[] => {
     },
     {
       id: '5',
-      name: 'Jersey Wall',
-      location: 'Floor 2 - North Wall',
+      name: 'Blue Line',
+      location: 'Level 2 - West',
       totalSurveys: 241,
       completedSurveys: 186,
       abandonedSurveys: 55,
@@ -169,8 +169,8 @@ const generatePodiumData = (dateRange: DateRange): PodiumData[] => {
     },
     {
       id: '6',
-      name: 'Kids Zone Podium',
-      location: 'Floor 2 - South Corner',
+      name: 'Red Line',
+      location: 'Level 2 - East',
       totalSurveys: 147,
       completedSurveys: 115,
       abandonedSurveys: 32,
@@ -216,8 +216,8 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
     try {
       await exportReportPdf({
         element: reportRef.current,
-        title: "Podium Activity Report",
-        fileName: `NHL_Podium_Activity_Report_${format(dateRange.from, "yyyy-MM-dd")}_to_${format(dateRange.to, "yyyy-MM-dd")}.pdf`,
+        title: "Kiosk Activity Report",
+        fileName: `NHL_Kiosk_Activity_Report_${format(dateRange.from, "yyyy-MM-dd")}_to_${format(dateRange.to, "yyyy-MM-dd")}.pdf`,
       });
     } catch (error) {
       console.error('PDF Error:', error);
@@ -226,8 +226,8 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
   };
 
   const handleEmail = () => {
-    const subject = `NHL Shop NYC Flagship - Podium Activity Report (${format(dateRange.from, "MMM d")} - ${format(dateRange.to, "MMM d, yyyy")})`;
-    const body = `Please find the Podium Activity Report for the period ${format(dateRange.from, "MMMM d, yyyy")} to ${format(dateRange.to, "MMMM d, yyyy")}.\n\nKey Metrics:\n- Total Surveys: ${totalSurveys}\n- Total Completed: ${totalCompleted}\n- Overall Completion Rate: ${overallCompletionRate}%\n- Avg Staff Contact Rate: ${avgStaffContactRate}%\n- Avg Staff Rating: ${avgStaffRating}/5.0\n\nTop Performing Podium: ${topPodium.name} (${topPodium.completionRate.toFixed(1)}%)`;
+    const subject = `NHL Shop NYC Flagship - Kiosk Activity Report (${format(dateRange.from, "MMM d")} - ${format(dateRange.to, "MMM d, yyyy")})`;
+    const body = `Please find the Kiosk Activity Report for the period ${format(dateRange.from, "MMMM d, yyyy")} to ${format(dateRange.to, "MMMM d, yyyy")}.\n\nKey Metrics:\n- Total Surveys: ${totalSurveys}\n- Total Completed: ${totalCompleted}\n- Overall Completion Rate: ${overallCompletionRate}%\n- Avg Staff Contact Rate: ${avgStaffContactRate}%\n- Avg Staff Rating: ${avgStaffRating}/5.0\n\nTop Performing Kiosk: ${topPodium.name} (${topPodium.completionRate.toFixed(1)}%)`;
 
     window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
@@ -256,10 +256,10 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
         />
 
         <div className="px-6 py-6">
-          <div ref={reportRef} style={{
+          <div ref={reportRef} className="nhl-report-document" style={{
             backgroundColor: '#ffffff',
             padding: '40px',
-            fontFamily: 'system-ui, -apple-system, sans-serif',
+            fontFamily: "'Roboto Condensed', 'Arial Narrow', Arial, sans-serif",
             color: '#1f2937'
           }}>
             {/* Header */}
@@ -268,19 +268,19 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                 <img src={nhlLogo} alt="NHL" style={{ height: '56px' }} />
                 <img src={jibeRetailLogo} alt="Jibe Retail" style={{ height: '80px' }} />
               </div>
-              <div style={{ borderBottom: '3px solid #041e42', paddingBottom: '12px' }}>
-                <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#041e42', margin: '0 0 8px 0' }}>
-                  Podium Activity Report
+              <div style={{ borderBottom: '3px solid #c7a447', paddingBottom: '12px' }}>
+                <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#07111b', margin: '0 0 8px 0' }}>
+                  Kiosk Activity Report
                 </h1>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#6b7280', margin: 0 }}>
-                    NHL Shop NYC Flagship Store - Detailed Podium Performance Analysis
+                    NHL Shop NYC Flagship Store - Detailed Kiosk Performance Analysis
                   </p>
                   <div style={{ textAlign: 'right' }}>
                     <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
                       Report Period
                     </p>
-                    <p style={{ fontSize: '16px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                    <p style={{ fontSize: '16px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                       {format(dateRange.from, "MMM d")} - {format(dateRange.to, "MMM d, yyyy")}
                     </p>
                     <p style={{ fontSize: '12px', color: '#9ca3af', margin: '4px 0 0 0' }}>
@@ -293,11 +293,11 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
 
             {/* Executive Summary */}
             <div style={{ marginBottom: '32px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
                 Executive Summary
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px', marginBottom: '16px' }}>
-                <div style={{ background: 'linear-gradient(135deg, #041e42 0%, #0a2f5f 100%)', padding: '20px', borderRadius: '8px' }}>
+                <div style={{ background: 'linear-gradient(135deg, #07111b 0%, #0a4f7c 100%)', padding: '20px', borderRadius: '8px' }}>
                   <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                     Total Surveys
                   </p>
@@ -305,7 +305,7 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                     {totalSurveys}
                   </p>
                 </div>
-                <div style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', padding: '20px', borderRadius: '8px' }}>
+                <div style={{ background: 'linear-gradient(135deg, #2385bd 0%, #167cb4 100%)', padding: '20px', borderRadius: '8px' }}>
                   <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                     Completion Rate
                   </p>
@@ -313,7 +313,7 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                     {overallCompletionRate}%
                   </p>
                 </div>
-                <div style={{ background: 'linear-gradient(135deg, #BC0022 0%, #d4002a 100%)', padding: '20px', borderRadius: '8px' }}>
+                <div style={{ background: 'linear-gradient(135deg, #9a7120 0%, #c7a447 100%)', padding: '20px', borderRadius: '8px' }}>
                   <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                     Staff Contact Rate
                   </p>
@@ -333,14 +333,14 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
 
               {/* Performance Highlights */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                <div style={{ border: '2px solid #10b981', borderRadius: '8px', padding: '16px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
+                <div style={{ border: '2px solid #2385bd', borderRadius: '8px', padding: '16px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <TrendingUp size={20} color="#10b981" />
-                    <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#10b981', margin: 0, textTransform: 'uppercase' }}>
-                      Top Performing Podium
+                    <TrendingUp size={20} color="#2385bd" />
+                    <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#2385bd', margin: 0, textTransform: 'uppercase' }}>
+                      Top Performing Kiosk
                     </p>
                   </div>
-                  <p style={{ fontSize: '18px', fontWeight: '900', color: '#041e42', margin: '0 0 4px 0' }}>
+                  <p style={{ fontSize: '18px', fontWeight: '900', color: '#07111b', margin: '0 0 4px 0' }}>
                     {topPodium.name}
                   </p>
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 8px 0' }}>
@@ -349,11 +349,11 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <div>
                       <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: 0, textTransform: 'uppercase' }}>Completion Rate</p>
-                      <p style={{ fontSize: '20px', fontWeight: '900', color: '#10b981', margin: 0 }}>{topPodium.completionRate.toFixed(1)}%</p>
+                      <p style={{ fontSize: '20px', fontWeight: '900', color: '#2385bd', margin: 0 }}>{topPodium.completionRate.toFixed(1)}%</p>
                     </div>
                     <div>
                       <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: 0, textTransform: 'uppercase' }}>Staff Rating</p>
-                      <p style={{ fontSize: '20px', fontWeight: '900', color: '#10b981', margin: 0 }}>{topPodium.avgStaffRating}/5.0</p>
+                      <p style={{ fontSize: '20px', fontWeight: '900', color: '#2385bd', margin: 0 }}>{topPodium.avgStaffRating}/5.0</p>
                     </div>
                   </div>
                 </div>
@@ -364,7 +364,7 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                       Needs Attention
                     </p>
                   </div>
-                  <p style={{ fontSize: '18px', fontWeight: '900', color: '#041e42', margin: '0 0 4px 0' }}>
+                  <p style={{ fontSize: '18px', fontWeight: '900', color: '#07111b', margin: '0 0 4px 0' }}>
                     {bottomPodium.name}
                   </p>
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 8px 0' }}>
@@ -389,7 +389,7 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
               <div key={podium.id} style={{ marginBottom: '32px' }}>
                 {/* Podium Header */}
                 <div style={{
-                  background: `linear-gradient(135deg, ${idx % 2 === 0 ? '#041e42' : '#BC0022'} 0%, ${idx % 2 === 0 ? '#0a2f5f' : '#d4002a'} 100%)`,
+                  background: `linear-gradient(135deg, ${idx % 2 === 0 ? '#07111b' : '#9a7120'} 0%, ${idx % 2 === 0 ? '#0a4f7c' : '#c7a447'} 100%)`,
                   padding: '20px',
                   borderRadius: '8px 8px 0 0',
                   marginBottom: '0'
@@ -426,10 +426,10 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                     </div>
                     <div style={{ textAlign: 'right' }}>
                       <p style={{ fontSize: '12px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
-                        Podium ID
+                        Kiosk ID
                       </p>
                       <p style={{ fontSize: '20px', fontWeight: '900', color: '#ffffff', margin: 0 }}>
-                        POD-{podium.id}
+                        JibeKiosk {podium.id}
                       </p>
                     </div>
                   </div>
@@ -439,59 +439,59 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                 <div style={{ border: '2px solid #e5e7eb', borderTop: 'none', borderRadius: '0 0 8px 8px', padding: '24px' }}>
                   {/* Key Metrics */}
                   <div style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                       Performance Metrics
                     </h3>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px' }}>
                       <div style={{ border: '1px solid #e5e7eb', borderRadius: '6px', padding: '12px', background: '#f9fafb' }}>
                         <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 6px 0', textTransform: 'uppercase' }}>Total Surveys</p>
-                        <p style={{ fontSize: '24px', fontWeight: '900', color: '#041e42', margin: 0 }}>{podium.totalSurveys}</p>
+                        <p style={{ fontSize: '24px', fontWeight: '900', color: '#07111b', margin: 0 }}>{podium.totalSurveys}</p>
                       </div>
                       <div style={{ border: '1px solid #e5e7eb', borderRadius: '6px', padding: '12px', background: '#f9fafb' }}>
                         <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 6px 0', textTransform: 'uppercase' }}>Completed</p>
-                        <p style={{ fontSize: '24px', fontWeight: '900', color: '#10b981', margin: 0 }}>{podium.completedSurveys}</p>
+                        <p style={{ fontSize: '24px', fontWeight: '900', color: '#2385bd', margin: 0 }}>{podium.completedSurveys}</p>
                       </div>
                       <div style={{ border: '1px solid #e5e7eb', borderRadius: '6px', padding: '12px', background: '#f9fafb' }}>
                         <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 6px 0', textTransform: 'uppercase' }}>Completion Rate</p>
-                        <p style={{ fontSize: '24px', fontWeight: '900', color: '#BC0022', margin: 0 }}>{podium.completionRate.toFixed(1)}%</p>
+                        <p style={{ fontSize: '24px', fontWeight: '900', color: '#9a7120', margin: 0 }}>{podium.completionRate.toFixed(1)}%</p>
                       </div>
                       <div style={{ border: '1px solid #e5e7eb', borderRadius: '6px', padding: '12px', background: '#f9fafb' }}>
                         <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 6px 0', textTransform: 'uppercase' }}>Avg Time</p>
-                        <p style={{ fontSize: '24px', fontWeight: '900', color: '#041e42', margin: 0 }}>{formatTime(podium.avgSurveyTime)}</p>
+                        <p style={{ fontSize: '24px', fontWeight: '900', color: '#07111b', margin: 0 }}>{formatTime(podium.avgSurveyTime)}</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Staff Performance */}
                   <div style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                       Staff Performance
                     </h3>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
-                      <div style={{ border: '2px solid #041e42', borderRadius: '6px', padding: '16px', background: 'linear-gradient(135deg, rgba(4,30,66,0.05) 0%, #ffffff 100%)' }}>
+                      <div style={{ border: '2px solid #07111b', borderRadius: '6px', padding: '16px', background: 'linear-gradient(135deg, rgba(7,17,27,0.05) 0%, #ffffff 100%)' }}>
                         <p style={{ fontSize: '11px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 8px 0', textTransform: 'uppercase' }}>Staff Contact Rate</p>
-                        <p style={{ fontSize: '28px', fontWeight: '900', color: '#041e42', margin: 0 }}>{podium.staffContactRate}%</p>
+                        <p style={{ fontSize: '28px', fontWeight: '900', color: '#07111b', margin: 0 }}>{podium.staffContactRate}%</p>
                       </div>
                       <div style={{ border: '2px solid #f59e0b', borderRadius: '6px', padding: '16px', background: 'linear-gradient(135deg, rgba(245,158,11,0.05) 0%, #ffffff 100%)' }}>
                         <p style={{ fontSize: '11px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 8px 0', textTransform: 'uppercase' }}>Avg Staff Rating</p>
                         <p style={{ fontSize: '28px', fontWeight: '900', color: '#f59e0b', margin: 0 }}>{podium.avgStaffRating}/5.0</p>
                       </div>
-                      <div style={{ border: '2px solid #10b981', borderRadius: '6px', padding: '16px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
+                      <div style={{ border: '2px solid #2385bd', borderRadius: '6px', padding: '16px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
                         <p style={{ fontSize: '11px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 8px 0', textTransform: 'uppercase' }}>Peak Hours</p>
-                        <p style={{ fontSize: '14px', fontWeight: '900', color: '#10b981', margin: 0 }}>{podium.peakHours}</p>
+                        <p style={{ fontSize: '14px', fontWeight: '900', color: '#2385bd', margin: 0 }}>{podium.peakHours}</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Top Missing Items */}
                   <div style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                       Top Missing Items Reported
                     </h3>
                     <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
                       <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                         <thead>
-                          <tr style={{ background: 'linear-gradient(to right, #BC0022, #d4002a)' }}>
+                          <tr style={{ background: 'linear-gradient(to right, #9a7120, #c7a447)' }}>
                             <th style={{ padding: '12px 16px', textAlign: 'left', fontSize: '10px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Rank</th>
                             <th style={{ padding: '12px 16px', textAlign: 'left', fontSize: '10px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Team</th>
                             <th style={{ padding: '12px 16px', textAlign: 'left', fontSize: '10px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Item</th>
@@ -502,11 +502,11 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                         <tbody>
                           {podium.topMissingItems.map((item, itemIdx) => (
                             <tr key={itemIdx} style={{ backgroundColor: itemIdx % 2 === 0 ? '#ffffff' : '#f9fafb' }}>
-                              <td style={{ padding: '10px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42' }}>#{itemIdx + 1}</td>
+                              <td style={{ padding: '10px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b' }}>#{itemIdx + 1}</td>
                               <td style={{ padding: '10px 16px', fontSize: '13px', fontWeight: '900', color: '#1f2937' }}>{item.team}</td>
                               <td style={{ padding: '10px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.item}</td>
                               <td style={{ padding: '10px 16px', fontSize: '13px', fontWeight: '600', color: '#6b7280' }}>{item.size}</td>
-                              <td style={{ padding: '10px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>{item.count}</td>
+                              <td style={{ padding: '10px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>{item.count}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -516,7 +516,7 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
 
                   {/* Top Friction Points */}
                   <div>
-                    <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                       Top Customer Friction Points
                     </h3>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
@@ -525,14 +525,14 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                           border: '2px solid #e5e7eb',
                           borderRadius: '6px',
                           padding: '14px',
-                          background: frictionIdx === 0 ? 'linear-gradient(135deg, rgba(188,0,34,0.08) 0%, #ffffff 100%)' : '#f9fafb'
+                          background: frictionIdx === 0 ? 'linear-gradient(135deg, rgba(154,113,32,0.08) 0%, #ffffff 100%)' : '#f9fafb'
                         }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
                             <div style={{
                               width: '24px',
                               height: '24px',
                               borderRadius: '50%',
-                              background: frictionIdx === 0 ? '#BC0022' : '#6b7280',
+                              background: frictionIdx === 0 ? '#9a7120' : '#6b7280',
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
@@ -546,7 +546,7 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                               {friction.issue}
                             </p>
                           </div>
-                          <p style={{ fontSize: '20px', fontWeight: '900', color: frictionIdx === 0 ? '#BC0022' : '#6b7280', margin: 0 }}>
+                          <p style={{ fontSize: '20px', fontWeight: '900', color: frictionIdx === 0 ? '#9a7120' : '#6b7280', margin: 0 }}>
                             {friction.count} reports
                           </p>
                         </div>
@@ -559,14 +559,14 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
 
             {/* Comparative Analysis */}
             <div style={{ marginBottom: '32px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
-                Comparative Podium Analysis
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
+                Comparative Kiosk Analysis
               </h2>
               <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
-                    <tr style={{ background: 'linear-gradient(to right, #041e42, #0a2f5f)' }}>
-                      <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Podium</th>
+                    <tr style={{ background: 'linear-gradient(to right, #07111b, #0a4f7c)' }}>
+                      <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Kiosk</th>
                       <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Location</th>
                       <th style={{ padding: '14px 16px', textAlign: 'right', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Surveys</th>
                       <th style={{ padding: '14px 16px', textAlign: 'right', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Completion %</th>
@@ -577,11 +577,11 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                   <tbody>
                     {data.map((podium, idx) => (
                       <tr key={podium.id} style={{ backgroundColor: idx % 2 === 0 ? '#ffffff' : '#f9fafb' }}>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42' }}>{podium.name}</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b' }}>{podium.name}</td>
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#6b7280' }}>{podium.location}</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42', textAlign: 'right' }}>{podium.totalSurveys}</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#10b981', textAlign: 'right' }}>{podium.completionRate.toFixed(1)}%</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>{podium.staffContactRate}%</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b', textAlign: 'right' }}>{podium.totalSurveys}</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#2385bd', textAlign: 'right' }}>{podium.completionRate.toFixed(1)}%</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>{podium.staffContactRate}%</td>
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#f59e0b', textAlign: 'right' }}>{podium.avgStaffRating}/5.0</td>
                       </tr>
                     ))}
@@ -592,41 +592,41 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
 
             {/* Key Insights */}
             <div style={{ marginBottom: '24px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
                 Key Insights & Recommendations
               </h2>
-              <div style={{ borderLeft: '4px solid #10b981', padding: '20px', backgroundColor: '#f0fdf4', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
-                <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#10b981', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+              <div style={{ borderLeft: '4px solid #2385bd', padding: '20px', backgroundColor: '#eff6ff', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#2385bd', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                   ✅ High Performance Areas
                 </h3>
                 <ul style={{ fontSize: '14px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
-                  <li><strong>Kids Zone Podium</strong> leads with 91.2% staff contact rate and 4.9/5.0 staff rating - excellent customer service model</li>
-                  <li><strong>Rangers Corner</strong> shows highest customer engagement with 312 total surveys, indicating strong traffic and interest</li>
-                  <li><strong>Hat Central</strong> demonstrates focused inventory needs with high concentration of specific fitted cap sizes</li>
+                  <li><strong>Red Line</strong> leads with 91.2% staff contact rate and 4.9/5.0 staff rating - excellent customer service model</li>
+                  <li><strong>Left Wing</strong> shows highest customer engagement with 312 total surveys, indicating strong traffic and interest</li>
+                  <li><strong>Center Lane</strong> demonstrates focused inventory needs with high concentration of specific fitted cap sizes</li>
                 </ul>
               </div>
 
-              <div style={{ borderLeft: '4px solid #BC0022', padding: '20px', backgroundColor: 'rgba(188,0,34,0.05)', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
-                <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#BC0022', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+              <div style={{ borderLeft: '4px solid #9a7120', padding: '20px', backgroundColor: 'rgba(154,113,32,0.05)', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#9a7120', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                   🚨 Critical Inventory Issues
                 </h3>
                 <ul style={{ fontSize: '14px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
-                  <li><strong>Rangers merchandise</strong> dominates missing item reports across multiple podiums, especially Panarin jerseys (L/XL) and fitted caps</li>
-                  <li><strong>Size availability</strong> is the #1 friction point at Hat Central (71 reports) and Jersey Wall (45 reports)</li>
-                  <li><strong>Game-used memorabilia</strong> shows consistent demand but limited supply across Rangers Corner and Islanders Display</li>
+                  <li><strong>Rangers merchandise</strong> dominates missing item reports across multiple kiosks, especially Panarin jerseys (L/XL) and fitted caps</li>
+                  <li><strong>Size availability</strong> is the #1 friction point at Center Lane (71 reports) and Blue Line (45 reports)</li>
+                  <li><strong>Game-used memorabilia</strong> shows consistent demand but limited supply across Left Wing and Right Wing</li>
                 </ul>
               </div>
 
-              <div style={{ borderLeft: '4px solid #041e42', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
-                <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+              <div style={{ borderLeft: '4px solid #07111b', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                   📊 Operational Recommendations
                 </h3>
                 <ol style={{ fontSize: '14px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
-                  <li><strong>Inventory Redistribution:</strong> Prioritize Rangers merchandise at Rangers Corner and Main Entrance based on high demand patterns</li>
-                  <li><strong>Staff Training:</strong> Replicate Kids Zone Podium customer service approach at lower-performing locations</li>
-                  <li><strong>Peak Hour Staffing:</strong> Increase staff presence during identified peak hours at each podium to maintain high contact rates</li>
+                  <li><strong>Inventory Redistribution:</strong> Prioritize Rangers merchandise at Left Wing and O-Zone based on high demand patterns</li>
+                  <li><strong>Staff Training:</strong> Replicate the Red Line kiosk customer service approach at lower-performing locations</li>
+                  <li><strong>Peak Hour Staffing:</strong> Increase staff presence during identified peak hours at each kiosk to maintain high contact rates</li>
                   <li><strong>Size Matrix Optimization:</strong> Focus restocking on L/XL apparel and 7 1/4 - 7 3/8 fitted caps based on report data</li>
-                  <li><strong>Checkout Efficiency:</strong> Address long lines issue (top friction at 3 podiums) with mobile checkout or additional registers during peak times</li>
+                  <li><strong>Checkout Efficiency:</strong> Address long lines issue (top friction at 3 kiosks) with mobile checkout or additional registers during peak times</li>
                 </ol>
               </div>
             </div>
@@ -634,7 +634,7 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
             {/* Footer */}
             <div style={{ marginTop: '40px', paddingTop: '24px', borderTop: '2px solid #e5e7eb', textAlign: 'center' }}>
               <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0' }}>
-                NHL Shop NYC Flagship Store • Podium Activity Report • Confidential
+                NHL Shop NYC Flagship Store • Kiosk Activity Report • Confidential
               </p>
               <p style={{ fontSize: '10px', color: '#d1d5db', margin: 0 }}>
                 Generated on {format(new Date(), "MMMM d, yyyy 'at' h:mm a")}
@@ -675,8 +675,8 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
             gap: '8px',
             padding: '8px 16px',
             backgroundColor: '#ffffff',
-            color: '#041e42',
-            border: '2px solid #041e42',
+            color: '#07111b',
+            border: '2px solid #07111b',
             borderRadius: '4px',
             fontWeight: 'bold',
             fontSize: '14px',
@@ -695,7 +695,7 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
             alignItems: 'center',
             gap: '8px',
             padding: '8px 16px',
-            backgroundColor: '#041e42',
+            backgroundColor: '#07111b',
             color: '#ffffff',
             border: 'none',
             borderRadius: '4px',
@@ -735,10 +735,10 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
         borderRadius: '8px',
         boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
       }}>
-        <div ref={reportRef} style={{
+        <div ref={reportRef} className="nhl-report-document" style={{
           backgroundColor: '#ffffff',
           padding: '40px',
-          fontFamily: 'system-ui, -apple-system, sans-serif',
+          fontFamily: "'Roboto Condensed', 'Arial Narrow', Arial, sans-serif",
           color: '#1f2937'
         }}>
           {/* Header */}
@@ -747,19 +747,19 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
               <img src={nhlLogo} alt="NHL" style={{ height: '56px' }} />
               <img src={jibeRetailLogo} alt="Jibe Retail" style={{ height: '80px' }} />
             </div>
-            <div style={{ borderBottom: '3px solid #041e42', paddingBottom: '12px' }}>
-              <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#041e42', margin: '0 0 8px 0' }}>
-                Podium Activity Report
+            <div style={{ borderBottom: '3px solid #c7a447', paddingBottom: '12px' }}>
+              <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#07111b', margin: '0 0 8px 0' }}>
+                Kiosk Activity Report
               </h1>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#6b7280', margin: 0 }}>
-                  NHL Shop NYC Flagship Store - Detailed Podium Performance Analysis
+                  NHL Shop NYC Flagship Store - Detailed Kiosk Performance Analysis
                 </p>
                 <div style={{ textAlign: 'right' }}>
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
                     Report Period
                   </p>
-                  <p style={{ fontSize: '16px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                  <p style={{ fontSize: '16px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                     {format(dateRange.from, "MMM d")} - {format(dateRange.to, "MMM d, yyyy")}
                   </p>
                   <p style={{ fontSize: '12px', color: '#9ca3af', margin: '4px 0 0 0' }}>
@@ -772,11 +772,11 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
 
           {/* Executive Summary */}
           <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
               Executive Summary
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px', marginBottom: '16px' }}>
-              <div style={{ background: 'linear-gradient(135deg, #041e42 0%, #0a2f5f 100%)', padding: '20px', borderRadius: '8px' }}>
+              <div style={{ background: 'linear-gradient(135deg, #07111b 0%, #0a4f7c 100%)', padding: '20px', borderRadius: '8px' }}>
                 <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                   Total Surveys
                 </p>
@@ -784,7 +784,7 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                   {totalSurveys}
                 </p>
               </div>
-              <div style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', padding: '20px', borderRadius: '8px' }}>
+              <div style={{ background: 'linear-gradient(135deg, #2385bd 0%, #167cb4 100%)', padding: '20px', borderRadius: '8px' }}>
                 <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                   Completion Rate
                 </p>
@@ -792,7 +792,7 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                   {overallCompletionRate}%
                 </p>
               </div>
-              <div style={{ background: 'linear-gradient(135deg, #BC0022 0%, #d4002a 100%)', padding: '20px', borderRadius: '8px' }}>
+              <div style={{ background: 'linear-gradient(135deg, #9a7120 0%, #c7a447 100%)', padding: '20px', borderRadius: '8px' }}>
                 <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                   Staff Contact Rate
                 </p>
@@ -812,14 +812,14 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
 
             {/* Performance Highlights */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-              <div style={{ border: '2px solid #10b981', borderRadius: '8px', padding: '16px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
+              <div style={{ border: '2px solid #2385bd', borderRadius: '8px', padding: '16px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                  <TrendingUp size={20} color="#10b981" />
-                  <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#10b981', margin: 0, textTransform: 'uppercase' }}>
-                    Top Performing Podium
+                  <TrendingUp size={20} color="#2385bd" />
+                  <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#2385bd', margin: 0, textTransform: 'uppercase' }}>
+                    Top Performing Kiosk
                   </p>
                 </div>
-                <p style={{ fontSize: '18px', fontWeight: '900', color: '#041e42', margin: '0 0 4px 0' }}>
+                <p style={{ fontSize: '18px', fontWeight: '900', color: '#07111b', margin: '0 0 4px 0' }}>
                   {topPodium.name}
                 </p>
                 <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 8px 0' }}>
@@ -828,11 +828,11 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <div>
                     <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: 0, textTransform: 'uppercase' }}>Completion Rate</p>
-                    <p style={{ fontSize: '20px', fontWeight: '900', color: '#10b981', margin: 0 }}>{topPodium.completionRate.toFixed(1)}%</p>
+                    <p style={{ fontSize: '20px', fontWeight: '900', color: '#2385bd', margin: 0 }}>{topPodium.completionRate.toFixed(1)}%</p>
                   </div>
                   <div>
                     <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: 0, textTransform: 'uppercase' }}>Staff Rating</p>
-                    <p style={{ fontSize: '20px', fontWeight: '900', color: '#10b981', margin: 0 }}>{topPodium.avgStaffRating}/5.0</p>
+                    <p style={{ fontSize: '20px', fontWeight: '900', color: '#2385bd', margin: 0 }}>{topPodium.avgStaffRating}/5.0</p>
                   </div>
                 </div>
               </div>
@@ -843,7 +843,7 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                     Needs Attention
                   </p>
                 </div>
-                <p style={{ fontSize: '18px', fontWeight: '900', color: '#041e42', margin: '0 0 4px 0' }}>
+                <p style={{ fontSize: '18px', fontWeight: '900', color: '#07111b', margin: '0 0 4px 0' }}>
                   {bottomPodium.name}
                 </p>
                 <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 8px 0' }}>
@@ -868,7 +868,7 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
             <div key={podium.id} style={{ marginBottom: '32px' }}>
               {/* Podium Header */}
               <div style={{
-                background: `linear-gradient(135deg, ${idx % 2 === 0 ? '#041e42' : '#BC0022'} 0%, ${idx % 2 === 0 ? '#0a2f5f' : '#d4002a'} 100%)`,
+                background: `linear-gradient(135deg, ${idx % 2 === 0 ? '#07111b' : '#9a7120'} 0%, ${idx % 2 === 0 ? '#0a4f7c' : '#c7a447'} 100%)`,
                 padding: '20px',
                 borderRadius: '8px 8px 0 0',
                 marginBottom: '0'
@@ -905,10 +905,10 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <p style={{ fontSize: '12px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
-                      Podium ID
+                      Kiosk ID
                     </p>
                     <p style={{ fontSize: '20px', fontWeight: '900', color: '#ffffff', margin: 0 }}>
-                      POD-{podium.id}
+                      JibeKiosk {podium.id}
                     </p>
                   </div>
                 </div>
@@ -918,59 +918,59 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
               <div style={{ border: '2px solid #e5e7eb', borderTop: 'none', borderRadius: '0 0 8px 8px', padding: '24px' }}>
                 {/* Key Metrics */}
                 <div style={{ marginBottom: '20px' }}>
-                  <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                     Performance Metrics
                   </h3>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px' }}>
                     <div style={{ border: '1px solid #e5e7eb', borderRadius: '6px', padding: '12px', background: '#f9fafb' }}>
                       <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 6px 0', textTransform: 'uppercase' }}>Total Surveys</p>
-                      <p style={{ fontSize: '24px', fontWeight: '900', color: '#041e42', margin: 0 }}>{podium.totalSurveys}</p>
+                      <p style={{ fontSize: '24px', fontWeight: '900', color: '#07111b', margin: 0 }}>{podium.totalSurveys}</p>
                     </div>
                     <div style={{ border: '1px solid #e5e7eb', borderRadius: '6px', padding: '12px', background: '#f9fafb' }}>
                       <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 6px 0', textTransform: 'uppercase' }}>Completed</p>
-                      <p style={{ fontSize: '24px', fontWeight: '900', color: '#10b981', margin: 0 }}>{podium.completedSurveys}</p>
+                      <p style={{ fontSize: '24px', fontWeight: '900', color: '#2385bd', margin: 0 }}>{podium.completedSurveys}</p>
                     </div>
                     <div style={{ border: '1px solid #e5e7eb', borderRadius: '6px', padding: '12px', background: '#f9fafb' }}>
                       <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 6px 0', textTransform: 'uppercase' }}>Completion Rate</p>
-                      <p style={{ fontSize: '24px', fontWeight: '900', color: '#BC0022', margin: 0 }}>{podium.completionRate.toFixed(1)}%</p>
+                      <p style={{ fontSize: '24px', fontWeight: '900', color: '#9a7120', margin: 0 }}>{podium.completionRate.toFixed(1)}%</p>
                     </div>
                     <div style={{ border: '1px solid #e5e7eb', borderRadius: '6px', padding: '12px', background: '#f9fafb' }}>
                       <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 6px 0', textTransform: 'uppercase' }}>Avg Time</p>
-                      <p style={{ fontSize: '24px', fontWeight: '900', color: '#041e42', margin: 0 }}>{formatTime(podium.avgSurveyTime)}</p>
+                      <p style={{ fontSize: '24px', fontWeight: '900', color: '#07111b', margin: 0 }}>{formatTime(podium.avgSurveyTime)}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Staff Performance */}
                 <div style={{ marginBottom: '20px' }}>
-                  <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                     Staff Performance
                   </h3>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
-                    <div style={{ border: '2px solid #041e42', borderRadius: '6px', padding: '16px', background: 'linear-gradient(135deg, rgba(4,30,66,0.05) 0%, #ffffff 100%)' }}>
+                    <div style={{ border: '2px solid #07111b', borderRadius: '6px', padding: '16px', background: 'linear-gradient(135deg, rgba(7,17,27,0.05) 0%, #ffffff 100%)' }}>
                       <p style={{ fontSize: '11px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 8px 0', textTransform: 'uppercase' }}>Staff Contact Rate</p>
-                      <p style={{ fontSize: '28px', fontWeight: '900', color: '#041e42', margin: 0 }}>{podium.staffContactRate}%</p>
+                      <p style={{ fontSize: '28px', fontWeight: '900', color: '#07111b', margin: 0 }}>{podium.staffContactRate}%</p>
                     </div>
                     <div style={{ border: '2px solid #f59e0b', borderRadius: '6px', padding: '16px', background: 'linear-gradient(135deg, rgba(245,158,11,0.05) 0%, #ffffff 100%)' }}>
                       <p style={{ fontSize: '11px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 8px 0', textTransform: 'uppercase' }}>Avg Staff Rating</p>
                       <p style={{ fontSize: '28px', fontWeight: '900', color: '#f59e0b', margin: 0 }}>{podium.avgStaffRating}/5.0</p>
                     </div>
-                    <div style={{ border: '2px solid #10b981', borderRadius: '6px', padding: '16px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
+                    <div style={{ border: '2px solid #2385bd', borderRadius: '6px', padding: '16px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
                       <p style={{ fontSize: '11px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 8px 0', textTransform: 'uppercase' }}>Peak Hours</p>
-                      <p style={{ fontSize: '14px', fontWeight: '900', color: '#10b981', margin: 0 }}>{podium.peakHours}</p>
+                      <p style={{ fontSize: '14px', fontWeight: '900', color: '#2385bd', margin: 0 }}>{podium.peakHours}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Top Missing Items */}
                 <div style={{ marginBottom: '20px' }}>
-                  <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                     Top Missing Items Reported
                   </h3>
                   <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
                     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                       <thead>
-                        <tr style={{ background: 'linear-gradient(to right, #BC0022, #d4002a)' }}>
+                        <tr style={{ background: 'linear-gradient(to right, #9a7120, #c7a447)' }}>
                           <th style={{ padding: '12px 16px', textAlign: 'left', fontSize: '10px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Rank</th>
                           <th style={{ padding: '12px 16px', textAlign: 'left', fontSize: '10px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Team</th>
                           <th style={{ padding: '12px 16px', textAlign: 'left', fontSize: '10px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Item</th>
@@ -981,11 +981,11 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                       <tbody>
                         {podium.topMissingItems.map((item, itemIdx) => (
                           <tr key={itemIdx} style={{ backgroundColor: itemIdx % 2 === 0 ? '#ffffff' : '#f9fafb' }}>
-                            <td style={{ padding: '10px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42' }}>#{itemIdx + 1}</td>
+                            <td style={{ padding: '10px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b' }}>#{itemIdx + 1}</td>
                             <td style={{ padding: '10px 16px', fontSize: '13px', fontWeight: '900', color: '#1f2937' }}>{item.team}</td>
                             <td style={{ padding: '10px 16px', fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>{item.item}</td>
                             <td style={{ padding: '10px 16px', fontSize: '13px', fontWeight: '600', color: '#6b7280' }}>{item.size}</td>
-                            <td style={{ padding: '10px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>{item.count}</td>
+                            <td style={{ padding: '10px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>{item.count}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -995,7 +995,7 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
 
                 {/* Top Friction Points */}
                 <div>
-                  <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                     Top Customer Friction Points
                   </h3>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
@@ -1004,14 +1004,14 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                         border: '2px solid #e5e7eb',
                         borderRadius: '6px',
                         padding: '14px',
-                        background: frictionIdx === 0 ? 'linear-gradient(135deg, rgba(188,0,34,0.08) 0%, #ffffff 100%)' : '#f9fafb'
+                        background: frictionIdx === 0 ? 'linear-gradient(135deg, rgba(154,113,32,0.08) 0%, #ffffff 100%)' : '#f9fafb'
                       }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
                           <div style={{
                             width: '24px',
                             height: '24px',
                             borderRadius: '50%',
-                            background: frictionIdx === 0 ? '#BC0022' : '#6b7280',
+                            background: frictionIdx === 0 ? '#9a7120' : '#6b7280',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
@@ -1025,7 +1025,7 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                             {friction.issue}
                           </p>
                         </div>
-                        <p style={{ fontSize: '20px', fontWeight: '900', color: frictionIdx === 0 ? '#BC0022' : '#6b7280', margin: 0 }}>
+                        <p style={{ fontSize: '20px', fontWeight: '900', color: frictionIdx === 0 ? '#9a7120' : '#6b7280', margin: 0 }}>
                           {friction.count} reports
                         </p>
                       </div>
@@ -1038,14 +1038,14 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
 
           {/* Comparative Analysis */}
           <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
-              Comparative Podium Analysis
+            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
+              Comparative Kiosk Analysis
             </h2>
             <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr style={{ background: 'linear-gradient(to right, #041e42, #0a2f5f)' }}>
-                    <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Podium</th>
+                  <tr style={{ background: 'linear-gradient(to right, #07111b, #0a4f7c)' }}>
+                    <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Kiosk</th>
                     <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Location</th>
                     <th style={{ padding: '14px 16px', textAlign: 'right', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Surveys</th>
                     <th style={{ padding: '14px 16px', textAlign: 'right', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Completion %</th>
@@ -1056,11 +1056,11 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
                 <tbody>
                   {data.map((podium, idx) => (
                     <tr key={podium.id} style={{ backgroundColor: idx % 2 === 0 ? '#ffffff' : '#f9fafb' }}>
-                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42' }}>{podium.name}</td>
+                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b' }}>{podium.name}</td>
                       <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#6b7280' }}>{podium.location}</td>
-                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42', textAlign: 'right' }}>{podium.totalSurveys}</td>
-                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#10b981', textAlign: 'right' }}>{podium.completionRate.toFixed(1)}%</td>
-                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>{podium.staffContactRate}%</td>
+                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b', textAlign: 'right' }}>{podium.totalSurveys}</td>
+                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#2385bd', textAlign: 'right' }}>{podium.completionRate.toFixed(1)}%</td>
+                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>{podium.staffContactRate}%</td>
                       <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#f59e0b', textAlign: 'right' }}>{podium.avgStaffRating}/5.0</td>
                     </tr>
                   ))}
@@ -1071,41 +1071,41 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
 
           {/* Key Insights */}
           <div style={{ marginBottom: '24px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
               Key Insights & Recommendations
             </h2>
-            <div style={{ borderLeft: '4px solid #10b981', padding: '20px', backgroundColor: '#f0fdf4', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#10b981', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+            <div style={{ borderLeft: '4px solid #2385bd', padding: '20px', backgroundColor: '#eff6ff', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#2385bd', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                 ✅ High Performance Areas
               </h3>
               <ul style={{ fontSize: '14px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
-                <li><strong>Kids Zone Podium</strong> leads with 91.2% staff contact rate and 4.9/5.0 staff rating - excellent customer service model</li>
-                <li><strong>Rangers Corner</strong> shows highest customer engagement with 312 total surveys, indicating strong traffic and interest</li>
-                <li><strong>Hat Central</strong> demonstrates focused inventory needs with high concentration of specific fitted cap sizes</li>
+                <li><strong>Red Line</strong> leads with 91.2% staff contact rate and 4.9/5.0 staff rating - excellent customer service model</li>
+                <li><strong>Left Wing</strong> shows highest customer engagement with 312 total surveys, indicating strong traffic and interest</li>
+                <li><strong>Center Lane</strong> demonstrates focused inventory needs with high concentration of specific fitted cap sizes</li>
               </ul>
             </div>
 
-            <div style={{ borderLeft: '4px solid #BC0022', padding: '20px', backgroundColor: 'rgba(188,0,34,0.05)', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#BC0022', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+            <div style={{ borderLeft: '4px solid #9a7120', padding: '20px', backgroundColor: 'rgba(154,113,32,0.05)', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#9a7120', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                 🚨 Critical Inventory Issues
               </h3>
               <ul style={{ fontSize: '14px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
-                <li><strong>Rangers merchandise</strong> dominates missing item reports across multiple podiums, especially Panarin jerseys (L/XL) and fitted caps</li>
-                <li><strong>Size availability</strong> is the #1 friction point at Hat Central (71 reports) and Jersey Wall (45 reports)</li>
-                <li><strong>Game-used memorabilia</strong> shows consistent demand but limited supply across Rangers Corner and Islanders Display</li>
+                <li><strong>Rangers merchandise</strong> dominates missing item reports across multiple kiosks, especially Panarin jerseys (L/XL) and fitted caps</li>
+                <li><strong>Size availability</strong> is the #1 friction point at Center Lane (71 reports) and Blue Line (45 reports)</li>
+                <li><strong>Game-used memorabilia</strong> shows consistent demand but limited supply across Left Wing and Right Wing</li>
               </ul>
             </div>
 
-            <div style={{ borderLeft: '4px solid #041e42', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+            <div style={{ borderLeft: '4px solid #07111b', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                 📊 Operational Recommendations
               </h3>
               <ol style={{ fontSize: '14px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
-                <li><strong>Inventory Redistribution:</strong> Prioritize Rangers merchandise at Rangers Corner and Main Entrance based on high demand patterns</li>
-                <li><strong>Staff Training:</strong> Replicate Kids Zone Podium customer service approach at lower-performing locations</li>
-                <li><strong>Peak Hour Staffing:</strong> Increase staff presence during identified peak hours at each podium to maintain high contact rates</li>
+                <li><strong>Inventory Redistribution:</strong> Prioritize Rangers merchandise at Left Wing and O-Zone based on high demand patterns</li>
+                <li><strong>Staff Training:</strong> Replicate the Red Line kiosk customer service approach at lower-performing locations</li>
+                <li><strong>Peak Hour Staffing:</strong> Increase staff presence during identified peak hours at each kiosk to maintain high contact rates</li>
                 <li><strong>Size Matrix Optimization:</strong> Focus restocking on L/XL apparel and 7 1/4 - 7 3/8 fitted caps based on report data</li>
-                <li><strong>Checkout Efficiency:</strong> Address long lines issue (top friction at 3 podiums) with mobile checkout or additional registers during peak times</li>
+                <li><strong>Checkout Efficiency:</strong> Address long lines issue (top friction at 3 kiosks) with mobile checkout or additional registers during peak times</li>
               </ol>
             </div>
           </div>
@@ -1113,7 +1113,7 @@ export function PodiumActivityReport({ dateRange, onClose, isModal }: PodiumActi
           {/* Footer */}
           <div style={{ marginTop: '40px', paddingTop: '24px', borderTop: '2px solid #e5e7eb', textAlign: 'center' }}>
             <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0' }}>
-              NHL Shop NYC Flagship Store • Podium Activity Report • Confidential
+              NHL Shop NYC Flagship Store • Kiosk Activity Report • Confidential
             </p>
             <p style={{ fontSize: '10px', color: '#d1d5db', margin: 0 }}>
               Generated on {format(new Date(), "MMMM d, yyyy 'at' h:mm a")}

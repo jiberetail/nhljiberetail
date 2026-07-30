@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { exportReportPdf } from "@/app/utils/exportReportPdf";
 import { useRef } from "react";
 import nhlLogo from "../../imports/NHL-league-logo.png";
-import jibeRetailLogo from "figma:asset/c9ceb1471dccd073ec86737828ad56cc026ab66e.png";
+import jibeRetailLogo from "../../imports/jibe-retail-official-logo.png";
 
 type DateRange = {
   from: Date;
@@ -46,8 +46,8 @@ const generateStaffData = (dateRange: DateRange): { podiums: PodiumStaffData[], 
   const podiums: PodiumStaffData[] = [
     {
       id: '1',
-      name: 'Main Entrance Podium',
-      location: 'Floor 1 - Main Entrance',
+      name: 'O-Zone',
+      location: 'Level 1 - Main Entrance',
       totalSurveys: 285,
       talkedToStaff: 235,
       staffContactRate: 82.5,
@@ -62,8 +62,8 @@ const generateStaffData = (dateRange: DateRange): { podiums: PodiumStaffData[], 
     },
     {
       id: '2',
-      name: 'Rangers Corner',
-      location: 'Floor 1 - East Side',
+      name: 'Left Wing',
+      location: 'Level 1 - West',
       totalSurveys: 312,
       talkedToStaff: 275,
       staffContactRate: 88.2,
@@ -78,8 +78,8 @@ const generateStaffData = (dateRange: DateRange): { podiums: PodiumStaffData[], 
     },
     {
       id: '3',
-      name: 'Islanders Display',
-      location: 'Floor 1 - West Side',
+      name: 'Right Wing',
+      location: 'Level 1 - East',
       totalSurveys: 198,
       talkedToStaff: 152,
       staffContactRate: 76.8,
@@ -94,8 +94,8 @@ const generateStaffData = (dateRange: DateRange): { podiums: PodiumStaffData[], 
     },
     {
       id: '4',
-      name: 'Hat Central',
-      location: 'Floor 2 - Center',
+      name: 'Center Lane',
+      location: 'Level 2 - Top of Stairs',
       totalSurveys: 267,
       talkedToStaff: 229,
       staffContactRate: 85.8,
@@ -110,8 +110,8 @@ const generateStaffData = (dateRange: DateRange): { podiums: PodiumStaffData[], 
     },
     {
       id: '5',
-      name: 'Jersey Wall',
-      location: 'Floor 2 - North Wall',
+      name: 'Blue Line',
+      location: 'Level 2 - West',
       totalSurveys: 241,
       talkedToStaff: 196,
       staffContactRate: 81.3,
@@ -126,8 +126,8 @@ const generateStaffData = (dateRange: DateRange): { podiums: PodiumStaffData[], 
     },
     {
       id: '6',
-      name: 'Kids Zone Podium',
-      location: 'Floor 2 - South Corner',
+      name: 'Red Line',
+      location: 'Level 2 - East',
       totalSurveys: 147,
       talkedToStaff: 134,
       staffContactRate: 91.2,
@@ -189,7 +189,7 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
 
   const handleEmail = () => {
     const subject = `NHL Shop NYC Flagship - Staff Satisfaction Report (${format(dateRange.from, "MMM d")} - ${format(dateRange.to, "MMM d, yyyy")})`;
-    const body = `Please find the Staff Satisfaction Report for the period ${format(dateRange.from, "MMMM d, yyyy")} to ${format(dateRange.to, "MMMM d, yyyy")}.\n\nKey Metrics:\n- Total Staff Interactions: ${overall.totalStaffInteractions}\n- Overall Contact Rate: ${overall.overallContactRate.toFixed(1)}%\n- Overall Satisfaction Score: ${overall.overallSatisfactionScore.toFixed(1)}%\n- Top Performing Podium: ${overall.topPerformingPodium}`;
+    const body = `Please find the Staff Satisfaction Report for the period ${format(dateRange.from, "MMMM d, yyyy")} to ${format(dateRange.to, "MMMM d, yyyy")}.\n\nKey Metrics:\n- Total Staff Interactions: ${overall.totalStaffInteractions}\n- Overall Contact Rate: ${overall.overallContactRate.toFixed(1)}%\n- Overall Satisfaction Score: ${overall.overallSatisfactionScore.toFixed(1)}%\n- Top Performing Kiosk: ${overall.topPerformingPodium}`;
 
     window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
@@ -211,10 +211,10 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
         />
 
         <div className="px-6 py-6">
-          <div ref={reportRef} style={{
+          <div ref={reportRef} className="nhl-report-document" style={{
             backgroundColor: '#ffffff',
             padding: '40px',
-            fontFamily: 'system-ui, -apple-system, sans-serif',
+            fontFamily: "'Roboto Condensed', 'Arial Narrow', Arial, sans-serif",
             color: '#1f2937'
           }}>
             {/* Header */}
@@ -223,8 +223,8 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                 <img src={nhlLogo} alt="NHL" style={{ height: '56px' }} />
                 <img src={jibeRetailLogo} alt="Jibe Retail" style={{ height: '80px' }} />
               </div>
-              <div style={{ borderBottom: '3px solid #041e42', paddingBottom: '12px' }}>
-                <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#041e42', margin: '0 0 8px 0' }}>
+              <div style={{ borderBottom: '3px solid #c7a447', paddingBottom: '12px' }}>
+                <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#07111b', margin: '0 0 8px 0' }}>
                   Staff Satisfaction Report
                 </h1>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -235,7 +235,7 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                     <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
                       Report Period
                     </p>
-                    <p style={{ fontSize: '16px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                    <p style={{ fontSize: '16px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                       {format(dateRange.from, "MMM d")} - {format(dateRange.to, "MMM d, yyyy")}
                     </p>
                     <p style={{ fontSize: '12px', color: '#9ca3af', margin: '4px 0 0 0' }}>
@@ -248,11 +248,11 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
 
             {/* Executive Summary */}
             <div style={{ marginBottom: '32px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
                 Executive Summary
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px', marginBottom: '16px' }}>
-                <div style={{ background: 'linear-gradient(135deg, #041e42 0%, #0a2f5f 100%)', padding: '20px', borderRadius: '8px' }}>
+                <div style={{ background: 'linear-gradient(135deg, #07111b 0%, #0a4f7c 100%)', padding: '20px', borderRadius: '8px' }}>
                   <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                     Total Surveys
                   </p>
@@ -260,7 +260,7 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                     {overall.totalSurveys}
                   </p>
                 </div>
-                <div style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', padding: '20px', borderRadius: '8px' }}>
+                <div style={{ background: 'linear-gradient(135deg, #2385bd 0%, #167cb4 100%)', padding: '20px', borderRadius: '8px' }}>
                   <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                     Staff Contact Rate
                   </p>
@@ -276,7 +276,7 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                     {overall.overallSatisfactionScore.toFixed(1)}%
                   </p>
                 </div>
-                <div style={{ background: 'linear-gradient(135deg, #BC0022 0%, #d4002a 100%)', padding: '20px', borderRadius: '8px' }}>
+                <div style={{ background: 'linear-gradient(135deg, #9a7120 0%, #c7a447 100%)', padding: '20px', borderRadius: '8px' }}>
                   <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                     Staff Interactions
                   </p>
@@ -288,14 +288,14 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
 
               {/* Performance Highlights */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                <div style={{ border: '2px solid #10b981', borderRadius: '8px', padding: '16px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
+                <div style={{ border: '2px solid #2385bd', borderRadius: '8px', padding: '16px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <Award size={20} color="#10b981" />
-                    <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#10b981', margin: 0, textTransform: 'uppercase' }}>
-                      Top Performing Podium
+                    <Award size={20} color="#2385bd" />
+                    <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#2385bd', margin: 0, textTransform: 'uppercase' }}>
+                      Top Performing Kiosk
                     </p>
                   </div>
-                  <p style={{ fontSize: '18px', fontWeight: '900', color: '#041e42', margin: '0 0 4px 0' }}>
+                  <p style={{ fontSize: '18px', fontWeight: '900', color: '#07111b', margin: '0 0 4px 0' }}>
                     {overall.topPerformingPodium}
                   </p>
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 8px 0' }}>
@@ -304,13 +304,13 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                   <div style={{ display: 'flex', gap: '16px' }}>
                     <div>
                       <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: 0, textTransform: 'uppercase' }}>Satisfaction</p>
-                      <p style={{ fontSize: '20px', fontWeight: '900', color: '#10b981', margin: 0 }}>
+                      <p style={{ fontSize: '20px', fontWeight: '900', color: '#2385bd', margin: 0 }}>
                         {podiums.find(p => p.name === overall.topPerformingPodium)?.overallSatisfactionScore.toFixed(1)}%
                       </p>
                     </div>
                     <div>
                       <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: 0, textTransform: 'uppercase' }}>Contact Rate</p>
-                      <p style={{ fontSize: '20px', fontWeight: '900', color: '#10b981', margin: 0 }}>
+                      <p style={{ fontSize: '20px', fontWeight: '900', color: '#2385bd', margin: 0 }}>
                         {podiums.find(p => p.name === overall.topPerformingPodium)?.staffContactRate.toFixed(1)}%
                       </p>
                     </div>
@@ -323,7 +323,7 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                       Needs Attention
                     </p>
                   </div>
-                  <p style={{ fontSize: '18px', fontWeight: '900', color: '#041e42', margin: '0 0 4px 0' }}>
+                  <p style={{ fontSize: '18px', fontWeight: '900', color: '#07111b', margin: '0 0 4px 0' }}>
                     {overall.lowestPerformingPodium}
                   </p>
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 8px 0' }}>
@@ -355,7 +355,7 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                 <div key={podium.id} style={{ marginBottom: '32px' }}>
                   {/* Podium Header */}
                   <div style={{
-                    background: `linear-gradient(135deg, ${idx % 2 === 0 ? '#041e42' : '#BC0022'} 0%, ${idx % 2 === 0 ? '#0a2f5f' : '#d4002a'} 100%)`,
+                    background: `linear-gradient(135deg, ${idx % 2 === 0 ? '#07111b' : '#9a7120'} 0%, ${idx % 2 === 0 ? '#0a4f7c' : '#c7a447'} 100%)`,
                     padding: '20px',
                     borderRadius: '8px 8px 0 0',
                     marginBottom: '0'
@@ -403,37 +403,37 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                   <div style={{ border: '2px solid #e5e7eb', borderTop: 'none', borderRadius: '0 0 8px 8px', padding: '24px' }}>
                     {/* Key Metrics */}
                     <div style={{ marginBottom: '20px' }}>
-                      <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+                      <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                         Staff Interaction Metrics
                       </h3>
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
                         <div style={{ border: '1px solid #e5e7eb', borderRadius: '6px', padding: '12px', background: '#f9fafb' }}>
                           <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 6px 0', textTransform: 'uppercase' }}>Total Surveys</p>
-                          <p style={{ fontSize: '24px', fontWeight: '900', color: '#041e42', margin: 0 }}>{podium.totalSurveys}</p>
+                          <p style={{ fontSize: '24px', fontWeight: '900', color: '#07111b', margin: 0 }}>{podium.totalSurveys}</p>
                         </div>
                         <div style={{ border: '1px solid #e5e7eb', borderRadius: '6px', padding: '12px', background: '#f9fafb' }}>
                           <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 6px 0', textTransform: 'uppercase' }}>Talked to Staff</p>
-                          <p style={{ fontSize: '24px', fontWeight: '900', color: '#10b981', margin: 0 }}>{podium.talkedToStaff}</p>
+                          <p style={{ fontSize: '24px', fontWeight: '900', color: '#2385bd', margin: 0 }}>{podium.talkedToStaff}</p>
                         </div>
                         <div style={{ border: '1px solid #e5e7eb', borderRadius: '6px', padding: '12px', background: '#f9fafb' }}>
                           <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 6px 0', textTransform: 'uppercase' }}>Contact Rate</p>
-                          <p style={{ fontSize: '24px', fontWeight: '900', color: '#BC0022', margin: 0 }}>{podium.staffContactRate.toFixed(1)}%</p>
+                          <p style={{ fontSize: '24px', fontWeight: '900', color: '#9a7120', margin: 0 }}>{podium.staffContactRate.toFixed(1)}%</p>
                         </div>
                       </div>
                     </div>
 
                     {/* Satisfaction Breakdown */}
                     <div style={{ marginBottom: '20px' }}>
-                      <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+                      <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                         Customer Satisfaction Breakdown
                       </h3>
                       <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: '#ffffff' }}>
                         {[
-                          { label: 'Very Satisfied', count: podium.satisfactionBreakdown.verySatisfied, color: '#10b981' },
+                          { label: 'Very Satisfied', count: podium.satisfactionBreakdown.verySatisfied, color: '#2385bd' },
                           { label: 'Satisfied', count: podium.satisfactionBreakdown.satisfied, color: '#3b82f6' },
                           { label: 'Neutral', count: podium.satisfactionBreakdown.neutral, color: '#f59e0b' },
                           { label: 'Dissatisfied', count: podium.satisfactionBreakdown.dissatisfied, color: '#ef4444' },
-                          { label: 'Very Dissatisfied', count: podium.satisfactionBreakdown.veryDissatisfied, color: '#BC0022' }
+                          { label: 'Very Dissatisfied', count: podium.satisfactionBreakdown.veryDissatisfied, color: '#9a7120' }
                         ].map((rating, ratingIdx) => {
                           const percentage = total > 0 ? (rating.count / total) * 100 : 0;
                           return (
@@ -462,10 +462,10 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
 
                     {/* Overall Satisfaction Score Display */}
                     <div>
-                      <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+                      <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                         Overall Satisfaction Score
                       </h3>
-                      <div style={{ border: '3px solid #10b981', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
+                      <div style={{ border: '3px solid #2385bd', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                           <div>
                             <p style={{ fontSize: '14px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 4px 0' }}>
@@ -476,13 +476,13 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                             </p>
                           </div>
                           <div style={{ textAlign: 'right' }}>
-                            <p style={{ fontSize: '42px', fontWeight: '900', color: '#10b981', margin: 0, lineHeight: '1' }}>
+                            <p style={{ fontSize: '42px', fontWeight: '900', color: '#2385bd', margin: 0, lineHeight: '1' }}>
                               {podium.overallSatisfactionScore.toFixed(1)}%
                             </p>
                           </div>
                         </div>
                         <div style={{ height: '12px', background: '#f3f4f6', borderRadius: '6px', overflow: 'hidden' }}>
-                          <div style={{ width: `${podium.overallSatisfactionScore}%`, height: '100%', background: 'linear-gradient(to right, #10b981, #059669)' }}></div>
+                          <div style={{ width: `${podium.overallSatisfactionScore}%`, height: '100%', background: 'linear-gradient(to right, #2385bd, #167cb4)' }}></div>
                         </div>
                       </div>
                     </div>
@@ -493,14 +493,14 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
 
             {/* Comparative Staff Performance Table */}
             <div style={{ marginBottom: '32px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
-                Comparative Staff Performance by Podium
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
+                Comparative Staff Performance by Kiosk
               </h2>
               <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
-                    <tr style={{ background: 'linear-gradient(to right, #041e42, #0a2f5f)' }}>
-                      <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Podium</th>
+                    <tr style={{ background: 'linear-gradient(to right, #07111b, #0a4f7c)' }}>
+                      <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Kiosk</th>
                       <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Location</th>
                       <th style={{ padding: '14px 16px', textAlign: 'right', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Contact Rate</th>
                       <th style={{ padding: '14px 16px', textAlign: 'right', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Interactions</th>
@@ -510,11 +510,11 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                   <tbody>
                     {[...podiums].sort((a, b) => b.overallSatisfactionScore - a.overallSatisfactionScore).map((podium, idx) => (
                       <tr key={podium.id} style={{ backgroundColor: idx % 2 === 0 ? '#ffffff' : '#f9fafb' }}>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42' }}>{podium.name}</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b' }}>{podium.name}</td>
                         <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#6b7280' }}>{podium.location}</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#10b981', textAlign: 'right' }}>{podium.staffContactRate.toFixed(1)}%</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42', textAlign: 'right' }}>{podium.talkedToStaff}</td>
-                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>{podium.overallSatisfactionScore.toFixed(1)}%</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#2385bd', textAlign: 'right' }}>{podium.staffContactRate.toFixed(1)}%</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b', textAlign: 'right' }}>{podium.talkedToStaff}</td>
+                        <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>{podium.overallSatisfactionScore.toFixed(1)}%</td>
                       </tr>
                     ))}
                   </tbody>
@@ -524,17 +524,17 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
 
             {/* Key Insights & Recommendations */}
             <div style={{ marginBottom: '24px' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
                 Key Insights & Recommendations
               </h2>
 
-              <div style={{ borderLeft: '4px solid #10b981', padding: '20px', backgroundColor: '#f0fdf4', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
-                <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#10b981', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+              <div style={{ borderLeft: '4px solid #2385bd', padding: '20px', backgroundColor: '#eff6ff', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#2385bd', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                   ✅ High Performance Areas
                 </h3>
                 <ul style={{ fontSize: '14px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
-                  <li><strong>Kids Zone Podium</strong> leads with 97.8% satisfaction and 91.2% staff contact rate - excellent customer service model</li>
-                  <li><strong>Rangers Corner</strong> demonstrates strong performance with 94.5% satisfaction and 88.2% contact rate</li>
+                  <li><strong>Red Line</strong> leads with 97.8% satisfaction and 91.2% staff contact rate - excellent customer service model</li>
+                  <li><strong>Left Wing</strong> demonstrates strong performance with 94.5% satisfaction and 88.2% contact rate</li>
                   <li><strong>Overall satisfaction</strong> is strong at {overall.overallSatisfactionScore.toFixed(1)}%, indicating positive customer experiences with staff</li>
                   <li><strong>High staff engagement</strong> with {overall.overallContactRate.toFixed(1)}% of customers talking to staff members</li>
                 </ul>
@@ -545,22 +545,22 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                   ⚠️ Areas for Improvement
                 </h3>
                 <ul style={{ fontSize: '14px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
-                  <li><strong>Islanders Display</strong> shows lower staff contact rate (76.8%) and needs increased staff presence on the floor</li>
+                  <li><strong>Right Wing</strong> shows lower staff contact rate (76.8%) and needs increased staff presence on the floor</li>
                   <li><strong>Staff visibility</strong> should be improved at locations with lower contact rates to ensure customers can easily find help</li>
                   <li><strong>Neutral and negative feedback</strong> exists at all locations - address specific pain points through training</li>
                 </ul>
               </div>
 
-              <div style={{ borderLeft: '4px solid #041e42', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
-                <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+              <div style={{ borderLeft: '4px solid #07111b', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                   📊 Recommended Actions
                 </h3>
                 <ol style={{ fontSize: '14px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
-                  <li><strong>Best Practice Sharing:</strong> Document Kids Zone's approach (97.8% satisfaction) and replicate across all podiums</li>
-                  <li><strong>Staff Coverage:</strong> Increase floor presence at Islanders Display and Jersey Wall during peak hours</li>
+                  <li><strong>Best Practice Sharing:</strong> Document Red Line's approach (97.8% satisfaction) and replicate across all kiosks</li>
+                  <li><strong>Staff Coverage:</strong> Increase floor presence at Right Wing and Blue Line during peak hours</li>
                   <li><strong>Proactive Engagement:</strong> Train staff to initiate customer interactions rather than waiting to be approached</li>
                   <li><strong>Follow-up on Negative Feedback:</strong> Review all dissatisfied responses and implement corrective measures</li>
-                  <li><strong>Recognition Program:</strong> Reward staff at high-performing podiums to encourage continued excellence</li>
+                  <li><strong>Recognition Program:</strong> Reward staff at high-performing kiosks to encourage continued excellence</li>
                   <li><strong>Regular Monitoring:</strong> Track satisfaction scores weekly to identify trends and address issues quickly</li>
                 </ol>
               </div>
@@ -609,8 +609,8 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
             gap: '8px',
             padding: '8px 16px',
             backgroundColor: '#ffffff',
-            color: '#041e42',
-            border: '2px solid #041e42',
+            color: '#07111b',
+            border: '2px solid #07111b',
             borderRadius: '4px',
             fontWeight: 'bold',
             fontSize: '14px',
@@ -629,7 +629,7 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
             alignItems: 'center',
             gap: '8px',
             padding: '8px 16px',
-            backgroundColor: '#041e42',
+            backgroundColor: '#07111b',
             color: '#ffffff',
             border: 'none',
             borderRadius: '4px',
@@ -669,10 +669,10 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
         borderRadius: '8px',
         boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
       }}>
-        <div ref={reportRef} style={{
+        <div ref={reportRef} className="nhl-report-document" style={{
           backgroundColor: '#ffffff',
           padding: '40px',
-          fontFamily: 'system-ui, -apple-system, sans-serif',
+          fontFamily: "'Roboto Condensed', 'Arial Narrow', Arial, sans-serif",
           color: '#1f2937'
         }}>
           {/* Header */}
@@ -681,8 +681,8 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
               <img src={nhlLogo} alt="NHL" style={{ height: '56px' }} />
               <img src={jibeRetailLogo} alt="Jibe Retail" style={{ height: '80px' }} />
             </div>
-            <div style={{ borderBottom: '3px solid #041e42', paddingBottom: '12px' }}>
-              <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#041e42', margin: '0 0 8px 0' }}>
+            <div style={{ borderBottom: '3px solid #c7a447', paddingBottom: '12px' }}>
+              <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#07111b', margin: '0 0 8px 0' }}>
                 Staff Satisfaction Report
               </h1>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -693,7 +693,7 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                   <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 4px 0', textTransform: 'uppercase' }}>
                     Report Period
                   </p>
-                  <p style={{ fontSize: '16px', fontWeight: '900', color: '#BC0022', margin: 0 }}>
+                  <p style={{ fontSize: '16px', fontWeight: '900', color: '#9a7120', margin: 0 }}>
                     {format(dateRange.from, "MMM d")} - {format(dateRange.to, "MMM d, yyyy")}
                   </p>
                   <p style={{ fontSize: '12px', color: '#9ca3af', margin: '4px 0 0 0' }}>
@@ -706,11 +706,11 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
 
           {/* Executive Summary */}
           <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
               Executive Summary
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px', marginBottom: '16px' }}>
-              <div style={{ background: 'linear-gradient(135deg, #041e42 0%, #0a2f5f 100%)', padding: '20px', borderRadius: '8px' }}>
+              <div style={{ background: 'linear-gradient(135deg, #07111b 0%, #0a4f7c 100%)', padding: '20px', borderRadius: '8px' }}>
                 <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                   Total Surveys
                 </p>
@@ -718,7 +718,7 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                   {overall.totalSurveys}
                 </p>
               </div>
-              <div style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', padding: '20px', borderRadius: '8px' }}>
+              <div style={{ background: 'linear-gradient(135deg, #2385bd 0%, #167cb4 100%)', padding: '20px', borderRadius: '8px' }}>
                 <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                   Staff Contact Rate
                 </p>
@@ -734,7 +734,7 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                   {overall.overallSatisfactionScore.toFixed(1)}%
                 </p>
               </div>
-              <div style={{ background: 'linear-gradient(135deg, #BC0022 0%, #d4002a 100%)', padding: '20px', borderRadius: '8px' }}>
+              <div style={{ background: 'linear-gradient(135deg, #9a7120 0%, #c7a447 100%)', padding: '20px', borderRadius: '8px' }}>
                 <p style={{ fontSize: '11px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', margin: '0 0 8px 0', textTransform: 'uppercase' }}>
                   Staff Interactions
                 </p>
@@ -746,14 +746,14 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
 
             {/* Performance Highlights */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-              <div style={{ border: '2px solid #10b981', borderRadius: '8px', padding: '16px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
+              <div style={{ border: '2px solid #2385bd', borderRadius: '8px', padding: '16px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                  <Award size={20} color="#10b981" />
-                  <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#10b981', margin: 0, textTransform: 'uppercase' }}>
-                    Top Performing Podium
+                  <Award size={20} color="#2385bd" />
+                  <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#2385bd', margin: 0, textTransform: 'uppercase' }}>
+                    Top Performing Kiosk
                   </p>
                 </div>
-                <p style={{ fontSize: '18px', fontWeight: '900', color: '#041e42', margin: '0 0 4px 0' }}>
+                <p style={{ fontSize: '18px', fontWeight: '900', color: '#07111b', margin: '0 0 4px 0' }}>
                   {overall.topPerformingPodium}
                 </p>
                 <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 8px 0' }}>
@@ -762,13 +762,13 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                 <div style={{ display: 'flex', gap: '16px' }}>
                   <div>
                     <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: 0, textTransform: 'uppercase' }}>Satisfaction</p>
-                    <p style={{ fontSize: '20px', fontWeight: '900', color: '#10b981', margin: 0 }}>
+                    <p style={{ fontSize: '20px', fontWeight: '900', color: '#2385bd', margin: 0 }}>
                       {podiums.find(p => p.name === overall.topPerformingPodium)?.overallSatisfactionScore.toFixed(1)}%
                     </p>
                   </div>
                   <div>
                     <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: 0, textTransform: 'uppercase' }}>Contact Rate</p>
-                    <p style={{ fontSize: '20px', fontWeight: '900', color: '#10b981', margin: 0 }}>
+                    <p style={{ fontSize: '20px', fontWeight: '900', color: '#2385bd', margin: 0 }}>
                       {podiums.find(p => p.name === overall.topPerformingPodium)?.staffContactRate.toFixed(1)}%
                     </p>
                   </div>
@@ -781,7 +781,7 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                     Needs Attention
                   </p>
                 </div>
-                <p style={{ fontSize: '18px', fontWeight: '900', color: '#041e42', margin: '0 0 4px 0' }}>
+                <p style={{ fontSize: '18px', fontWeight: '900', color: '#07111b', margin: '0 0 4px 0' }}>
                   {overall.lowestPerformingPodium}
                 </p>
                 <p style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 8px 0' }}>
@@ -813,7 +813,7 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
               <div key={podium.id} style={{ marginBottom: '32px' }}>
                 {/* Podium Header */}
                 <div style={{
-                  background: `linear-gradient(135deg, ${idx % 2 === 0 ? '#041e42' : '#BC0022'} 0%, ${idx % 2 === 0 ? '#0a2f5f' : '#d4002a'} 100%)`,
+                  background: `linear-gradient(135deg, ${idx % 2 === 0 ? '#07111b' : '#9a7120'} 0%, ${idx % 2 === 0 ? '#0a4f7c' : '#c7a447'} 100%)`,
                   padding: '20px',
                   borderRadius: '8px 8px 0 0',
                   marginBottom: '0'
@@ -861,37 +861,37 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                 <div style={{ border: '2px solid #e5e7eb', borderTop: 'none', borderRadius: '0 0 8px 8px', padding: '24px' }}>
                   {/* Key Metrics */}
                   <div style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                       Staff Interaction Metrics
                     </h3>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
                       <div style={{ border: '1px solid #e5e7eb', borderRadius: '6px', padding: '12px', background: '#f9fafb' }}>
                         <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 6px 0', textTransform: 'uppercase' }}>Total Surveys</p>
-                        <p style={{ fontSize: '24px', fontWeight: '900', color: '#041e42', margin: 0 }}>{podium.totalSurveys}</p>
+                        <p style={{ fontSize: '24px', fontWeight: '900', color: '#07111b', margin: 0 }}>{podium.totalSurveys}</p>
                       </div>
                       <div style={{ border: '1px solid #e5e7eb', borderRadius: '6px', padding: '12px', background: '#f9fafb' }}>
                         <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 6px 0', textTransform: 'uppercase' }}>Talked to Staff</p>
-                        <p style={{ fontSize: '24px', fontWeight: '900', color: '#10b981', margin: 0 }}>{podium.talkedToStaff}</p>
+                        <p style={{ fontSize: '24px', fontWeight: '900', color: '#2385bd', margin: 0 }}>{podium.talkedToStaff}</p>
                       </div>
                       <div style={{ border: '1px solid #e5e7eb', borderRadius: '6px', padding: '12px', background: '#f9fafb' }}>
                         <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#9ca3af', margin: '0 0 6px 0', textTransform: 'uppercase' }}>Contact Rate</p>
-                        <p style={{ fontSize: '24px', fontWeight: '900', color: '#BC0022', margin: 0 }}>{podium.staffContactRate.toFixed(1)}%</p>
+                        <p style={{ fontSize: '24px', fontWeight: '900', color: '#9a7120', margin: 0 }}>{podium.staffContactRate.toFixed(1)}%</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Satisfaction Breakdown */}
                   <div style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                       Customer Satisfaction Breakdown
                     </h3>
                     <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: '#ffffff' }}>
                       {[
-                        { label: 'Very Satisfied', count: podium.satisfactionBreakdown.verySatisfied, color: '#10b981' },
+                        { label: 'Very Satisfied', count: podium.satisfactionBreakdown.verySatisfied, color: '#2385bd' },
                         { label: 'Satisfied', count: podium.satisfactionBreakdown.satisfied, color: '#3b82f6' },
                         { label: 'Neutral', count: podium.satisfactionBreakdown.neutral, color: '#f59e0b' },
                         { label: 'Dissatisfied', count: podium.satisfactionBreakdown.dissatisfied, color: '#ef4444' },
-                        { label: 'Very Dissatisfied', count: podium.satisfactionBreakdown.veryDissatisfied, color: '#BC0022' }
+                        { label: 'Very Dissatisfied', count: podium.satisfactionBreakdown.veryDissatisfied, color: '#9a7120' }
                       ].map((rating, ratingIdx) => {
                         const percentage = total > 0 ? (rating.count / total) * 100 : 0;
                         return (
@@ -920,10 +920,10 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
 
                   {/* Overall Satisfaction Score Display */}
                   <div>
-                    <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                       Overall Satisfaction Score
                     </h3>
-                    <div style={{ border: '3px solid #10b981', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
+                    <div style={{ border: '3px solid #2385bd', borderRadius: '8px', padding: '20px', background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, #ffffff 100%)' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                         <div>
                           <p style={{ fontSize: '14px', fontWeight: 'bold', color: '#6b7280', margin: '0 0 4px 0' }}>
@@ -934,13 +934,13 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                           </p>
                         </div>
                         <div style={{ textAlign: 'right' }}>
-                          <p style={{ fontSize: '42px', fontWeight: '900', color: '#10b981', margin: 0, lineHeight: '1' }}>
+                          <p style={{ fontSize: '42px', fontWeight: '900', color: '#2385bd', margin: 0, lineHeight: '1' }}>
                             {podium.overallSatisfactionScore.toFixed(1)}%
                           </p>
                         </div>
                       </div>
                       <div style={{ height: '12px', background: '#f3f4f6', borderRadius: '6px', overflow: 'hidden' }}>
-                        <div style={{ width: `${podium.overallSatisfactionScore}%`, height: '100%', background: 'linear-gradient(to right, #10b981, #059669)' }}></div>
+                        <div style={{ width: `${podium.overallSatisfactionScore}%`, height: '100%', background: 'linear-gradient(to right, #2385bd, #167cb4)' }}></div>
                       </div>
                     </div>
                   </div>
@@ -951,14 +951,14 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
 
           {/* Comparative Staff Performance Table */}
           <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
-              Comparative Staff Performance by Podium
+            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
+              Comparative Staff Performance by Kiosk
             </h2>
             <div style={{ border: '2px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr style={{ background: 'linear-gradient(to right, #041e42, #0a2f5f)' }}>
-                    <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Podium</th>
+                  <tr style={{ background: 'linear-gradient(to right, #07111b, #0a4f7c)' }}>
+                    <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Kiosk</th>
                     <th style={{ padding: '14px 16px', textAlign: 'left', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Location</th>
                     <th style={{ padding: '14px 16px', textAlign: 'right', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Contact Rate</th>
                     <th style={{ padding: '14px 16px', textAlign: 'right', fontSize: '11px', fontWeight: '900', color: '#ffffff', textTransform: 'uppercase' }}>Interactions</th>
@@ -968,11 +968,11 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                 <tbody>
                   {[...podiums].sort((a, b) => b.overallSatisfactionScore - a.overallSatisfactionScore).map((podium, idx) => (
                     <tr key={podium.id} style={{ backgroundColor: idx % 2 === 0 ? '#ffffff' : '#f9fafb' }}>
-                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42' }}>{podium.name}</td>
+                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b' }}>{podium.name}</td>
                       <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: '#6b7280' }}>{podium.location}</td>
-                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#10b981', textAlign: 'right' }}>{podium.staffContactRate.toFixed(1)}%</td>
-                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#041e42', textAlign: 'right' }}>{podium.talkedToStaff}</td>
-                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#BC0022', textAlign: 'right' }}>{podium.overallSatisfactionScore.toFixed(1)}%</td>
+                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#2385bd', textAlign: 'right' }}>{podium.staffContactRate.toFixed(1)}%</td>
+                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#07111b', textAlign: 'right' }}>{podium.talkedToStaff}</td>
+                      <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '900', color: '#9a7120', textAlign: 'right' }}>{podium.overallSatisfactionScore.toFixed(1)}%</td>
                     </tr>
                   ))}
                 </tbody>
@@ -982,17 +982,17 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
 
           {/* Key Insights & Recommendations */}
           <div style={{ marginBottom: '24px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#041e42', marginBottom: '12px', textTransform: 'uppercase' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#07111b', marginBottom: '12px', textTransform: 'uppercase' }}>
               Key Insights & Recommendations
             </h2>
 
-            <div style={{ borderLeft: '4px solid #10b981', padding: '20px', backgroundColor: '#f0fdf4', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#10b981', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+            <div style={{ borderLeft: '4px solid #2385bd', padding: '20px', backgroundColor: '#eff6ff', borderRadius: '0 8px 8px 0', marginBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#2385bd', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                 ✅ High Performance Areas
               </h3>
               <ul style={{ fontSize: '14px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
-                <li><strong>Kids Zone Podium</strong> leads with 97.8% satisfaction and 91.2% staff contact rate - excellent customer service model</li>
-                <li><strong>Rangers Corner</strong> demonstrates strong performance with 94.5% satisfaction and 88.2% contact rate</li>
+                <li><strong>Red Line</strong> leads with 97.8% satisfaction and 91.2% staff contact rate - excellent customer service model</li>
+                <li><strong>Left Wing</strong> demonstrates strong performance with 94.5% satisfaction and 88.2% contact rate</li>
                 <li><strong>Overall satisfaction</strong> is strong at {overall.overallSatisfactionScore.toFixed(1)}%, indicating positive customer experiences with staff</li>
                 <li><strong>High staff engagement</strong> with {overall.overallContactRate.toFixed(1)}% of customers talking to staff members</li>
               </ul>
@@ -1003,22 +1003,22 @@ export function StaffSatisfactionReport({ dateRange, onClose, isModal }: StaffSa
                 ⚠️ Areas for Improvement
               </h3>
               <ul style={{ fontSize: '14px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
-                <li><strong>Islanders Display</strong> shows lower staff contact rate (76.8%) and needs increased staff presence on the floor</li>
+                <li><strong>Right Wing</strong> shows lower staff contact rate (76.8%) and needs increased staff presence on the floor</li>
                 <li><strong>Staff visibility</strong> should be improved at locations with lower contact rates to ensure customers can easily find help</li>
                 <li><strong>Neutral and negative feedback</strong> exists at all locations - address specific pain points through training</li>
               </ul>
             </div>
 
-            <div style={{ borderLeft: '4px solid #041e42', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#041e42', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
+            <div style={{ borderLeft: '4px solid #07111b', padding: '20px', backgroundColor: '#f9fafb', borderRadius: '0 8px 8px 0' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '900', color: '#07111b', margin: '0 0 12px 0', textTransform: 'uppercase' }}>
                 📊 Recommended Actions
               </h3>
               <ol style={{ fontSize: '14px', lineHeight: '1.7', color: '#4b5563', margin: '0 0 0 20px', padding: 0 }}>
-                <li><strong>Best Practice Sharing:</strong> Document Kids Zone's approach (97.8% satisfaction) and replicate across all podiums</li>
-                <li><strong>Staff Coverage:</strong> Increase floor presence at Islanders Display and Jersey Wall during peak hours</li>
+                <li><strong>Best Practice Sharing:</strong> Document Red Line's approach (97.8% satisfaction) and replicate across all kiosks</li>
+                <li><strong>Staff Coverage:</strong> Increase floor presence at Right Wing and Blue Line during peak hours</li>
                 <li><strong>Proactive Engagement:</strong> Train staff to initiate customer interactions rather than waiting to be approached</li>
                 <li><strong>Follow-up on Negative Feedback:</strong> Review all dissatisfied responses and implement corrective measures</li>
-                <li><strong>Recognition Program:</strong> Reward staff at high-performing podiums to encourage continued excellence</li>
+                <li><strong>Recognition Program:</strong> Reward staff at high-performing kiosks to encourage continued excellence</li>
                 <li><strong>Regular Monitoring:</strong> Track satisfaction scores weekly to identify trends and address issues quickly</li>
               </ol>
             </div>

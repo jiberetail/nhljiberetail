@@ -2,24 +2,39 @@ import { Home, FileText, Settings, ClipboardList } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import nhlLogo from "../../imports/NHL-league-logo.png";
 import jibeLogo from "../../imports/white_trans_retail.png";
+import sidebarPattern from "../../imports/nhl-faceted-sidebar-pattern.png";
 
 export function Sidebar() {
   const location = useLocation();
 
   return (
     <div
-      className="w-36 flex flex-col border-r border-white/10"
+      className="relative w-36 flex flex-col overflow-hidden border-r border-white/10"
       style={{
         background: "linear-gradient(to bottom, #000000 0%, #4a4a4a 60%, #a8a8a8 100%)",
       }}
     >
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${sidebarPattern})`,
+          backgroundPosition: "center center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          mixBlendMode: "soft-light",
+          opacity: 0.78,
+          filter: "contrast(1.14) brightness(0.94)",
+        }}
+      />
+
       {/* Top Logo Section — Jibe Logo */}
-      <div className="px-3 py-5 flex items-center justify-center">
+      <div className="relative z-10 px-3 py-5 flex items-center justify-center">
         <img src={jibeLogo} alt="Jibe Retail" style={{ width: '181%', maxWidth: 'none' }} />
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-2 py-5">
+      <nav className="relative z-10 flex-1 px-2 py-5">
         <div className="space-y-1">
           <Link
             to="/"
@@ -52,7 +67,7 @@ export function Sidebar() {
             }`}
           >
             <Settings size={18} />
-            <span>Podiums</span>
+            <span>Kiosks</span>
           </Link>
           <Link
             to="/store-survey"
@@ -69,7 +84,7 @@ export function Sidebar() {
       </nav>
 
       {/* Footer — NHL Logo */}
-      <div className="px-3 py-4 flex items-center justify-center">
+      <div className="relative z-10 px-3 py-4 flex items-center justify-center">
         <img src={nhlLogo} alt="NHL" className="w-20 mx-auto" />
       </div>
     </div>
